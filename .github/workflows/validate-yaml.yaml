@@ -1,0 +1,29 @@
+on:
+  push:
+    paths:
+      - '**.yml'
+      - '**.yaml'
+
+name: Validate YAML
+jobs:
+  changed_files:
+    runs-on: ubuntu-latest
+    name: Change Files
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate participant folder
+        run: |
+          echo "Checando se existe a pasta do participante"
+
+          if [ -d "participants/${{ github.actor}}" ]; then
+            echo "✅ pasta encontrada!"
+            exit 0
+          fi
+
+          echo "::error::Pasta do participante não encontrada! Por favor crie uma pasta com o seu usuário do git: participants/${{ github.actor }}"
+          exit 1
+      - name: Validate docker compose schema
+        uses: RomanosTrechlis/actions-validate-yaml@v1.0
+        with:
+          schema: scripts/schema.yaml
+          data: participants/${{ github.actor }}/docker-compose.yml
