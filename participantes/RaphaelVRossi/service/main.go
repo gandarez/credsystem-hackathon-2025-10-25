@@ -12,5 +12,5 @@ func main() {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from Go in a Docker Container!")
+	fmt.Fprintf(w, "Hello from Go in a Docker Container in a fork project!!")
 }
