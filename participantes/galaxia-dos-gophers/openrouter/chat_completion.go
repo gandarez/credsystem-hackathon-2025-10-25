@@ -11,8 +11,14 @@ import (
 
 type (
 	OpenRouterRequest struct {
-		Model    string `json:"model"`
-		Messages []struct {
+		Model            string  `json:"model"`
+		Temperature      float64 `json:"temperature,omitempty"`
+		TopP             float64 `json:"top_p,omitempty"`
+		MaxTokens        int     `json:"max_tokens,omitempty"`
+		PresencePenalty  float64 `json:"presence_penalty,omitempty"`
+		FrequencyPenalty float64 `json:"frequency_penalty,omitempty"`
+		Stream           bool    `json:"stream,omitempty"`
+		Messages         []struct {
 			Role    string `json:"role"`
 			Content string `json:"content"`
 		} `json:"messages"`
@@ -43,7 +49,8 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 		}{
 			{
 				Role: "system",
-				Content: `Você é um sistema de classificação de solicitações de clientes da Credsystem.
+				Content: `Você é um sistema de classificação de solicitações de clientes.
+				Analise toda a intenção da frase pois tem mais de uma opção com a mesma palavra.
 						Seu trabalho é identificar a intenção do cliente e retornar o service_id e service_name corretos.
 
 						REGRAS OBRIGATÓRIAS:
@@ -112,6 +119,12 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 				Content: intent,
 			},
 		},
+		Temperature:      0.1,
+		TopP:             0.3,
+		MaxTokens:        70,
+		PresencePenalty:  0,
+		FrequencyPenalty: 0,
+		Stream:           false,
 	}
 
 	jsonBody, err := json.Marshal(requestBody)
