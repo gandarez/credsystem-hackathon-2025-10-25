@@ -31,7 +31,6 @@ func main() {
 				Error: "invalid request body",
 			}
 			b, _ := json.Marshal(message)
-			w.WriteHeader(http.StatusBadRequest)
 			w.Write(b)
 			return
 		}
@@ -46,7 +45,6 @@ func main() {
 				Error: "could not classify intent: " + err.Error(),
 			}
 			b, _ := json.Marshal(message)
-			w.WriteHeader(http.StatusInternalServerError)
 			w.Write(b)
 			return
 		}

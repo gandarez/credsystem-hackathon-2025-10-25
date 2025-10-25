@@ -36,7 +36,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	url := c.baseURL + "/chat/completions"
 
 	requestBody := OpenRouterRequest{
-		Model: "openai/gpt-4o-mini",
+		Model: "Mistral 7B",
 		Messages: []struct {
 			Role    string `json:"role"`
 			Content string `json:"content"`

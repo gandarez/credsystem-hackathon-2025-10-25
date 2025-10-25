@@ -1,95 +1,135 @@
 {
-  "intent": "a conta venceu"
+  "intent": "quanto tem disponível para usar"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "quando vence meu cartão"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "quando posso comprar"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "segunda via boleto de acordo"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "quero o boleto do meu parcelamento"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "quero meu boleto"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "segunda via de fatura"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "preciso pagar o cartão"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "onde está meu cartão"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "meu cartão não chegou"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "não consigo passar meu cartão"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "cartão recusado"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "quero mais limite"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "aumentar limite do cartão"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "cancelar cartão"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "encerrar conta"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "telefone do seguro"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "quero cancelar seguro"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "desbloquear cartão"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "ativar cartão novo"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "esqueci minha senha"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "trocar senha do cartão"
 }
 
 {
-  "intent": "a conta venceu"
+  "intent": "perdi meu cartão"
 }
 
 {
-  "intent": "perdi meu cartao"
+  "intent": "roubaram meu cartão"
+}
+
+{
+  "intent": "consultar saldo"
+}
+
+{
+  "intent": "quanto tenho na conta"
+}
+
+{
+  "intent": "quero pagar minha conta"
+}
+
+{
+  "intent": "pagar boleto"
+}
+
+{
+  "intent": "quero reclamar"
+}
+
+{
+  "intent": "abrir reclamação"
+}
+
+{
+  "intent": "falar com atendente"
+}
+
+{
+  "intent": "preciso de humano"
+}
+
+{
+  "intent": "token de proposta"
+}
+
+{
+  "intent": "código para fazer meu cartão"
 }
