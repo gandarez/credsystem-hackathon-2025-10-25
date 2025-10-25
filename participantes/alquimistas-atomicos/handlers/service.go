@@ -25,12 +25,12 @@ func (h *ServiceHandler) FindService(w http.ResponseWriter, r *http.Request) {
 	var req models.FindServiceRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		h.sendErrorResponse(w, "Erro ao decodificar requisição", http.StatusBadRequest)
+		h.sendErrorResponse(w, "Erro ao decodificar requisição")
 		return
 	}
 
 	if req.Intent == "" {
-		h.sendErrorResponse(w, "Campo 'intent' é obrigatório", http.StatusBadRequest)
+		h.sendErrorResponse(w, "Campo 'intent' é obrigatório")
 		return
 	}
 
@@ -40,7 +40,7 @@ func (h *ServiceHandler) FindService(w http.ResponseWriter, r *http.Request) {
 	aiService, err := h.openRouterClient.ClassifyIntent(ctx, req.Intent)
 	if err != nil {
 		log.Printf("Erro na classificação por IA: %v", err)
-		h.sendErrorResponse(w, "Não foi possível classificar a intenção", http.StatusInternalServerError)
+		h.sendErrorResponse(w, "Não foi possível classificar a intenção")
 		return
 	}
 
@@ -69,13 +69,13 @@ func (h *ServiceHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func (h *ServiceHandler) sendErrorResponse(w http.ResponseWriter, message string, statusCode int) {
+func (h *ServiceHandler) sendErrorResponse(w http.ResponseWriter, message string) {
 	response := models.FindServiceResponse{
 		Success: false,
 		Error:   message,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(statusCode)
+	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(response)
 }
