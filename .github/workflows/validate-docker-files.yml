@@ -89,6 +89,7 @@ jobs:
 
           for compose_file in $COMPOSE_FILES; do
             echo "Validating $compose_file..."
+            echo "=========================================="
 
             # Check if file exists
             if [ ! -f "$compose_file" ]; then
@@ -97,76 +98,124 @@ jobs:
               continue
             fi
 
-            # Get the first service name
-            SERVICE_NAME=$(yq eval '.services | keys | .[0]' "$compose_file")
+            # Get all service names
+            SERVICE_NAMES=$(yq eval '.services | keys | .[]' "$compose_file")
 
-            if [ "$SERVICE_NAME" == "null" ] || [ -z "$SERVICE_NAME" ]; then
+            if [ -z "$SERVICE_NAMES" ]; then
               echo "❌ No services found in $compose_file"
               VALIDATION_FAILED=1
               continue
             fi
 
-            echo "Checking service: $SERVICE_NAME"
+            # Initialize totals
+            TOTAL_CPU=0
+            TOTAL_MEMORY_MB=0
 
-            # Check for OPENROUTER_API_KEY environment variable
-            HAS_OPENROUTER=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -i "OPENROUTER_API_KEY" || true)
-            if [ -z "$HAS_OPENROUTER" ]; then
-              echo "❌ $compose_file must have OPENROUTER_API_KEY environment variable"
-              VALIDATION_FAILED=1
-            else
-              echo "✅ OPENROUTER_API_KEY found"
-            fi
+            # Validate each service
+            for SERVICE_NAME in $SERVICE_NAMES; do
+              echo ""
+              echo "Checking service: $SERVICE_NAME"
+              echo "------------------------------------------"
 
-            # Check for PORT environment variable
-            HAS_PORT=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -E "^PORT" || true)
-            if [ -z "$HAS_PORT" ]; then
-              echo "❌ $compose_file must have PORT environment variable"
-              VALIDATION_FAILED=1
-            else
-              echo "✅ PORT environment variable found"
-            fi
+              # Check for OPENROUTER_API_KEY environment variable
+              HAS_OPENROUTER=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -i "OPENROUTER_API_KEY" || true)
+              if [ -z "$HAS_OPENROUTER" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have OPENROUTER_API_KEY environment variable"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ OPENROUTER_API_KEY found"
+              fi
 
-            # Check for port 18020 exposed
-            PORTS=$(yq eval ".services.$SERVICE_NAME.ports[]" "$compose_file" 2>/dev/null || echo "")
-            HAS_PORT_18020=0
+              # Check for PORT environment variable
+              HAS_PORT=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -E "^PORT" || true)
+              if [ -z "$HAS_PORT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have PORT environment variable"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ PORT environment variable found"
+              fi
 
-            for port in $PORTS; do
-              # Handle both "18020:8080" and "18020" formats
-              if echo "$port" | grep -q "^18020:" || [ "$port" == "18020" ]; then
-                HAS_PORT_18020=1
-                break
+              # Check for port 18020 exposed
+              PORTS=$(yq eval ".services.$SERVICE_NAME.ports[]" "$compose_file" 2>/dev/null || echo "")
+              HAS_PORT_18020=0
+
+              for port in $PORTS; do
+                # Handle both "18020:8080" and "18020" formats
+                if echo "$port" | grep -q "^18020:" || [ "$port" == "18020" ]; then
+                  HAS_PORT_18020=1
+                  break
+                fi
+              done
+
+              if [ $HAS_PORT_18020 -eq 0 ]; then
+                echo "❌ Service '$SERVICE_NAME' must expose port 18020"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ Port 18020 exposed"
+              fi
+
+              # Get CPU limit for this service
+              CPU_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.cpus" "$compose_file" 2>/dev/null || echo "null")
+              if [ "$CPU_LIMIT" == "null" ] || [ -z "$CPU_LIMIT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have CPU limit defined"
+                VALIDATION_FAILED=1
+              else
+                echo "  CPU limit: $CPU_LIMIT"
+                # Remove quotes if present
+                CPU_LIMIT=$(echo "$CPU_LIMIT" | tr -d "'\"")
+                # Add to total (using bc for floating point arithmetic)
+                TOTAL_CPU=$(echo "$TOTAL_CPU + $CPU_LIMIT" | bc)
+              fi
+
+              # Get memory limit for this service
+              MEMORY_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.memory" "$compose_file" 2>/dev/null || echo "null")
+              if [ "$MEMORY_LIMIT" == "null" ] || [ -z "$MEMORY_LIMIT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have memory limit defined"
+                VALIDATION_FAILED=1
+              else
+                echo "  Memory limit: $MEMORY_LIMIT"
+                # Convert to MB
+                MEMORY_MB=0
+                if echo "$MEMORY_LIMIT" | grep -iq "MB"; then
+                  MEMORY_MB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                elif echo "$MEMORY_LIMIT" | grep -iq "M"; then
+                  MEMORY_MB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                elif echo "$MEMORY_LIMIT" | grep -iq "GB"; then
+                  MEMORY_GB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                  MEMORY_MB=$((MEMORY_GB * 1024))
+                elif echo "$MEMORY_LIMIT" | grep -iq "G"; then
+                  MEMORY_GB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                  MEMORY_MB=$((MEMORY_GB * 1024))
+                fi
+                TOTAL_MEMORY_MB=$((TOTAL_MEMORY_MB + MEMORY_MB))
               fi
             done
 
-            if [ $HAS_PORT_18020-eq 0 ]; then
-              echo "❌ $compose_file must expose port 18020"
-              VALIDATION_FAILED=1
-            else
-              echo "✅ Port 18020 exposed"
+            # Check total resource limits
+            echo ""
+            echo "=========================================="
+            echo "Total Resource Usage for $compose_file:"
+            echo "  Total CPU: $TOTAL_CPU"
+            echo "  Total Memory: ${TOTAL_MEMORY_MB}MB"
+            echo ""
+
+            # Validate total CPU (must be <= 0.5)
+            if [ "$TOTAL_CPU" != "0" ]; then
+              CPU_CHECK=$(echo "$TOTAL_CPU <= 0.5" | bc)
+              if [ "$CPU_CHECK" -eq 0 ]; then
+                echo "❌ Total CPU limit exceeds 0.5 (found: $TOTAL_CPU)"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ Total CPU limit is within allowed range (≤ 0.5)"
+              fi
             fi
 
-            # Check CPU limit
-            CPU_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.cpus" "$compose_file" 2>/dev/null || echo "null")
-            if [ "$CPU_LIMIT" == "null" ]; then
-              echo "❌ $compose_file must have CPU limit defined"
-              VALIDATION_FAILED=1
-            elif [ "$CPU_LIMIT" != "0.5" ] && [ "$CPU_LIMIT" != "'0.5'" ]; then
-              echo "❌ $compose_file must have CPU limit of 0.5 (found: $CPU_LIMIT)"
+            # Validate total memory (must be <= 128MB)
+            if [ "$TOTAL_MEMORY_MB" -gt 128 ]; then
+              echo "❌ Total memory limit exceeds 128MB (found: ${TOTAL_MEMORY_MB}MB)"
               VALIDATION_FAILED=1
             else
-              echo "✅ CPU limit is 0.5"
-            fi
-
-            # Check memory limit
-            MEMORY_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.memory" "$compose_file" 2>/dev/null || echo "null")
-            if [ "$MEMORY_LIMIT" == "null" ]; then
-              echo "❌ $compose_file must have memory limit defined"
-              VALIDATION_FAILED=1
-            elif [ "$MEMORY_LIMIT" != "128MB" ] && [ "$MEMORY_LIMIT" != "128M" ]; then
-              echo "❌ $compose_file must have memory limit of 128MB (found: $MEMORY_LIMIT)"
-              VALIDATION_FAILED=1
-            else
-              echo "✅ Memory limit is 128MB"
+              echo "✅ Total memory limit is within allowed range (≤ 128MB)"
             fi
 
             echo ""

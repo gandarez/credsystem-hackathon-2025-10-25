@@ -78,7 +78,7 @@ Então você deve:
 - Desbloqueio de Cartão (ID 9)
 - Esqueceu senha / Troca de senha (ID 10)
 - Perda e roubo (ID 11)
-- Consulta do Saldo Conta do Mais (ID 12)
+- Consulta do Saldo (ID 12)
 - Pagamento de contas (ID 13)
 - Reclamações (ID 14)
 - Atendimento humano (ID 15)
