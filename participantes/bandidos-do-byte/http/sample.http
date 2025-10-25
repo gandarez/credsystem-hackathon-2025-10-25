@@ -51,7 +51,7 @@ Content-Type: application/json
 ###
 
 ### Test 6: Renegociação
-POST {{baseUrl}}/find-service
+POST {{baseUrl}}/api/find-service
 Content-Type: application/json
 
 {
@@ -61,7 +61,7 @@ Content-Type: application/json
 ###
 
 ### Test 7: Texto sem relação com serviços (deve retornar success: false)
-POST {{baseUrl}}/find-service
+POST {{baseUrl}}/api/find-service
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 ###
 
 ### Test 8: Texto aleatório (deve retornar success: false)
-POST {{baseUrl}}/find-service
+POST {{baseUrl}}/api/find-service
 Content-Type: application/json
 
 {
@@ -81,7 +81,7 @@ Content-Type: application/json
 ###
 
 ### Test 9: Texto vazio (deve retornar success: false)
-POST {{baseUrl}}/find-service
+POST {{baseUrl}}/api/find-service
 Content-Type: application/json
 
 {
@@ -91,6 +91,6 @@ Content-Type: application/json
 ###
 
 ### Health check
-GET {{baseUrl}}/healthz
+GET {{baseUrl}}/api/healthz
 
 ###

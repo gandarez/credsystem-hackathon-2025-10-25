@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/bandidos_do_byte/api/internal/domain"
@@ -29,7 +30,6 @@ func NewServiceFinder(classifier ports.IntentClassifier, trainingRepo ports.Trai
 
 // FindService implementa a lógica para encontrar o serviço apropriado usando IA
 func (s *serviceFinder) FindService(intent string) (*domain.ServiceData, error) {
-	// Lazy load training examples on first use
 	if !s.examplesLoaded {
 		examples, err := s.trainingData.LoadIntentExamples()
 		if err != nil {
@@ -39,15 +39,16 @@ func (s *serviceFinder) FindService(intent string) (*domain.ServiceData, error) 
 		s.examplesLoaded = true
 	}
 
-	// Build classification request
 	classificationReq := domain.IntentClassificationRequest{
 		UserIntent: intent,
 		Examples:   s.cachedExamples,
 	}
 
-	// Use AI to classify the intent
 	result, err := s.intentClassifier.ClassifyIntent(classificationReq)
 	if err != nil {
+		if errors.Is(err, domain.ErrNoServiceFound) {
+			return nil, domain.ErrNoServiceFound
+		}
 		return nil, fmt.Errorf("failed to classify intent: %w", err)
 	}
 
