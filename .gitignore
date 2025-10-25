@@ -32,8 +32,7 @@ go.work.sum
 # .vscode/
 
 # load test results
-**/results/
-**/docker-compose.logs
-test/responses.txt
+participantes/**/results/
+participantes/**/docker-compose.logs
 load-test/*.logs
 */results.html
