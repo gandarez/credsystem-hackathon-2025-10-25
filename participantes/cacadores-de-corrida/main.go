@@ -88,6 +88,12 @@ func findServiceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Verificar se a intenção é inválida (não relacionada a serviços bancários)
+	if serviceID == 0 || serviceName == "INVALID" {
+		sendErrorResponse(w, "Intent não está relacionado a serviços bancários ou financeiros", http.StatusBadRequest)
+		return
+	}
+
 	// Validar a resposta do agente
 	if !validator.IsValidService(serviceID) {
 		sendErrorResponse(w, "Serviço inválido retornado pelo classificador", http.StatusInternalServerError)
