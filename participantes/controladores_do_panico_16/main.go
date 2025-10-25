@@ -1,10 +1,15 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"time"
+
+	"github.com/victorbrittoferreira/credsystem-hackathon-2025-10-25/participantes/controladores_do_panico_16/internal/client"
 )
 
 type (
@@ -24,11 +29,29 @@ type (
 	}
 )
 
+const (
+	openRouterBaseURL = "https://openrouter.ai/api/v1"
+)
+
+var openRouterClient *client.Client
+
 func main() {
+	// Ler variáveis de ambiente
+	apiKey := os.Getenv("OPENROUTER_API_KEY")
+	if apiKey == "" {
+		log.Fatal("OPENROUTER_API_KEY environment variable is required")
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
+
+	// Inicializar cliente OpenRouter
+	openRouterClient = client.NewClient(
+		openRouterBaseURL,
+		client.WithAuth(apiKey),
+	)
 
 	http.HandleFunc("/api/healthz", healthCheckHandler)
 	http.HandleFunc("/api/find-service", findServiceHandler)
@@ -40,42 +63,78 @@ func main() {
 }
 
 func healthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
 	if r.Method != http.MethodGet {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(map[string]string{"status": "error", "message": "Method not allowed"})
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"status": "ok"})
 }
 
 func findServiceHandler(w http.ResponseWriter, r *http.Request) {
+	// Sempre retornar 200 OK, usar success: true/false
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+
 	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Error:   "Method not allowed",
+		})
+		return
+	}
+
+	// Validar Content-Type
+	contentType := r.Header.Get("Content-Type")
+	if contentType != "application/json" {
+		json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Error:   "content-type must be application/json",
+		})
 		return
 	}
 
 	var req IntentRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		sendErrorResponse(w, "Invalid request body", http.StatusBadRequest)
+		json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Error:   "Invalid request body",
+		})
 		return
 	}
 
 	if req.Intent == "" {
-		sendErrorResponse(w, "Intent is required", http.StatusBadRequest)
+		json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Error:   "Intent is required",
+		})
 		return
 	}
 
-	// TODO: implementar OpenRouter para classificação de intenções
-	sendErrorResponse(w, "Not implemented yet", http.StatusNotImplemented)
-}
+	// Contexto com timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 25*time.Second)
+	defer cancel()
 
-func sendErrorResponse(w http.ResponseWriter, message string, status int) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
+	// Chamar OpenRouter para classificar a intenção
+	data, err := openRouterClient.ChatCompletion(ctx, req.Intent)
+	if err != nil {
+		log.Printf("Error calling ChatCompletion: %v", err)
+		json.NewEncoder(w).Encode(Response{
+			Success: false,
+			Error:   fmt.Sprintf("failed to process intent: %v", err),
+		})
+		return
+	}
+
+	// Resposta de sucesso
 	json.NewEncoder(w).Encode(Response{
-		Success: false,
-		Error:   message,
+		Success: true,
+		Data: &Data{
+			ServiceID:   data.ServiceID,
+			ServiceName: data.ServiceName,
+		},
 	})
 }
