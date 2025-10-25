@@ -1,0 +1,2 @@
+[Sáb 25 Out 2025 14:37:01 -03] Seu backend não respondeu nenhuma das 3 tentativas de GET para http://localhost:18020/api/healthz. Teste abortado.
+[Sáb 25 Out 2025 14:37:01 -03] Inspecione o arquivo docker-compose.logs para mais informações.

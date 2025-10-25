@@ -45,11 +45,16 @@ func (c *Client) Do(ctx context.Context, req *http.Request) (*http.Response, err
 // NewTransport initializes a new http.Transport.
 func NewTransport() *http.Transport {
 	return &http.Transport{
-		ForceAttemptHTTP2:   true,
-		MaxConnsPerHost:     10,
-		MaxIdleConns:        10,
-		MaxIdleConnsPerHost: 10,
-		Proxy:               nil,
-		TLSHandshakeTimeout: DefaultTimeoutSecs * time.Second,
+		ForceAttemptHTTP2:     true,
+		MaxConnsPerHost:       50,               // Increased for better concurrency
+		MaxIdleConns:          50,               // Increased for better connection reuse
+		MaxIdleConnsPerHost:   50,               // Increased for better connection reuse
+		IdleConnTimeout:       90 * time.Second, // Keep connections alive longer
+		DisableKeepAlives:     false,            // Enable keep-alive
+		DisableCompression:    false,            // Enable compression
+		Proxy:                 nil,
+		TLSHandshakeTimeout:   10 * time.Second, // Reduced from 30s
+		ResponseHeaderTimeout: 15 * time.Second, // Add response timeout
+		ExpectContinueTimeout: 1 * time.Second,  // Add expect continue timeout
 	}
 }
