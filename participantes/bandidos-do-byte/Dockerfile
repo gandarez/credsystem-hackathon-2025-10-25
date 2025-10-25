@@ -14,17 +14,25 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd/api
 
 # Final stage
-FROM alpine:latest
+FROM scratch
 
-RUN apk --no-cache add ca-certificates
+# Define build argument for port
+ARG PORT
+ENV PORT=${PORT}
 
-WORKDIR /root/
+WORKDIR /
+
+# Copy CA certificates from builder
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 # Copy the binary from builder
 COPY --from=builder /app/main .
 
-# Expose port
-EXPOSE 18020
+# Copy training data
+COPY --from=builder /app/training ./training
+
+# Expose port (dynamic)
+EXPOSE ${PORT}
 
 # Run the application
 CMD ["./main"]

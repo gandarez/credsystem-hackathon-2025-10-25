@@ -5,7 +5,7 @@ POST {{baseUrl}}/api/find-service
 Content-Type: application/json
 
 {
-  "intent": "cancelar cartão de crédito"
+  "intent": "quero adquirir um novo cartão de crédito"
 }
 
 ###

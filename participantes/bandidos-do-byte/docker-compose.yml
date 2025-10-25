@@ -2,12 +2,16 @@ version: '3.8'
 
 services:
   api:
-    image: your-dockerhub-username/bandidos-do-byte:latest  # Substitua pelo seu repositório Docker
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
     container_name: bandidos_do_byte_api
     ports:
-      - "18020:18020"
+      - "${PORT}:${PORT}"
     environment:
-      - PORT=18020
+      - PORT=${PORT}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
     deploy:
       resources:
