@@ -169,7 +169,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 				Content: intent,
 			},
 		},
-		Temperature:      0.05,
+		Temperature:      0.1,
 		TopP:             0.3,
 		MaxTokens:        70,
 		PresencePenalty:  0,
