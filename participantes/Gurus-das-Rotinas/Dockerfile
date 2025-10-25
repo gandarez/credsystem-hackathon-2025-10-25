@@ -4,7 +4,7 @@ FROM golang:1.21-alpine AS builder
 WORKDIR /app
 
 # Copy go mod and sum files
-COPY participantes/Gurus-das-Rotinas/go.mod participantes/Gurus-das-Rotinas/go.sum ./
+COPY . .
 
 # Download dependencies
 RUN go mod download
