@@ -22,7 +22,6 @@ FROM scratch AS bin
 # Copy from build
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=build /src/assets /assets
 COPY --from=build /src/build/pioneiros-linux-amd64 .
 
 # Specify the container's entrypoint as the action

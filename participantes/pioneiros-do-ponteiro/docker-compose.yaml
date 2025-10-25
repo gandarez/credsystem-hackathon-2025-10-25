@@ -1,10 +1,12 @@
 services:
   backend-api:
-    image: pioneiros-api
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
     ports:
-      - "18020:8081"
+      - "18020:18020"
     deploy:
       resources:
         limits:
