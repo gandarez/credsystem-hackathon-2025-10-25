@@ -89,7 +89,7 @@ func handleFindService(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Printf("✅ Intent: '%s' → Service: %d (%s)", req.Intent, serviceID, serviceName)
+	// log.Printf("✅ Intent: '%s' → Service: %d (%s)", req.Intent, serviceID, serviceName)
 
 	respondSuccess(w, serviceID, serviceName)
 }
