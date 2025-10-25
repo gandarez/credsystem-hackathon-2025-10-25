@@ -13,10 +13,23 @@ import (
 	"time"
 )
 
+type ServiceData struct {
+	// Add any fields your API returns if you want to inspect them
+	// Example:
+	// Intent string `json:"intent"`
+}
+
+type Message struct {
+	Success bool        `json:"success"`
+	Data    ServiceData `json:"data"`
+	Error   string      `json:"error"`
+}
+
 var (
-	mu         sync.Mutex // protects file + metrics
-	totalTime  time.Duration
-	totalCount int
+	mu           sync.Mutex
+	totalTime    time.Duration
+	totalCount   int
+	successCount int
 )
 
 func readPayloads(path string) ([]string, error) {
@@ -31,7 +44,6 @@ func readPayloads(path string) ([]string, error) {
 		return nil, err
 	}
 
-	// Split by blank lines
 	blocks := bytes.Split(data, []byte("\n\n"))
 	var payloads []string
 	for _, b := range blocks {
@@ -41,7 +53,6 @@ func readPayloads(path string) ([]string, error) {
 		}
 	}
 
-	// Fallback to line-by-line
 	if len(payloads) < 2 {
 		if _, err := f.Seek(0, 0); err != nil {
 			return nil, err
@@ -55,7 +66,6 @@ func readPayloads(path string) ([]string, error) {
 		}
 	}
 
-	// Validate JSON
 	valid := make([]string, 0, len(payloads))
 	for _, p := range payloads {
 		var js json.RawMessage
@@ -69,29 +79,35 @@ func readPayloads(path string) ([]string, error) {
 	return valid, nil
 }
 
-func saveResponse(intent string, response string, duration time.Duration, statusCode int) {
+func saveResponse(intent string, response string, duration time.Duration, success bool, errMsg string) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	f, err := os.OpenFile("./participantes/campeoes-do-canal/test/responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile("responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Printf("❌ Error opening file: %v\n", err)
 		return
 	}
 	defer f.Close()
 
+	status := "❌ FAILED"
+	if success {
+		status = "✅ SUCCESS"
+		successCount++
+	}
+
 	entry := fmt.Sprintf(
-		"---\nRequest: %s\nResponse: %s\nStatus: %d\nTime: %v\n\n",
+		"---\nRequest: %s\nResponse: %s\nResult: %s\nError: %s\nTime: %v\n\n",
 		strings.TrimSpace(intent),
 		strings.TrimSpace(response),
-		statusCode,
+		status,
+		errMsg,
 		duration,
 	)
 	if _, err := f.WriteString(entry); err != nil {
 		fmt.Printf("❌ Error writing to file: %v\n", err)
 	}
 
-	// Update total metrics
 	totalTime += duration
 	totalCount++
 }
@@ -110,18 +126,27 @@ func worker(wg *sync.WaitGroup, client *http.Client, url string, jobs <-chan str
 
 		resp, err := client.Do(req)
 		duration := time.Since(start)
-
 		if err != nil {
 			fmt.Printf("[w%d] post error (%.2fs): %v\n", id, duration.Seconds(), err)
+			saveResponse(body, "", duration, false, err.Error())
 			continue
 		}
 
 		respBody, _ := io.ReadAll(resp.Body)
 		resp.Body.Close()
 
-		fmt.Printf("[w%d] %s -> %d (%.2fs)\n", id, url, resp.StatusCode, duration.Seconds())
+		var msg Message
+		success := false
+		errMsg := ""
+		if err := json.Unmarshal(respBody, &msg); err == nil {
+			success = msg.Success
+			errMsg = msg.Error
+		} else {
+			errMsg = "invalid JSON response"
+		}
 
-		saveResponse(body, string(respBody), duration, resp.StatusCode)
+		fmt.Printf("[w%d] %s -> success=%v (%.2fs)\n", id, url, success, duration.Seconds())
+		saveResponse(body, string(respBody), duration, success, errMsg)
 	}
 }
 
@@ -151,9 +176,7 @@ func main() {
 	url := strings.TrimRight(host, "/") + "/api/find-service"
 	fmt.Printf("🚀 Sending %d payloads to %s (concurrency=%d)\n", len(payloads), url, concurrency)
 
-	// Clear old results
 	os.Remove("responses.txt")
-
 	startAll := time.Now()
 
 	jobs := make(chan string, len(payloads))
@@ -181,5 +204,6 @@ func main() {
 	fmt.Println("✅ Done.")
 	fmt.Printf("🕒 Total time: %v\n", elapsed)
 	fmt.Printf("📈 Average response time: %v\n", avg)
+	fmt.Printf("📊 Success: %d / %d (%.2f%%)\n", successCount, totalCount, float64(successCount)/float64(totalCount)*100)
 	fmt.Printf("📦 Responses saved to responses.txt\n")
 }
