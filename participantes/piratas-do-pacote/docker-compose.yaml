@@ -1,6 +1,8 @@
 services:
   backend-api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
     ports:
