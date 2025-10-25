@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"runtime/debug"
 	"time"
 
 	"ivr-service/client"
@@ -22,9 +23,18 @@ func NewServiceHandler(openRouterClient *client.OpenRouterClient) *ServiceHandle
 }
 
 func (h *ServiceHandler) FindService(w http.ResponseWriter, r *http.Request) {
+	// Middleware de recuperação de panic
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Panic recuperado: %v\n%s", r, debug.Stack())
+			h.sendErrorResponse(w, "Erro interno do servidor")
+		}
+	}()
+
 	var req models.FindServiceRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		log.Printf("Erro ao decodificar requisição: %v", err)
 		h.sendErrorResponse(w, "Erro ao decodificar requisição")
 		return
 	}
@@ -60,6 +70,16 @@ func (h *ServiceHandler) FindService(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ServiceHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
+	// Middleware de recuperação de panic
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Panic recuperado no HealthCheck: %v\n%s", r, debug.Stack())
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusOK)
+			json.NewEncoder(w).Encode(map[string]string{"status": "error"})
+		}
+	}()
+
 	response := models.HealthResponse{
 		Status: "ok",
 	}
@@ -70,12 +90,25 @@ func (h *ServiceHandler) HealthCheck(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *ServiceHandler) sendErrorResponse(w http.ResponseWriter, message string) {
+	// Garantir que sempre retornamos status 200
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf("Erro ao enviar resposta de erro: %v", r)
+		}
+	}()
+
 	response := models.FindServiceResponse{
 		Success: false,
 		Error:   message,
 	}
 
+	// Limpar qualquer header que possa ter sido definido anteriormente
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(response)
+
+	if err := json.NewEncoder(w).Encode(response); err != nil {
+		log.Printf("Erro ao codificar resposta de erro: %v", err)
+		// Fallback: tentar escrever uma resposta simples
+		w.Write([]byte(`{"success":false,"error":"Erro interno"}`))
+	}
 }

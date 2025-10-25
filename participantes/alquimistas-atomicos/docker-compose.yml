@@ -1,11 +1,10 @@
 services:
   alquimistas-atomicos:
     build: .
-    env_file:
-      - config.env
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
-      - PORT=${PORT}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-mistralai/mistral-7b-instruct}
+      - PORT=${PORT:-8080}
     ports:
       - "18020:${PORT:-8080}"
     deploy:
