@@ -20,15 +20,17 @@ type APIRequest struct {
 	Intent string `json:"intent"`
 }
 
-// APIResponse representa a resposta da API
-type APIResponse struct {
+// ServiceData representa os dados do serviço encontrado
+type ServiceData struct {
 	ServiceID   int    `json:"service_id"`
 	ServiceName string `json:"service_name"`
 }
 
-// ErrorResponse representa uma resposta de erro
-type ErrorResponse struct {
-	Error string `json:"error"`
+// APIResponse representa a resposta da API
+type APIResponse struct {
+	Success bool         `json:"success"`
+	Data    *ServiceData `json:"data,omitempty"`
+	Error   string       `json:"error,omitempty"`
 }
 
 // TestCase representa um caso de teste individual
@@ -50,19 +52,33 @@ type APITestResult struct {
 	PredictedName     string  `json:"predicted_service_name"`
 	Confidence        float64 `json:"confidence"`
 	IsCorrect         bool    `json:"is_correct,omitempty"`
+	UsedAI            bool    `json:"used_ai"` // Indica se foi usado AI para classificar
 }
 
 // TestBatchStats representa as estatísticas do lote de testes
 type TestBatchStats struct {
-	TotalTests           int                       `json:"total_tests"`
-	CorrectPredictions   int                       `json:"correct_predictions,omitempty"`
-	IncorrectPredictions int                       `json:"incorrect_predictions,omitempty"`
-	AccuracyRate         float64                   `json:"accuracy_rate,omitempty"`
-	AverageConfidence    float64                   `json:"average_confidence"`
-	HighConfidence       int                       `json:"high_confidence_count"`   // >= 80%
-	MediumConfidence     int                       `json:"medium_confidence_count"` // 50-80%
-	LowConfidence        int                       `json:"low_confidence_count"`    // < 50%
-	ByService            map[int]*ServiceTestStats `json:"by_service,omitempty"`
+	TotalTests           int     `json:"total_tests"`
+	CorrectPredictions   int     `json:"correct_predictions,omitempty"`
+	IncorrectPredictions int     `json:"incorrect_predictions,omitempty"`
+	AccuracyRate         float64 `json:"accuracy_rate,omitempty"`
+	AverageConfidence    float64 `json:"average_confidence"`
+	HighConfidence       int     `json:"high_confidence_count"`   // >= 80%
+	MediumConfidence     int     `json:"medium_confidence_count"` // 50-80%
+	LowConfidence        int     `json:"low_confidence_count"`    // < 50%
+
+	// Métricas de uso da IA
+	AIUsageCount         int     `json:"ai_usage_count"`         // Quantos casos usaram IA
+	AIUsagePercentage    float64 `json:"ai_usage_percentage"`    // % de casos que usaram IA
+	LocalUsageCount      int     `json:"local_usage_count"`      // Quantos casos usaram NLP local
+	LocalUsagePercentage float64 `json:"local_usage_percentage"` // % de casos que usaram NLP local
+
+	// Métricas de acerto por método
+	AICorrectPredictions    int     `json:"ai_correct_predictions,omitempty"`    // Acertos quando usou IA
+	AIAccuracyRate          float64 `json:"ai_accuracy_rate,omitempty"`          // Taxa de acerto da IA
+	LocalCorrectPredictions int     `json:"local_correct_predictions,omitempty"` // Acertos quando usou NLP local
+	LocalAccuracyRate       float64 `json:"local_accuracy_rate,omitempty"`       // Taxa de acerto do NLP local
+
+	ByService map[int]*ServiceTestStats `json:"by_service,omitempty"`
 }
 
 // ServiceTestStats representa estatísticas por serviço

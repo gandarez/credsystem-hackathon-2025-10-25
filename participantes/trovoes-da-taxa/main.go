@@ -4,10 +4,17 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
+
+	// Carregar variáveis de ambiente do arquivo .env (se existir)
+	if err := godotenv.Load(); err != nil {
+		log.Printf("Note: .env file not found, using system environment variables")
+	}
 
 	// Determinar o caminho do arquivo CSV
 	csvPath := os.Getenv("INTENTS_CSV_PATH")
