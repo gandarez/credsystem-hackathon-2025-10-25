@@ -1,9 +1,9 @@
 services:
   backend-api:
     build:
-      context: .
-      dockerfile: Dockerfile
-      target: build
+      context: ../..
+      dockerfile: participantes/controladores_do_panico_16/Dockerfile
+      target: runtime
       args:
         - CGO_ENABLED=0
         - GOOS=linux

@@ -23,15 +23,12 @@ type (
 )
 
 var (
-	cachedIntents  []Intent
-	cachedServices map[uint8]*ServiceInfo
+	loadedIntents  []Intent
+	loadedServices map[uint8]*ServiceInfo
 )
 
 // LoadIntentsFromCSV carrega os intents do arquivo CSV
 func LoadIntentsFromCSV(filePath string) ([]Intent, error) {
-	if cachedIntents != nil {
-		return cachedIntents, nil
-	}
 
 	file, err := os.Open(filePath)
 	if err != nil {
@@ -89,60 +86,43 @@ func LoadIntentsFromCSV(filePath string) ([]Intent, error) {
 		services[uint8(serviceID)].Examples = append(services[uint8(serviceID)].Examples, intentText)
 	}
 
-	cachedIntents = intents
-	cachedServices = services
+	loadedIntents = intents
+	loadedServices = services
 
 	return intents, nil
 }
 
 // GetServices retorna o mapa de serviços com seus exemplos
 func GetServices() map[uint8]*ServiceInfo {
-	return cachedServices
+	return loadedServices
 }
 
-// GetServicesList retorna uma lista formatada dos serviços (sem exemplos para prompt)
-func GetServicesList() string {
+// GetLoadedIntents retorna todos os intents carregados
+func GetLoadedIntents() []Intent {
+	return loadedIntents
+}
+
+// BuildPromptWithExamples constrói o prompt com exemplos dos intents carregados
+func BuildPromptWithExamples() string {
 	var sb strings.Builder
-
-	for i := uint8(1); i <= 16; i++ {
-		if service, exists := cachedServices[i]; exists {
-			sb.WriteString(fmt.Sprintf("%d. %s\n", service.ID, service.Name))
-		}
-	}
-
-	return sb.String()
-}
-
-// FindBestMatchInCSV busca o melhor match no CSV (busca simples por palavras-chave)
-func FindBestMatchInCSV(userIntent string) *Intent {
-	userLower := strings.ToLower(userIntent)
 	
-	var bestMatch *Intent
-	maxScore := 0
-
-	for i := range cachedIntents {
-		intent := &cachedIntents[i]
-		intentLower := strings.ToLower(intent.Intent)
-		
-		// Contar palavras em comum
-		score := 0
-		words := strings.Fields(userLower)
-		for _, word := range words {
-			if len(word) > 2 && strings.Contains(intentLower, word) {
-				score++
+	sb.WriteString("Classifique a intenção e retorne JSON: {\"service_id\": N, \"service_name\": \"Nome\"}\n\n")
+	sb.WriteString("SERVIÇOS E EXEMPLOS:\n")
+	
+	for i := uint8(1); i <= 16; i++ {
+		if service, exists := loadedServices[i]; exists {
+			sb.WriteString(fmt.Sprintf("%d. %s\n", service.ID, service.Name))
+			// Adicionar até 3 exemplos por serviço
+			exampleCount := len(service.Examples)
+			if exampleCount > 3 {
+				exampleCount = 3
+			}
+			for j := 0; j < exampleCount; j++ {
+				sb.WriteString(fmt.Sprintf("   - %s\n", service.Examples[j]))
 			}
 		}
-
-		if score > maxScore {
-			maxScore = score
-			bestMatch = intent
-		}
 	}
-
-	// Se encontrou um match razoável, retorna
-	if maxScore >= 2 {
-		return bestMatch
-	}
-
-	return nil
+	
+	sb.WriteString("\nRetorne APENAS o JSON, sem texto adicional.")
+	return sb.String()
 }

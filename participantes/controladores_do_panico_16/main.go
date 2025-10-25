@@ -54,7 +54,7 @@ func main() {
 	log.Printf("DEBUG: API Key starts with: %s", apiKey[:min(20, len(apiKey))])
 
 	// Carregar intents do CSV
-	csvPath := "../../assets/intents_pre_loaded.csv"
+	csvPath := "/assets/intents_pre_loaded.csv"
 	log.Printf("Loading intents from CSV: %s", csvPath)
 	intents, err := client.LoadIntentsFromCSV(csvPath)
 	if err != nil {
