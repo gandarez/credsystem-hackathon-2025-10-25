@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -51,10 +52,9 @@ var catalog = map[int]string{
 	14: "Reclamações",
 	15: "Atendimento humano",
 	16: "Token de proposta",
-	17: "Atualização de dados cadastrais",
 }
 
-// ---------------------- HTTP client global (keep-alive/HTTP2) ----------------------
+// ---------------------- HTTP client ----------------------
 
 var httpClient = &http.Client{
 	Transport: &http.Transport{
@@ -64,21 +64,35 @@ var httpClient = &http.Client{
 		IdleConnTimeout:     90 * time.Second,
 		ForceAttemptHTTP2:   true,
 	},
-	Timeout: 8 * time.Second, // fail-fast
+	Timeout: 8 * time.Second,
 }
 
 // ---------------------- LLM (OpenRouter) ----------------------
 
 const llmModel = "openai/gpt-4o-mini"
 
-// Prompt mínimo: saída só com {"service_id": N}
-const systemPrompt = `Você classifica a intenção do usuário como UM ÚNICO ID entre 1..16 da lista:
-1 Limite/Vencimento/Melhor dia; 2 2ª via boleto de acordo; 3 2ª via de Fatura; 4 Status de Entrega do Cartão;
-5 Status de cartão; 6 Aumento de limite; 7 Cancelamento de cartão; 8 Telefones de seguradoras; 9 Desbloqueio de Cartão;
-10 Esqueceu/Troca de senha; 11 Perda e roubo; 12 Saldo Conta do Mais; 13 Pagamento de contas; 14 Reclamações;
-15 Atendimento humano; 16 Token de proposta;
-Regras: Retorne SOMENTE JSON {"service_id":<int>}. Em caso de ambiguidade ou falta de contexto, retorne {"service_id":15}.
-Dica, verifique bem o texto enviado, talvez o que ele precisa já esta na lista acima.`
+// Saída do modelo: APENAS o número 1..16 (sem JSON/explicações)
+const systemPrompt = `Você deve classificar a intenção do usuário como UM ÚNICO ID entre 1 e 16 da lista:
+1 Consulta Limite / Vencimento do cartão / Melhor dia de compra
+2 Segunda via de boleto de acordo
+3 Segunda via de Fatura
+4 Status de Entrega do Cartão
+5 Status de cartão
+6 Solicitação de aumento de limite
+7 Cancelamento de cartão
+8 Telefones de seguradoras
+9 Desbloqueio de Cartão
+10 Esqueceu senha / Troca de senha
+11 Perda e roubo
+12 Consulta do Saldo Conta do Mais
+13 Pagamento de contas
+14 Reclamações
+15 Atendimento humano
+16 Token de proposta
+REGRAS:
+- Retorne SOMENTE o número do ID (ex.: 7).
+- Não retorne texto, explicações, JSON, aspas ou qualquer outro símbolo.
+- Se houver dúvida ou ambiguidade, responda 15.`
 
 func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	apiKey := os.Getenv("OPENROUTER_API_KEY")
@@ -94,11 +108,8 @@ func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	payload := map[string]interface{}{
 		"model":       llmModel,
 		"temperature": 0,
-		"max_tokens":  8, // só precisa do {"service_id":N}
+		"max_tokens":  4,
 		"messages":    messages,
-		"response_format": map[string]string{
-			"type": "json_object",
-		},
 	}
 
 	b, _ := json.Marshal(payload)
@@ -133,56 +144,53 @@ func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	}
 
 	content := strings.TrimSpace(or.Choices[0].Message.Content)
+	content = strings.Trim(content, " \t\r\n\"'`.,;")
 
-	// Esperamos JSON estrito {"service_id":N}
-	var out struct {
-		ServiceID int `json:"service_id"`
-	}
-	if err := json.Unmarshal([]byte(content), &out); err != nil {
-		return 0, fmt.Errorf("resposta não-JSON do LLM: %s", content)
-	}
-	if out.ServiceID < 1 || out.ServiceID > 17 {
+	id, err := strconv.Atoi(content)
+	if err != nil || id < 1 || id > 16 {
 		return 15, nil // fallback seguro
 	}
-	return out.ServiceID, nil
+	return id, nil
 }
 
 // ---------------------- HTTP ----------------------
 
-func returnJSON(w http.ResponseWriter, status int, v interface{}) {
+func returnJSON(w http.ResponseWriter, v interface{}) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(status)
+	w.WriteHeader(http.StatusOK)
 	_ = json.NewEncoder(w).Encode(v)
 }
 
 func makeServer() http.Handler {
 	mux := http.NewServeMux()
 
+	// healthz simples
 	mux.HandleFunc("/api/healthz", func(w http.ResponseWriter, r *http.Request) {
-		returnJSON(w, http.StatusOK, map[string]string{"status": "ok"})
+		returnJSON(w, map[string]string{"status": "ok"})
 	})
 
+	// Classificação de serviço
 	mux.HandleFunc("/api/find-service", func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			returnJSON(w, http.StatusMethodNotAllowed, apiResponse{Success: false, Error: "use POST"})
-			return
-		}
-
 		var reqBody requestBody
 		if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil || strings.TrimSpace(reqBody.Intent) == "" {
-			returnJSON(w, http.StatusBadRequest, apiResponse{Success: false, Error: "body inválido: {\"intent\": \"...\"}"})
+			returnJSON(w, apiResponse{
+				Success: false,
+				Data:    nil,
+				Error:   "body inválido: {\"intent\": \"...\"}",
+			})
 			return
 		}
 
-		intent := strings.TrimSpace(reqBody.Intent)
-
-		// chama o LLM sempre (sem fast-path)
 		ctx, cancel := context.WithTimeout(r.Context(), 1*time.Second)
 		defer cancel()
 
-		id, err := classifyWithLLM(ctx, intent)
+		id, err := classifyWithLLM(ctx, strings.TrimSpace(reqBody.Intent))
 		if err != nil {
-			returnJSON(w, http.StatusBadGateway, apiResponse{Success: false, Error: err.Error()})
+			returnJSON(w, apiResponse{
+				Success: false,
+				Data:    nil,
+				Error:   err.Error(),
+			})
 			return
 		}
 
@@ -192,9 +200,10 @@ func makeServer() http.Handler {
 			name = catalog[id]
 		}
 
-		returnJSON(w, http.StatusOK, apiResponse{
+		returnJSON(w, apiResponse{
 			Success: true,
 			Data:    &responseData{ServiceID: id, ServiceName: name},
+			Error:   "",
 		})
 	})
 
