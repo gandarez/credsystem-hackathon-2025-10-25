@@ -1,0 +1,38 @@
+@host = http://localhost:8080
+# @host = http://localhost:18020  # Uncomment this line when using Docker
+
+### Health Check
+GET {{host}}/api/healthz
+Accept: application/json
+
+### Find Service
+POST {{host}}/api/find-service
+Content-Type: application/json
+
+{
+    "intent": "quero consultar meu limite disponível"
+}
+
+### Test with different intents
+POST http://localhost:18020/api/find-service
+Content-Type: application/json
+
+{
+    "intent": "preciso de segunda via do boleto"
+}
+
+### Another example
+POST http://localhost:18020/api/find-service
+Content-Type: application/json
+
+{
+    "intent": "quero desbloquear meu cartão"
+}
+
+### Test error case - empty intent
+POST http://localhost:18020/api/find-service
+Content-Type: application/json
+
+{
+    "intent": ""
+}
