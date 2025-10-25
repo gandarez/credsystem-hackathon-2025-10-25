@@ -12,7 +12,7 @@ import (
 
 func main() {
 	r := chi.NewRouter()
-	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/api/healthz", func(w http.ResponseWriter, r *http.Request) {
 		message := map[string]string{"status": "ok"}
 		b, _ := json.Marshal(message)
 		w.Write(b)
