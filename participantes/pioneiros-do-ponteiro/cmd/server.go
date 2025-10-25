@@ -127,6 +127,8 @@ func findServiceHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	fmt.Printf("user embedding generated: (%v)", len(userEmb))
+
 	// Find best match
 	var best Intent
 	bestScore := -1.0
