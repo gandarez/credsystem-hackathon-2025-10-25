@@ -86,7 +86,7 @@ Então você deve:
 
 5. Faça um fork deste repositório criando uma pasta com o nome da sua dupla no diretório `participantes`.
 
-6. Faça o build da sua imagem Docker e disponibilize em algum repositório público (Docker Hub, GitHub Container Registry, etc).
+6. O build será feito durante a execução da sua imagem Docker. Crie um Dockerfile conforme exemplo na pasta `./examples` para construir a imagem do seu serviço. Apenas preencher a imagem Docker criada por você.
 
 7. Crie um arquivo docker-compose conforme exemplo na pasta `./examples` para facilitar a execução do seu serviço. Apenas preencher a imagem Docker criada por você.
 
