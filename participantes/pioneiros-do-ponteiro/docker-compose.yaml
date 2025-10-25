@@ -1,0 +1,12 @@
+services:
+  backend-api:
+    image: pioneiros-api
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "18020:8081"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
