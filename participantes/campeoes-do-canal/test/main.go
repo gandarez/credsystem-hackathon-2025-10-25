@@ -68,7 +68,7 @@ func saveResponse(intent string, response string, duration time.Duration, succes
 	mu.Lock()
 	defer mu.Unlock()
 
-	f, err := os.OpenFile("./participantes/campeoes-do-canal/test/responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile("./test/responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Printf("❌ Error opening file: %v\n", err)
 		return
