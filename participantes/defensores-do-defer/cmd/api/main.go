@@ -1,8 +1,11 @@
 package main
 
 import (
+	"defensoresdefer/cmd/api/openrouter"
+	"defensoresdefer/cmd/configs"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/middleware"
@@ -25,11 +28,6 @@ type DataService struct {
 }
 
 func main() {
-	/*configs, err := LoadConfigs(".")
-	if err != nil {
-		log.Fatalf("failed to load configs: %v", err)
-	}*/
-
 	r := chi.NewRouter()
 	//r.Use(LogRequest)
 	r.Use(middleware.Logger)
@@ -51,13 +49,42 @@ func ConsultaHealthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindService(w http.ResponseWriter, r *http.Request) {
+	configs, err := configs.LoadConfig(".")
+	if err != nil {
+		log.Fatalf("failed to load configs: %v", err)
+	}
 	var intent IntentUser
-	err := json.NewDecoder(r.Body).Decode(&intent)
+	fmt.Printf("Recebido request para FindService %s", intent.Intent)
+	err = json.NewDecoder(r.Body).Decode(&intent)
 	if err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
-	fmt.Println(intent.Intent)
-	// Lógica simples para determinar o serviço com base na intenção
 
+	// Lógica simples para determinar o serviço com base na intenção
+	var response Response
+
+	var client openrouter.Client
+	client = *openrouter.NewClient("https://openrouter.ai/api/v1",
+		openrouter.WithAuth(configs.OPENROUTER_API_KEY),
+	)
+	fmt.Printf("Client OpenRouter criado %v", client)
+
+	dataResp, err := client.ChatCompletion(r.Context(), intent.Intent)
+	if err != nil {
+		http.Error(w, "Error processing request: "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+	fmt.Printf("Resposta recebida do OpenRouter %v", dataResp)
+
+	response = Response{
+		success: true,
+		dataService: DataService{
+			service_id:   int(dataResp.ServiceID),
+			service_name: dataResp.ServiceName,
+		},
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }

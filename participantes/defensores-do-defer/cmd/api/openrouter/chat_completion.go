@@ -36,7 +36,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	url := c.baseURL + "/chat/completions"
 
 	requestBody := OpenRouterRequest{
-		Model: "<definir_modelo>",
+		Model: "openai/gpt-4o-mini-2024-07-18",
 		Messages: []struct {
 			Role    string `json:"role"`
 			Content string `json:"content"`
@@ -58,7 +58,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	if err != nil {
 		return nil, fmt.Errorf("error marshaling request: %v", err)
 	}
-
+	fmt.Printf("Requisição para o OpenRouter %s", string(jsonBody))
 	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %v", err)
@@ -80,12 +80,12 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	if resp.StatusCode != http.StatusOK {
 		return nil, fmt.Errorf("API request failed with status %d: %s", resp.StatusCode, string(body))
 	}
-
+	fmt.Printf("Resposta bruta do OpenRouter %s", string(body))
 	var openRouterResp OpenRouterResponse
 	if err := json.Unmarshal(body, &openRouterResp); err != nil {
 		return nil, fmt.Errorf("error unmarshaling response: %v. body: %s", err, string(body))
 	}
-
+	fmt.Printf("Resposta unmarshaled do OpenRouter %v", openRouterResp)
 	if len(openRouterResp.Choices) == 0 {
 		return nil, fmt.Errorf("no choices in response")
 	}
