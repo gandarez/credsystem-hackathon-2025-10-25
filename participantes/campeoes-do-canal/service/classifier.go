@@ -65,7 +65,7 @@ CONTEXTO (Serviços e Intenções de Exemplo):
 * ID: 13, Nome: Pagamento de contas
     Exemplos: "quero pagar minha conta", "pagar boleto", "pagamento de conta", "quero pagar fatura", "efetuar pagamento", "pagar conta de luz", "quitar um boleto"
 * ID: 14, Nome: Reclamações
-    Exemplos: "quero reclamar", "abrir reclamação", "fazer queixa", "reclamar atendimento", "registrar problema", "protocolo de reclamação", "estou insatisfeito", "péssimo atendimento"
+    Exemplos: "quero reclamar", "abrir reclamação", "fazer queixa", "reclamar atendimento", "registrar problema", "protocolo de reclamação", "estou insatisfeito", "péssimo atendimento", "resgistrar problema", "registrar ocorrência"
 * ID: 15, Nome: Atendimento humano
     Exemplos: "falar com uma pessoa", "preciso de humano", "transferir para atendente", "quero falar com atendente", "atendimento pessoal", "ajuda", "falar com alguém", "não é nada disso"
 * ID: 16, Nome: Token de proposta

@@ -47,6 +47,19 @@ func main() {
 			w.Write(b)
 			return
 		}
+		if intent.ServiceID == 0 {
+			message := models.Message{
+				Success: false,
+				Data: models.ServiceData{
+					ServiceID:   0,
+					ServiceName: "",
+				},
+				Error: "nenhum serviço compatível localizado",
+			}
+			b, _ := json.Marshal(message)
+			w.Write(b)
+			return
+		}
 		message := models.Message{
 			Success: true,
 			Data: models.ServiceData{
