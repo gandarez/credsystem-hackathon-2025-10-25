@@ -42,7 +42,7 @@ func initServiceGateway() gateway.ServiceGateway {
 	}
 
 	openRouterBaseURL := envOrDefault("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-	openRouterModel := envOrDefault("OPENROUTER_MODEL", openrouter.DefaultModel)
+	openRouterModel := envOrDefault("OPENROUTER_MODEL", "google/gemini-2.5-flash-preview-09-2025")
 	systemPrompt := os.Getenv("OPENROUTER_SYSTEM_PROMPT")
 	if systemPrompt == "" {
 		systemPrompt = gateway.OpenRouterSystemPrompt
