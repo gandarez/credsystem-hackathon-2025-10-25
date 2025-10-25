@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -128,12 +129,25 @@ func (c *OpenRouterClient) ClassifyIntent(ctx context.Context, intent string) (*
 		return nil, fmt.Errorf("erro ao fazer parse da resposta da IA: %v", err)
 	}
 
+	service.Name = strings.TrimSpace(service.Name)
+
 	return &service, nil
 }
 
 func (c *OpenRouterClient) createClassificationPrompt(_ string) string {
 	// Tenta ler o prompt do arquivo prompt.txt
-	promptBytes, err := os.ReadFile("prompt.txt")
+	// Primeiro tenta no diretório atual, depois no diretório do executável
+	promptPath := "prompt.txt"
+	if _, err := os.Stat(promptPath); os.IsNotExist(err) {
+		// Se não encontrar no diretório atual, tenta no diretório do executável
+		execPath, err := os.Executable()
+		if err == nil {
+			execDir := filepath.Dir(execPath)
+			promptPath = filepath.Join(execDir, "prompt.txt")
+		}
+	}
+
+	promptBytes, err := os.ReadFile(promptPath)
 	if err != nil {
 		// Se não conseguir ler o arquivo, usa o prompt padrão
 		return `Você é um assistente especializado em classificar intenções de clientes bancários.
