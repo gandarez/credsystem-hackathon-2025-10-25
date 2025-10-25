@@ -68,7 +68,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Total de exemplos: %d\n", len(testData))
+	// Limita a 100 testes
+	maxTests := 100
+	if len(testData) > maxTests {
+		testData = testData[:maxTests]
+		fmt.Printf("Limitando a %d testes (de %d exemplos disponíveis)\n", maxTests, len(testData))
+	}
+
+	fmt.Printf("Total de testes: %d\n", len(testData))
 
 	// Converte dados de teste em exemplos para o classificador
 	examples := make([]domain.IntentExample, len(testData))
@@ -80,11 +87,10 @@ func main() {
 		}
 	}
 
-	// Testa todos os cenários
-	fmt.Printf("Testando todos os %d cenários\n", len(testData))
+	// Executa testes
+	fmt.Printf("Testando %d cenários\n", len(testData))
 	fmt.Println()
 
-	// Executa testes
 	results := runTests(classifier, testData, examples)
 
 	// Mostra resultados
