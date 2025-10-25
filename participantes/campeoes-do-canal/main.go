@@ -18,10 +18,7 @@ func main() {
 		w.Write(b)
 	})
 	r.Post("/api/find-service", func(w http.ResponseWriter, r *http.Request) {
-		type FindServiceRequest struct {
-			Intent string `json:"intent" validate:"required"`
-		}
-		var body FindServiceRequest
+		var body models.FindServiceRequest
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
 			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			return

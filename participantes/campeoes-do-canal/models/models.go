@@ -38,6 +38,9 @@ func BindAndValidate(data interface{}, r *http.Request) error {
 	return nil
 }
 
+type FindServiceRequest struct {
+	Intent string `json:"intent" validate:"required"`
+}
 type ServiceData struct {
 	ServiceID   int    `json:"service_id"`
 	ServiceName string `json:"service_name"`
