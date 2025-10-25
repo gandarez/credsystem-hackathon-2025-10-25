@@ -10,15 +10,16 @@ RUN go mod download
 # Copiar código fonte
 COPY . .
 
-# Build da aplicação
+# Build da aplicação estaticamente
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Runtime stage
-FROM alpine:latest
+FROM scratch
 
-RUN apk --no-cache add ca-certificates
+WORKDIR /app
 
-WORKDIR /root/
+# Copiar certificados SSL
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 # Copiar binário do stage anterior
 COPY --from=builder /app/main .

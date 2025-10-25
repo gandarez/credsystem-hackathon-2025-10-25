@@ -36,4 +36,3 @@ participantes/**/results/
 participantes/**/docker-compose.logs
 load-test/*.logs
 */results.html
-check_limit_openrouter.py
