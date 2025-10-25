@@ -1,0 +1,93 @@
+{"intent": "Quanto tem disponível para usar"}
+{"intent": "quando fecha minha fatura"}
+{"intent": "Quando vence meu cartão"}
+{"intent": "quando posso comprar"}
+{"intent": "vencimento da fatura"}
+{"intent": "valor para gastar"}
+{"intent": "segunda via boleto de acordo"}
+{"intent": "Boleto para pagar minha negociação"}
+{"intent": "código de barras acordo"}
+{"intent": "preciso pagar negociação"}
+{"intent": "enviar boleto acordo"}
+{"intent": "boleto da negociação"}
+{"intent": "quero meu boleto"}
+{"intent": "segunda via de fatura"}
+{"intent": "código de barras fatura"}
+{"intent": "quero a fatura do cartão"}
+{"intent": "enviar boleto da fatura"}
+{"intent": "fatura para pagamento"}
+{"intent": "onde está meu cartão"}
+{"intent": "meu cartão não chegou"}
+{"intent": "status da entrega do cartão"}
+{"intent": "cartão em transporte"}
+{"intent": "previsão de entrega do cartão"}
+{"intent": "cartão foi enviado?"}
+{"intent": "não consigo passar meu cartão"}
+{"intent": "meu cartão não funciona"}
+{"intent": "cartão recusado"}
+{"intent": "cartão não está passando"}
+{"intent": "status do cartão ativo"}
+{"intent": "problema com cartão"}
+{"intent": "quero mais limite"}
+{"intent": "aumentar limite do cartão"}
+{"intent": "solicitar aumento de crédito"}
+{"intent": "preciso de mais limite"}
+{"intent": "pedido de aumento de limite"}
+{"intent": "limite maior no cartão"}
+{"intent": "cancelar cartão"}
+{"intent": "quero encerrar meu cartão"}
+{"intent": "bloquear cartão definitivamente"}
+{"intent": "cancelamento de crédito"}
+{"intent": "desistir do cartão"}
+{"intent": "quero cancelar seguro"}
+{"intent": "telefone do seguro"}
+{"intent": "contato da seguradora"}
+{"intent": "preciso falar com o seguro"}
+{"intent": "seguro do cartão"}
+{"intent": "cancelar assistência"}
+{"intent": "desbloquear cartão"}
+{"intent": "ativar cartão novo"}
+{"intent": "como desbloquear meu cartão"}
+{"intent": "quero desbloquear o cartão"}
+{"intent": "cartão para uso imediato"}
+{"intent": "desbloqueio para compras"}
+{"intent": "não tenho mais a senha do cartão"}
+{"intent": "esqueci minha senha"}
+{"intent": "trocar senha do cartão"}
+{"intent": "preciso de nova senha"}
+{"intent": "recuperar senha"}
+{"intent": "senha bloqueada"}
+{"intent": "perdi meu cartão"}
+{"intent": "roubaram meu cartão"}
+{"intent": "cartão furtado"}
+{"intent": "perda do cartão"}
+{"intent": "bloquear cartão por roubo"}
+{"intent": "extravio de cartão"}
+{"intent": "saldo conta corrente"}
+{"intent": "consultar saldo"}
+{"intent": "quanto tenho na conta"}
+{"intent": "extrato da conta"}
+{"intent": "saldo disponível"}
+{"intent": "meu saldo atual"}
+{"intent": "quero pagar minha conta"}
+{"intent": "pagar boleto"}
+{"intent": "pagamento de conta"}
+{"intent": "quero pagar fatura"}
+{"intent": "efetuar pagamento"}
+{"intent": "quero reclamar"}
+{"intent": "abrir reclamação"}
+{"intent": "fazer queixa"}
+{"intent": "reclamar atendimento"}
+{"intent": "registrar problema"}
+{"intent": "protocolo de reclamação"}
+{"intent": "falar com uma pessoa"}
+{"intent": "preciso de humano"}
+{"intent": "transferir para atendente"}
+{"intent": "quero falar com atendente"}
+{"intent": "atendimento pessoal"}
+{"intent": "código para fazer meu cartão"}
+{"intent": "token de proposta"}
+{"intent": "receber código do cartão"}
+{"intent": "proposta token"}
+{"intent": "número de token"}
+{"intent": "código de token da proposta"}
