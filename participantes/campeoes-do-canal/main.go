@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/configs"
 	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/models"
 	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/service"
 	"github.com/go-chi/chi/v5"
@@ -59,6 +58,6 @@ func main() {
 		b, _ := json.Marshal(message)
 		w.Write(b)
 	})
-	fmt.Printf("\n running on http://localhost%s \n", configs.GetPort())
-	http.ListenAndServe(configs.GetPort(), r)
+	fmt.Printf("\n running on http://localhost%s \n", ":18020")
+	http.ListenAndServe(":18020", r)
 }

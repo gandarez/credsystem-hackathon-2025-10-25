@@ -1,9 +1,8 @@
-module github.com/andre-bernardes200/credsystem-hackathon-2025/participantes/campeoes-do-canal
+module github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal
 
 go 1.24.9
 
 require (
-	github.com/andre-bernardes200/credsystem-hackathon-2025-10-25 v0.0.0-20251025161147-df4dc9eb679b
 	github.com/go-chi/chi/v5 v5.2.3
 	github.com/go-playground/validator/v10 v10.28.0
 	github.com/joho/godotenv v1.5.1

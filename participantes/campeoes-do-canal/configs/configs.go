@@ -1,14 +1,17 @@
 package configs
 
 import (
+	"log"
 	"os"
 
 	"github.com/joho/godotenv"
 )
 
 func init() {
-	if err := godotenv.Load("./participantes/campeoes-do-canal/.env"); err != nil {
-		panic(err)
+	// Try to load .env if present; don't panic when missing so the app can run
+	// in environments where environment variables are provided externally.
+	if err := godotenv.Load(".env"); err != nil {
+		log.Printf("warning: .env not loaded: %v", err)
 	}
 }
 
