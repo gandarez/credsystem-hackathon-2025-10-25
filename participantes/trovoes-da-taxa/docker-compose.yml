@@ -10,6 +10,7 @@ services:
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - PORT=18020
+      - INTENTS_CSV_PATH=/root/nlp/data-set.csv
     restart: unless-stopped
     healthcheck:
       test:
@@ -25,4 +26,3 @@ services:
       timeout: 5s
       retries: 3
       start_period: 5s
-

@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.21-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
@@ -23,15 +23,16 @@ WORKDIR /root/
 # Copiar binário
 COPY --from=builder /app/knn-server .
 
-# Copiar CSV de intenções (assumindo que está em ../../assets/)
-COPY ../../../assets/intents_pre_loaded.csv /root/assets/intents_pre_loaded.csv
+# Criar diretório nlp e copiar data-set.csv
+RUN mkdir -p /root/nlp
+COPY --from=builder /app/nlp/data-set.csv /root/nlp/data-set.csv
 
 # Expor porta
 EXPOSE 18020
 
-# Definir variável de ambiente para o CSV
-ENV INTENTS_CSV_PATH=/root/assets/intents_pre_loaded.csv
+# Definir variáveis de ambiente
 ENV PORT=18020
+ENV INTENTS_CSV_PATH=/root/nlp/data-set.csv
 
 CMD ["./knn-server"]
 
