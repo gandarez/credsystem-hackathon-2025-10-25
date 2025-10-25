@@ -1,0 +1,12 @@
+{
+  "total_requests": 93,
+  "timestamp": "2025-10-25T15:28:58-03:00",
+  "elapsed_time": "00:02",
+  "total_success": 0,
+  "total_failed": 93,
+  "success_rate": 0,
+  "failure_rate": 100,
+  "fastest_time": "184ms",
+  "slowest_time": "681ms",
+  "average_time": "431ms"
+}
