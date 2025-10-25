@@ -20,7 +20,17 @@ func main() {
 	r.Post("/api/find-service", func(w http.ResponseWriter, r *http.Request) {
 		var body models.FindServiceRequest
 		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-			http.Error(w, "Invalid request body", http.StatusBadRequest)
+			message := models.Message{
+				Success: false,
+				Data: models.ServiceData{
+					ServiceID:   000,
+					ServiceName: "000",
+				},
+				Error: "invalid request body",
+			}
+			b, _ := json.Marshal(message)
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write(b)
 			return
 		}
 		message := models.Message{
