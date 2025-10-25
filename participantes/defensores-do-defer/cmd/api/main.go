@@ -5,7 +5,6 @@ import (
 	"defensoresdefer/cmd/configs"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/go-chi/chi/middleware"
@@ -34,8 +33,7 @@ func main() {
 	r.Get("/api/healthz", ConsultaHealthz)
 	r.Post("/api/find-service", FindService)
 
-	fmt.Println("🚀 Server running on port 8080")
-	log.Fatal(http.ListenAndServe(":8080", r))
+	http.ListenAndServe(":8080", r)
 }
 
 func ConsultaHealthz(w http.ResponseWriter, r *http.Request) {
@@ -56,13 +54,11 @@ func FindService(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("📩 Received intent: %s\n", intent.Intent)
 
 	client := openrouter.NewClient(
 		"https://openrouter.ai/api/v1",
 		openrouter.WithAuth(cfg.OPENROUTER_API_KEY),
 	)
-	fmt.Println("✅ OpenRouter client created")
 
 	dataResp, err := client.ChatCompletion(r.Context(), intent.Intent)
 	if err != nil {
