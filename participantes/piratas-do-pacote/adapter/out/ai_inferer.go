@@ -123,6 +123,7 @@ func buildSystemPrompt(kb *KB) string {
 		}
 	}
 
+	b.WriteString("\nSe o texto do usuário não tiver conexão NENHUMA com nenhum item, retornar apenas o número 0\n")
 	b.WriteString("\nRestrições:\n- Saída deve ser SÓ o número do ID (ex.: '4').\n- Temperature = 0.\n")
 	return b.String()
 }
