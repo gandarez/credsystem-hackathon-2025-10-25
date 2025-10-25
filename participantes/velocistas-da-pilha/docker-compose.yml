@@ -3,7 +3,7 @@ version: '3.8'
 
 services:
   velocistas-api:
-    image: ./velocistas-da-pilha:latest  # SUBSTITUIR pela sua imagem
+    image: rogeriogregorio/velocistas-da-pilha:latest  # SUBSTITUIR pela sua imagem
     container_name: velocistas-da-pilha
     ports:
       - "18020:18020"
