@@ -78,8 +78,8 @@ func (h *ServiceHandler) FindService(c *fiber.Ctx) error {
 }
 
 func RegisterRoutes(app *fiber.App, handler *ServiceHandler) {
-	app.Get("/api/healthz", Health)
-	app.Post("/api/find-service", handler.FindService)
+	app.Get("/healthz", Health)
+	app.Post("/find-service", handler.FindService)
 }
 
 func Health(c *fiber.Ctx) error {
