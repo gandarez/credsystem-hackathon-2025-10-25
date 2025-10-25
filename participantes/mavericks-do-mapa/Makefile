@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := build
 
 # globals
-BINARY_NAME?=<nome_do_seu_binario>
+BINARY_NAME?=mavericks-do-mapa
 BUILD_DIR?="./build"
 CGO_ENABLED?=0
 
