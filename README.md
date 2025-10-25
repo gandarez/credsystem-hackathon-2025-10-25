@@ -65,7 +65,7 @@ Então você deve:
 
 3. No arquivo `./assets/intents_pre_loaded.csv` você encontrará uma lista contendo as 93  intenções iniciais e seus respectivos serviços. Utilize essa lista para treinar seu modelo de IA.
 
-4. **Não invente serviços, utilize um dos 17 serviços** listados:
+4. **Não invente serviços, utilize um dos 16 serviços** listados:
 
 - Consulta Limite / Vencimento do cartão / Melhor dia de compra (ID 1)
 - Segunda via de boleto de acordo (ID 2)
@@ -86,7 +86,7 @@ Então você deve:
 
 5. Faça um fork deste repositório criando uma pasta com o nome da sua dupla no diretório `participantes`.
 
-6. Faça o build da sua imagem Docker e disponibilize em algum repositório público (Docker Hub, GitHub Container Registry, etc).
+6. O build será feito durante a execução da sua imagem Docker. Crie um Dockerfile conforme exemplo na pasta `./examples` para construir a imagem do seu serviço. Apenas preencher a imagem Docker criada por você.
 
 7. Crie um arquivo docker-compose conforme exemplo na pasta `./examples` para facilitar a execução do seu serviço. Apenas preencher a imagem Docker criada por você.
 
