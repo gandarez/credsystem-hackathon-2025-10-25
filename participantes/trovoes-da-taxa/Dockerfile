@@ -1,39 +1,38 @@
-# Build stage
-FROM golang:1.24-alpine AS builder
+#####################
+# Build stage       #
+#####################
+FROM golang:1.25-bookworm AS build
+
+RUN apt-get update && apt-get -y install \
+    git \
+    make \
+    ca-certificates
 
 WORKDIR /app
 
-# Copiar go.mod primeiro para cache de dependências
-COPY go.mod ./
-RUN go mod download
-
-# Copiar código fonte
+# Copy everything
 COPY . .
 
-# Build da aplicação
+# Download dependencies and build
+RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o knn-server .
 
-# Runtime stage
-FROM alpine:latest
+#####################
+# Build final image #
+#####################
+FROM scratch AS bin
 
-RUN apk --no-cache add ca-certificates
-
-WORKDIR /root/
-
-# Copiar binário
-COPY --from=builder /app/knn-server .
-
-# Criar diretório nlp e copiar data-set.csv
-RUN mkdir -p /root/nlp
-COPY --from=builder /app/nlp/data-set.csv /root/nlp/data-set.csv
-
-# Expor porta
-EXPOSE 18020
+# Copy from build
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=build /app/knn-server .
+COPY --from=build /app/nlp/data-set.csv /nlp/data-set.csv
 
 # Definir variáveis de ambiente
 ENV PORT=18020
-ENV INTENTS_CSV_PATH=/root/nlp/data-set.csv
+ENV INTENTS_CSV_PATH=/nlp/data-set.csv
 
-CMD ["./knn-server"]
+# Specify the container's entrypoint as the action
+ENTRYPOINT ["./knn-server"]
 
 
