@@ -3,8 +3,8 @@ version: '3.8'
 services:
   gurus-das-rotinas:
     build:
-      context: ../..
-      dockerfile: participantes/Gurus-das-Rotinas/Dockerfile
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - "18020:18020"
     environment:

@@ -10,7 +10,7 @@ COPY participantes/Gurus-das-Rotinas/go.mod participantes/Gurus-das-Rotinas/go.s
 RUN go mod download
 
 # Copy source code
-COPY participantes/Gurus-das-Rotinas/ .
+COPY . .
 
 
 # Build the application
