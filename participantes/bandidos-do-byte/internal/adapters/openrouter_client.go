@@ -104,6 +104,11 @@ func (c *OpenRouterClient) ClassifyIntent(request domain.IntentClassificationReq
 		return nil, err
 	}
 
+	// Se o OpenRouter retornou service_id 0, significa que não encontrou um serviço adequado
+	if result.ServiceID == 0 {
+		return nil, domain.ErrNoServiceFound
+	}
+
 	return &domain.IntentClassificationResponse{
 		ServiceID:   result.ServiceID,
 		ServiceName: result.ServiceName,
@@ -143,7 +148,8 @@ func (c *OpenRouterClient) buildPrompt(request domain.IntentClassificationReques
 	sb.WriteString(fmt.Sprintf("A intenção do cliente é: \"%s\"\n\n", request.UserIntent))
 	sb.WriteString("Analise a intenção do cliente e retorne APENAS um JSON no seguinte formato (sem nenhum texto adicional):\n")
 	sb.WriteString(`{"service_id": <número>, "service_name": "<nome do serviço>"}`)
-	sb.WriteString("Caso intenção não seja compatível com um um serviço mapeado retorne {\"service_id\": 0, \"service_name\": \"Contate a URA\"}")
+	sb.WriteString("\n\nIMPORTANTE: Se a intenção NÃO for claramente compatível com nenhum dos serviços listados acima, ")
+	sb.WriteString(`retorne {"service_id": 0, "service_name": "Não identificado"}`)
 
 	return sb.String()
 }

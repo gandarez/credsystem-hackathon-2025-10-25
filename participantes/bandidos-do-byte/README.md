@@ -111,7 +111,7 @@ Encontra o serviço adequado baseado na intenção.
 }
 ```
 
-**Response:**
+**Response (sucesso):**
 ```json
 {
   "success": true,
@@ -121,6 +121,15 @@ Encontra o serviço adequado baseado na intenção.
   }
 }
 ```
+
+**Response (não encontrado):**
+```json
+{
+  "success": false,
+  "error": "No suitable service found for your request"
+}
+```
+*Retorna quando a intenção não corresponde a nenhum serviço ou quando a confiança é muito baixa.*
 
 ### GET /healthz
 Verifica a saúde do serviço.

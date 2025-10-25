@@ -324,16 +324,12 @@ func (c *TensorFlowClassifier) ClassifyIntent(request domain.IntentClassificatio
 	}
 
 	if bestService == nil {
-		return nil, fmt.Errorf("could not classify intent")
+		return nil, domain.ErrNoServiceFound
 	}
 
-	// Threshold mínimo de confiança
-	if bestService.AvgScore < 0.15 {
-		return &domain.IntentClassificationResponse{
-			ServiceID:   0,
-			ServiceName: c.serviceMapping[0], // "Contate a URA"
-			Confidence:  bestService.AvgScore,
-		}, nil
+	// Threshold mínimo de confiança - retorna erro se muito baixo
+	if bestService.AvgScore < 0.20 {
+		return nil, domain.ErrNoServiceFound
 	}
 
 	return &domain.IntentClassificationResponse{

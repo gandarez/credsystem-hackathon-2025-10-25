@@ -1,4 +1,4 @@
-.PHONY: build run docker-build docker-run test clean
+.PHONY: build run docker-build docker-run test test-accuracy clean
 
 # Build the application
 build:
@@ -33,6 +33,12 @@ docker-stop:
 test:
 	go test -v ./...
 
+# Test accuracy of the classifier
+test-accuracy:
+	@echo "=== Testando Acurácia do Classificador ==="
+	@echo ""
+	go run scripts/test_accuracy.go
+
 # Clean build artifacts
 clean:
 	rm -rf bin/
@@ -57,6 +63,7 @@ help:
 	@echo "  docker-run-detached - Run with Docker Compose in background"
 	@echo "  docker-stop         - Stop Docker Compose"
 	@echo "  test                - Run tests"
+	@echo "  test-accuracy       - Test classifier accuracy against CSV data"
 	@echo "  clean               - Clean build artifacts"
 	@echo "  fmt                 - Format code"
 	@echo "  lint                - Run linter"

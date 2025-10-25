@@ -51,7 +51,7 @@ Content-Type: application/json
 ###
 
 ### Test 6: Renegociação
-POST {{baseUrl}}/api/find-service
+POST {{baseUrl}}/find-service
 Content-Type: application/json
 
 {
@@ -60,7 +60,37 @@ Content-Type: application/json
 
 ###
 
+### Test 7: Texto sem relação com serviços (deve retornar success: false)
+POST {{baseUrl}}/find-service
+Content-Type: application/json
+
+{
+  "intent": "qual o horário de funcionamento?"
+}
+
+###
+
+### Test 8: Texto aleatório (deve retornar success: false)
+POST {{baseUrl}}/find-service
+Content-Type: application/json
+
+{
+  "intent": "gosto de pizza"
+}
+
+###
+
+### Test 9: Texto vazio (deve retornar success: false)
+POST {{baseUrl}}/find-service
+Content-Type: application/json
+
+{
+  "intent": "oi"
+}
+
+###
+
 ### Health check
-GET {{baseUrl}}/api/healthz
+GET {{baseUrl}}/healthz
 
 ###

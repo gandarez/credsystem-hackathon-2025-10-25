@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 
 	"github.com/bandidos_do_byte/api/internal/domain"
@@ -36,6 +37,17 @@ func (h *Handler) FindService(w http.ResponseWriter, r *http.Request) {
 
 	serviceData, err := h.serviceFinder.FindService(req.Intent)
 	if err != nil {
+		// Se for erro de "serviço não encontrado", retorna 200 com success: false
+		if errors.Is(err, domain.ErrNoServiceFound) {
+			response := domain.FindServiceResponse{
+				Success: false,
+				Error:   "No suitable service found for your request",
+			}
+			h.sendJSONResponse(w, response, http.StatusOK)
+			return
+		}
+
+		// Outros erros retornam 500
 		h.sendErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

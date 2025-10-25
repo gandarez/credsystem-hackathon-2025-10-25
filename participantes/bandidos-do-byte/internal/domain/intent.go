@@ -1,5 +1,10 @@
 package domain
 
+import "errors"
+
+// ErrNoServiceFound é retornado quando nenhum serviço adequado é encontrado
+var ErrNoServiceFound = errors.New("no suitable service found for the given intent")
+
 // IntentExample representa um exemplo de intent do arquivo de treinamento
 type IntentExample struct {
 	ServiceID   int
