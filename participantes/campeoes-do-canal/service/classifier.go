@@ -4,12 +4,11 @@ import (
 	"context"
 	"os"
 
-	openrouter "github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/examples/api/client/openrouter"
+	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/openrouter"
 )
 
 const (
 	openRouterBaseURL = "https://openrouter.ai/api/v1"
-	openRouterModel   = "openai/gpt-4o-mini"
 )
 
 var (
