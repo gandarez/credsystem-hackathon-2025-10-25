@@ -13,7 +13,6 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"time"
 )
 
 // ---------------------- Tipos ----------------------
@@ -47,31 +46,28 @@ var catalog = map[int]string{
 	9:  "Desbloqueio de Cartão",
 	10: "Esqueceu senha / Troca de senha",
 	11: "Perda e roubo",
-	12: "Consulta do Saldo Conta do Mais",
+	12: "Consulta do Saldo",
 	13: "Pagamento de contas",
 	14: "Reclamações",
 	15: "Atendimento humano",
 	16: "Token de proposta",
 }
 
-// ---------------------- HTTP client ----------------------
+// ---------------------- HTTP client (sem timeout) ----------------------
 
 var httpClient = &http.Client{
 	Transport: &http.Transport{
 		MaxIdleConns:        100,
-		MaxConnsPerHost:     0,
 		MaxIdleConnsPerHost: 100,
-		IdleConnTimeout:     90 * time.Second,
 		ForceAttemptHTTP2:   true,
 	},
-	Timeout: 8 * time.Second,
+	// Timeout removido completamente
 }
 
 // ---------------------- LLM (OpenRouter) ----------------------
 
 const llmModel = "openai/gpt-4o-mini"
 
-// Saída do modelo: APENAS o número 1..16 (sem JSON/explicações)
 const systemPrompt = `Você deve classificar a intenção do usuário como UM ÚNICO ID entre 1 e 16 da lista:
 1 Consulta Limite / Vencimento do cartão / Melhor dia de compra
 2 Segunda via de boleto de acordo
@@ -84,7 +80,7 @@ const systemPrompt = `Você deve classificar a intenção do usuário como UM Ú
 9 Desbloqueio de Cartão
 10 Esqueceu senha / Troca de senha
 11 Perda e roubo
-12 Consulta do Saldo Conta do Mais
+12 Consulta do Saldo
 13 Pagamento de contas
 14 Reclamações
 15 Atendimento humano
@@ -92,7 +88,7 @@ const systemPrompt = `Você deve classificar a intenção do usuário como UM Ú
 REGRAS:
 - Retorne SOMENTE o número do ID (ex.: 7).
 - Não retorne texto, explicações, JSON, aspas ou qualquer outro símbolo.
-- Se houver dúvida ou ambiguidade, responda 15.`
+- Se houver dúvida ou ambiguidade, responda 15, mas antes, pense`
 
 func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	apiKey := os.Getenv("OPENROUTER_API_KEY")
@@ -164,31 +160,27 @@ func returnJSON(w http.ResponseWriter, v interface{}) {
 func makeServer() http.Handler {
 	mux := http.NewServeMux()
 
-	// healthz simples
+	// Healthz
 	mux.HandleFunc("/api/healthz", func(w http.ResponseWriter, r *http.Request) {
 		returnJSON(w, map[string]string{"status": "ok"})
 	})
 
-	// Classificação de serviço
+	// Classificador
 	mux.HandleFunc("/api/find-service", func(w http.ResponseWriter, r *http.Request) {
 		var reqBody requestBody
 		if err := json.NewDecoder(r.Body).Decode(&reqBody); err != nil || strings.TrimSpace(reqBody.Intent) == "" {
 			returnJSON(w, apiResponse{
 				Success: false,
-				Data:    nil,
 				Error:   "body inválido: {\"intent\": \"...\"}",
 			})
 			return
 		}
 
-		ctx, cancel := context.WithTimeout(r.Context(), 1*time.Second)
-		defer cancel()
-
-		id, err := classifyWithLLM(ctx, strings.TrimSpace(reqBody.Intent))
+		intent := strings.TrimSpace(reqBody.Intent)
+		id, err := classifyWithLLM(context.Background(), intent)
 		if err != nil {
 			returnJSON(w, apiResponse{
 				Success: false,
-				Data:    nil,
 				Error:   err.Error(),
 			})
 			return
@@ -211,19 +203,13 @@ func makeServer() http.Handler {
 }
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "18020"
-	}
+	port := "8080"
 
 	addr := ":" + port
 	server := &http.Server{
-		Addr:              addr,
-		Handler:           makeServer(),
-		ReadTimeout:       2 * time.Second,
-		WriteTimeout:      2 * time.Second,
-		IdleTimeout:       90 * time.Second,
-		ReadHeaderTimeout: 1 * time.Second,
+		Addr:    addr,
+		Handler: makeServer(),
+		// sem timeouts
 	}
 
 	log.Printf("servidor ouvindo em %s", addr)
