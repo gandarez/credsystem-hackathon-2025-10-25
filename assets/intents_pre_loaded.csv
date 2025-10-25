@@ -91,4 +91,3 @@ service_id;service_name;intent
 16;Token de proposta;receber código do cartão
 16;Token de proposta;proposta token
 16;Token de proposta;número de token
-16;Token de proposta;código de token da proposta
