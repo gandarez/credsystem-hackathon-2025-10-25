@@ -22,7 +22,7 @@ type OpenRouterClient struct {
 func NewOpenRouterClient() *OpenRouterClient {
 	model := os.Getenv("OPENROUTER_MODEL")
 	if model == "" {
-		model = "mistralai/mistral-7b-instruct" // Modelo padrão
+		model = "openai/gpt-4o-mini"
 	}
 
 	return &OpenRouterClient{
