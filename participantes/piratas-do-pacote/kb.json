@@ -15,11 +15,12 @@
         "limite disponível agora"
       ],
       "negative_examples": [
+        "conta do mais", "programa mais", "saldo", "saldo disponível",
         "quero aumentar meu limite",
         "segunda via da fatura",
         "cancelar cartão"
       ],
-      "disambiguation_notes": "Se o usuário pedir 'aumentar limite', é serviço 6; se pedir 'segunda via', é serviço 3."
+      "disambiguation_notes": "Se mencionar Conta do Mais/saldo → 12; ‘aumentar limite’ → 6; ‘segunda via’ → 3."
     },
     {
       "id": 2,
@@ -53,13 +54,13 @@
       "positive_examples": [
         "quero meu boleto",
         "segunda via de boleto",
-        "fatura para pagamento",
         "me envie o código de barras da fatura"
       ],
       "negative_examples": [
+        "pagar fatura", "quero pagar fatura",
         "boleto do acordo", "acordo", "negociação", "renegociação"
       ],
-      "disambiguation_notes": "Sem 'acordo/negociação' → considerar boleto como fatura (3). Com 'acordo/negociação' → 2."
+      "disambiguation_notes": "‘Segunda via/código/linha digitável’ → 3. ‘Pagar fatura’ (ação) → 13. ‘Acordo/negociação’ → 2."
     },
     {
       "id": 4,
@@ -132,18 +133,24 @@
     {
       "id": 8,
       "name": "Telefones de seguradoras",
-      "keywords": ["telefone seguradora", "contato seguradora", "assistência 24h", "central da seguradora", "número seguradora"],
+      "keywords": [
+        "telefone seguradora", "contato seguradora", "assistência 24h", "assistencia 24h",
+        "central da seguradora", "número seguradora", "telefone da mapfre", "telefone porto seguro",
+        "telefone azul seguros", "telefone sulamerica", "cancelar assistência", "cancelar assistencia",
+        "cancelar assistência 24h", "cancelar seguro assistência"
+      ],
       "positive_examples": [
         "qual o telefone da mapfre?",
         "contato da seguradora azul",
-        "assistência 24 horas da seguradora"
+        "assistência 24 horas da seguradora",
+        "cancelar assistência"
       ],
       "negative_examples": [
-        "sinistro do cartão",
-        "cancelar cartão",
-        "segunda via de fatura"
+        "reclamação",
+        "quero reclamar",
+        "ouvidoria"
       ],
-      "disambiguation_notes": "Apenas fornecimento de contato/parceiros seguradoras."
+      "disambiguation_notes": "Pedidos de telefone/contato/assistência (inclusive 'cancelar assistência') → 8. Só use 14 se houver reclamação explícita."
     },
     {
       "id": 9,
@@ -190,51 +197,54 @@
     {
       "id": 12,
       "name": "Consulta do Saldo Conta do Mais",
-      "keywords": ["saldo conta do mais", "saldo programa", "pontos do mais", "consultar saldo do mais"],
+      "keywords": [
+        "saldo conta do mais", "saldo programa", "pontos do mais", "consultar saldo do mais",
+        "programa mais", "saldo", "saldo disponível", "ver saldo"
+      ],
       "positive_examples": [
         "quanto tenho na conta do mais?",
         "consultar saldo do programa",
-        "meu saldo no conta do mais"
+        "meu saldo no conta do mais",
+        "saldo disponível"
       ],
       "negative_examples": [
-        "saldo do cartão (limite)",
-        "fatura",
-        "pagamento de contas"
+        "limite", "vencimento", "melhor dia", "fatura", "pagamento de contas"
       ],
-      "disambiguation_notes": "Programa/conta vinculada. Limite do cartão é 1."
+      "disambiguation_notes": "‘Saldo’/‘saldo disponível’ referem-se ao Conta do Mais neste contexto. Limite/vencimento/melhor dia é 1."
     },
     {
       "id": 13,
       "name": "Pagamento de contas",
       "keywords": [
-        "pagar boleto", "pagamento de contas", "quitar boleto", "pagar conta de luz", "pagar com cartão"
+        "pagar boleto", "pagamento de contas", "quitar boleto", "pagar conta de luz",
+        "pagar com cartão", "pagar fatura", "pagamento da fatura", "quero pagar fatura"
       ],
       "positive_examples": [
         "quero pagar um boleto",
         "pagar conta de luz",
-        "pagar boleto de 150 reais"
+        "pagar boleto de 150 reais",
+        "quero pagar fatura"
       ],
       "negative_examples": [
-        "fatura", "segunda via de boleto", "meu boleto", "código de barras da fatura",
-        "boleto da fatura", "acordo", "negociação"
+        "segunda via da fatura", "2a via da fatura", "código de barras da fatura",
+        "linha digitável da fatura", "enviar fatura",
+        "acordo", "negociação", "renegociação"
       ],
-      "disambiguation_notes": "Sem 'fatura' e sem 'acordo'. Se disser 'meu boleto' e não houver 'acordo', trate como fatura (3)."
+      "disambiguation_notes": "‘Pagar fatura’ (ação de pagamento) → 13. Pedidos de 2ª via/código/linha digitável → 3. Se for ‘acordo/negociação’ → 2."
     },
     {
       "id": 14,
       "name": "Reclamações",
-      "keywords": ["reclamação", "quero reclamar", "ouvidoria", "insatisfação", "não resolveu"],
+      "keywords": ["reclamação", "quero reclamar", "ouvidoria", "insatisfação", "não resolveu", "abrir reclamação", "protocolo de reclamação"],
       "positive_examples": [
         "quero fazer uma reclamação",
-        "meu problema não foi resolvido",
-        "quero falar na ouvidoria"
+        "não resolveram meu problema, quero reclamar",
+        "ouvidoria por favor"
       ],
       "negative_examples": [
-        "falar com atendente sem reclamar",
-        "cancelar cartão",
-        "segunda via"
+        "telefone da seguradora", "assistência 24h", "contato seguradora"
       ],
-      "disambiguation_notes": "Se o usuário apenas pede humano sem alegar reclamação → 15."
+      "disambiguation_notes": "Use 14 apenas quando o usuário declara claramente a intenção de reclamar."
     },
     {
       "id": 15,
@@ -246,11 +256,9 @@
         "preciso de um atendente"
       ],
       "negative_examples": [
-        "quero reclamar (ouvidoria)",
-        "cancelar cartão",
-        "segunda via"
+        "assistência", "assistencia", "cancelar assistência", "telefone da seguradora"
       ],
-      "disambiguation_notes": "Se houver intenção explícita de reclamar → 14."
+      "disambiguation_notes": "Se a intenção for assistência/telefone de seguradora, use 8. Aqui só quando o usuário pede humano genericamente."
     },
     {
       "id": 16,
