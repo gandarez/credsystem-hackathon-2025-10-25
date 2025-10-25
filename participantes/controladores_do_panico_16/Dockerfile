@@ -10,7 +10,7 @@ COPY participantes/controladores_do_panico_16/go.* ./
 RUN go mod download
 
 # Copy the rest of the source code
-COPY participantes/controladores_do_panico_16/ .
+COPY . .
 
 # Copy CSV file from repository root
 COPY assets/intents_pre_loaded.csv /assets/intents_pre_loaded.csv

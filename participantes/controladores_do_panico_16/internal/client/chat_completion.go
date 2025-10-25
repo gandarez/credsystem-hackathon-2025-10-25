@@ -75,9 +75,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 
 	req.Header.Set("Content-Type", "application/json")
 
-	// Debug: log headers
-	fmt
-7. quero pagar fatura - Expected: ID=13, Name=Pagamento de contas.Printf("DEBUG: Authorization header: %s\n", req.Header.Get("Authorization"))
+	fmt.Printf("DEBUG: Authorization header: %s\n", req.Header.Get("Authorization"))
 
 	resp, err := c.Do(ctx, req)
 	if err != nil {
@@ -117,7 +115,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	}
 
 	content := strings.TrimSpace(openRouterResp.Choices[0].Message.Content)
-	
+
 	// Tentar extrair JSON se vier com texto extra
 	if strings.Contains(content, "{") && strings.Contains(content, "}") {
 		start := strings.Index(content, "{")
