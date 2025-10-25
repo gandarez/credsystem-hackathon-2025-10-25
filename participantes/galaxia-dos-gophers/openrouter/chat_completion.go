@@ -5,42 +5,37 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
-	"time"
 )
 
-type Client struct {
-	BaseURL string
-	APIKey  string
-	Client  *http.Client
-}
-
-func NewClient(baseURL, apiKey string) *Client {
-	return &Client{
-		BaseURL: baseURL,
-		APIKey:  apiKey,
-		Client:  &http.Client{Timeout: 15 * time.Second},
-	}
-}
-
-type ChatCompletionRequest struct {
-	Model    string `json:"model"`
-	Messages []struct {
-		Role    string `json:"role"`
-		Content string `json:"content"`
-	} `json:"messages"`
-}
-
-type ChatCompletionResponse struct {
-	Choices []struct {
-		Message struct {
+type (
+	OpenRouterRequest struct {
+		Model    string `json:"model"`
+		Messages []struct {
+			Role    string `json:"role"`
 			Content string `json:"content"`
-		} `json:"message"`
-	} `json:"choices"`
-}
+		} `json:"messages"`
+	}
 
-func (c *Client) ChatCompletion(ctx context.Context, intent string) (string, error) {
-	body := ChatCompletionRequest{
+	OpenRouterResponse struct {
+		Choices []struct {
+			Message struct {
+				Content string `json:"content"`
+			} `json:"message"`
+		} `json:"choices"`
+	}
+
+	DataResponse struct {
+		ServiceID   uint8  `json:"service_id"`
+		ServiceName string `json:"service_name"`
+	}
+)
+
+func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataResponse, error) {
+	url := c.baseURL + "/chat/completions"
+
+	requestBody := OpenRouterRequest{
 		Model: "openai/gpt-4o-mini",
 		Messages: []struct {
 			Role    string `json:"role"`
@@ -119,29 +114,46 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (string, err
 		},
 	}
 
-	data, _ := json.Marshal(body)
-	req, err := http.NewRequestWithContext(ctx, http.MethodPost, c.BaseURL+"/chat/completions", bytes.NewBuffer(data))
+	jsonBody, err := json.Marshal(requestBody)
 	if err != nil {
-		return "", err
+		return nil, fmt.Errorf("error marshaling request: %v", err)
+	}
+
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(jsonBody))
+	if err != nil {
+		return nil, fmt.Errorf("failed to create request: %v", err)
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+c.APIKey)
 
-	resp, err := c.Client.Do(req)
+	resp, err := c.Do(ctx, req)
 	if err != nil {
-		return "", err
+		return nil, fmt.Errorf("failed to execute request: %v", err)
 	}
 	defer resp.Body.Close()
 
-	var res ChatCompletionResponse
-	if err := json.NewDecoder(resp.Body).Decode(&res); err != nil {
-		return "", err
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("error reading response: %v", err)
 	}
 
-	if len(res.Choices) == 0 {
-		return "", fmt.Errorf("empty response from OpenRouter")
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("API request failed with status %d: %s", resp.StatusCode, string(body))
 	}
 
-	return res.Choices[0].Message.Content, nil
+	var openRouterResp OpenRouterResponse
+	if err := json.Unmarshal(body, &openRouterResp); err != nil {
+		return nil, fmt.Errorf("error unmarshaling response: %v. body: %s", err, string(body))
+	}
+
+	if len(openRouterResp.Choices) == 0 {
+		return nil, fmt.Errorf("no choices in response")
+	}
+
+	var dataRes DataResponse
+	if err := json.Unmarshal([]byte(openRouterResp.Choices[0].Message.Content), &dataRes); err != nil {
+		return nil, fmt.Errorf("error unmarshaling data response: %v. content: %s", err, openRouterResp.Choices[0].Message.Content)
+	}
+
+	return &dataRes, nil
 }
