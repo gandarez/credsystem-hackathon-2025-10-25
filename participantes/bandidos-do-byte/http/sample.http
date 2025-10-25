@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:18020
+
+### Find a service by intent
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "cancelar cartão de crédito"
+}
+
+###
+
+### Health check
+GET {{baseUrl}}/api/healthz
+
+###
