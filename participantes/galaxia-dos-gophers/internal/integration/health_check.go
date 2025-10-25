@@ -6,18 +6,20 @@ import (
 )
 
 type HealthResponse struct {
-	Success bool `json:"success"`
+	Success bool `json:"-"`
 }
 
 func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "Método não permitido", http.StatusMethodNotAllowed)
+		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	status := "fail"
+	if true {
+		status = "ok"
+	}
 
-	response := HealthResponse{Success: true}
-	json.NewEncoder(w).Encode(response)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(map[string]string{"status": status})
 }

@@ -45,19 +45,34 @@ func FindServiceHandler(w http.ResponseWriter, r *http.Request) {
 	response, err := client.ChatCompletion(ctx, req.Intent)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(ApiResponse{Success: false, Error: err.Error()})
+		json.NewEncoder(w).Encode(ApiResponse{
+			Success: false,
+			Data:    &dto.DataResponse{},
+			Error:   err.Error(),
+		})
 		return
 	}
 
 	serviceID := response.ServiceID
 	serviceName := response.ServiceName
 
-	resp := ApiResponse{
-		Success: true,
-		Data: &dto.DataResponse{
-			ServiceID:   serviceID,
-			ServiceName: serviceName,
-		},
+	var resp ApiResponse
+
+	if serviceID == 0 {
+		resp = ApiResponse{
+			Success: false,
+			Data:    &dto.DataResponse{},
+			Error:   "Serviço não identificado",
+		}
+	} else {
+		resp = ApiResponse{
+			Success: true,
+			Data: &dto.DataResponse{
+				ServiceID:   serviceID,
+				ServiceName: serviceName,
+			},
+			Error: "",
+		}
 	}
 
 	w.Header().Set("Content-Type", "application/json")
