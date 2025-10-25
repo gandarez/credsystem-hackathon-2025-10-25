@@ -42,11 +42,8 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	url := c.baseURL + "/chat/completions"
 
 	requestBody := OpenRouterRequest{
-		// Model: "openai/gpt-4o-mini",
-		// Model: "google/gemini-2.5-flash-preview-09-2025",
-		// Model: "anthropic/claude-opus-4",
+		Model: "openai/gpt-4o-mini",
 		// Model: "google/gemini-2.5-pro",
-		// Model: "openai/gpt-4o",
 		Messages: []struct {
 			Role    string `json:"role"`
 			Content string `json:"content"`
@@ -116,9 +113,9 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 							Exemplos: "cancelar meu cartão", "não quero mais o cartão"
 
 						8 - Telefones de seguradoras
-						Contexto: Assuntos relacionados a seguros e assistências vinculadas ao cartão.
-						Termos: seguro, seguradora, assistência, proteção, apólice, sinistro
-						Exemplos: "cancelar seguro", "cancelar assistência", "telefone do seguro", "falar com a seguradora", "contato da seguradora"
+							Contexto: Assuntos relacionados a seguros e assistências vinculadas ao cartão.
+							Termos: seguro, seguradora, assistência, proteção, apólice, sinistro
+							Exemplos: "cancelar seguro", "cancelar assistência", "telefone do seguro", "falar com a seguradora", "contato da seguradora"
 
 						9 - Desbloqueio de Cartão
 							Contexto: Ativar ou liberar cartão para uso
@@ -172,7 +169,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 				Content: intent,
 			},
 		},
-		Temperature:      0.1,
+		Temperature:      0.05,
 		TopP:             0.3,
 		MaxTokens:        70,
 		PresencePenalty:  0,
