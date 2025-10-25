@@ -2,90 +2,112 @@
 
 Solução para o Hackathon Credsystem & Golang SP 2025.
 
-## Estrutura do Projeto
+## 🎯 Destaques
+
+- ✅ **Arquitetura Hexagonal** completa
+- ✅ **OpenRouter + Mistral** para classificação de intenções
+- ✅ **TensorFlow** opcional para classificação local
+
+## 🏗️ Estrutura do Projeto
 
 ```
 .
 ├── cmd/
 │   └── api/
-│       └── main.go           # Entry point da aplicação
+│       └── main.go              # Entry point da aplicação
 ├── internal/
+│   ├── adapters/
+│   │   ├── csv_repository.go    # Adapter para dados CSV
+│   │   ├── openrouter_client.go # Adapter OpenRouter
+│   │   └── tensorflow_classifier.go # Adapter TensorFlow
 │   ├── config/
-│   │   └── config.go         # Configurações da aplicação
+│   │   └── config.go            # Configurações
 │   ├── domain/
-│   │   └── models.go         # Modelos de domínio
+│   │   ├── intent.go            # Domínio de intents
+│   │   └── models.go            # Modelos de domínio
 │   ├── handler/
-│   │   └── handler.go        # HTTP handlers
+│   │   └── handler.go           # HTTP handlers
+│   ├── ports/
+│   │   └── ports.go             # Interfaces (portas)
 │   ├── service/
-│   │   └── service.go        # Lógica de negócio
+│   │   └── service.go           # Lógica de negócio
 │   └── server/
-│       └── server.go         # Configuração do servidor HTTP
+│       └── server.go            # Configuração do servidor
+├── training/
+│   ├── service_intent_model.h5  # Modelo TensorFlow treinado
+│   ├── tokenizer.pkl            # Tokenizer para o modelo
+│   ├── model_server.py          # Servidor Flask para o modelo
+│   └── create_tokenizer.py      # Script para criar tokenizer
 ├── Dockerfile
+├── Dockerfile.tensorflow         # Dockerfile do servidor TF
 ├── docker-compose.yml
+├── CLASSIFIER_GUIDE.md          # Guia detalhado dos classificadores
 └── go.mod
 ```
 
-## Arquitetura
+## 🚀 Classificadores de IA
 
-A aplicação segue os princípios da **Arquitetura Hexagonal** com as seguintes camadas:
+### OpenRouter Classifier (Padrão)
+- Usa API OpenRouter com modelo Mistral-7B
+- Alta precisão com LLM
+- Classificação baseada em contexto
 
-- **Domain**: Entidades e modelos de negócio
-- **Service**: Lógica de negócio e casos de uso
-- **Handler**: Adaptadores HTTP (entrada)
-- **Config**: Configurações da aplicação
+### TensorFlow Classifier (Opcional)
+- Usa algoritmo de similaridade de texto (cosine similarity)
+- Rápido e sem dependências externas
+- Baseado nos dados de treinamento do CSV
+- **Nota**: Não requer modelo .h5 ou servidor Python
 
-## Tecnologias Utilizadas
+## 🔄 Como Trocar o Classificador
 
-- **Go 1.21**
+Para usar TensorFlow ao invés de OpenRouter, altere no `.env`:
+```bash
+CLASSIFIER_TYPE=tensorflow
+```
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Go 1.21**: Linguagem principal
 - **Chi Router**: Router HTTP leve e performático
 - **Uber FX**: Framework de injeção de dependências
+- **OpenRouter API**: Classificação com Mistral
+- **TensorFlow/Keras**: Modelo de ML local
+- **Flask**: Servidor para o modelo TensorFlow
 - **Docker**: Containerização
 
-## Como Executar Localmente
+## ⚙️ Como Executar
 
-1. Clone o repositório e entre na pasta do projeto:
+### Pré-requisitos
+
+- Go 1.21+
+- Docker (opcional)
+
+### Local
+
 ```bash
-cd participantes/bandidos_do_byte
-```
+# 1. Configurar variáveis
+export PORT=18020
+export OPENROUTER_API_KEY=sua_chave
 
-2. Copie o arquivo de exemplo de variáveis de ambiente:
-```bash
-cp .env.example .env
-```
-
-3. Configure as variáveis de ambiente no arquivo `.env`
-
-4. Instale as dependências:
-```bash
-go mod download
-```
-
-5. Execute a aplicação:
-```bash
+# 2. Executar
 go run cmd/api/main.go
 ```
 
-## Como Executar com Docker
+### Docker Compose
 
-1. Build da imagem:
 ```bash
-docker build -t bandidos-do-byte:latest .
+docker-compose up -d
 ```
 
-2. Execute com docker-compose:
-```bash
-docker-compose up
-```
+## 📡 Endpoints
 
-## Endpoints
-
-### POST /api/find-service
-Encontra o serviço mais adequado baseado na intenção do usuário.
+### POST /find-service
+Encontra o serviço adequado baseado na intenção.
 
 **Request:**
 ```json
 {
-  "intent": "string"
+  "intent": "quero abrir uma conta"
 }
 ```
 
@@ -95,13 +117,12 @@ Encontra o serviço mais adequado baseado na intenção do usuário.
   "success": true,
   "data": {
     "service_id": 1,
-    "service_name": "Nome do Serviço"
-  },
-  "error": ""
+    "service_name": "Abertura de Conta"
+  }
 }
 ```
 
-### GET /api/healthz
+### GET /healthz
 Verifica a saúde do serviço.
 
 **Response:**
@@ -111,15 +132,71 @@ Verifica a saúde do serviço.
 }
 ```
 
-## Próximos Passos
+## 🧪 Testes
 
-- [ ] Implementar integração com OpenRouter API
-- [ ] Adicionar lógica de IA para classificação de intenções
-- [ ] Carregar dados do arquivo `intents_pre_loaded.csv`
-- [ ] Implementar cache de respostas
-- [ ] Adicionar testes unitários e de integração
-- [ ] Otimizar performance para os limites de recursos (0.5 CPU, 128MB RAM)
+```bash
+curl -X POST http://localhost:18020/find-service \
+  -H "Content-Type: application/json" \
+  -d '{"intent": "preciso de um empréstimo"}'
+```
 
-## Autores
+## 📊 Serviços Disponíveis
 
-Bandidos do Byte
+O sistema classifica 17 tipos de serviços:
+
+1. Abertura de Conta
+2. Empréstimo Pessoal
+3. Cartão de Crédito
+4. Investimentos
+5. Seguros
+6. Consórcio
+7. Financiamento Imobiliário
+8. Financiamento de Veículos
+9. Previdência Privada
+10. Conta Digital
+11. Portabilidade de Salário
+12. Renegociação de Dívidas
+13. Antecipação de FGTS
+14. Crédito Consignado
+15. Conta para Empresas
+16. Suporte Técnico
+0. Contate a URA (fallback)
+
+## 🎓 Arquitetura Hexagonal
+
+```
+┌─────────────────────────────────────────┐
+│           HTTP Handler (Adapter)         │
+└─────────────────┬───────────────────────┘
+                  │
+         ┌────────▼────────┐
+         │  Service (Core)  │
+         └────────┬────────┘
+                  │
+      ┌───────────┴───────────┐
+      │                        │
+┌─────▼──────┐        ┌───────▼────────┐
+│ OpenRouter │   OU   │  TensorFlow    │
+│  (Adapter) │        │   (Adapter)    │
+└────────────┘        └────────────────┘
+```
+
+**Vantagens:**
+- ✅ Fácil trocar implementações
+- ✅ Testável (mock das interfaces)
+- ✅ Desacoplado
+- ✅ Escalável
+
+## 🚧 Próximos Passos
+
+- [x] Implementar integração com OpenRouter API
+- [x] Adicionar lógica de IA para classificação
+- [x] Carregar dados do CSV
+- [x] Implementar classificador TensorFlow alternativo
+- [ ] Adicionar cache de respostas
+- [ ] Testes unitários e de integração
+
+##  Autores
+
+**Bandidos do Byte** - Hackathon Credsystem 2025
+

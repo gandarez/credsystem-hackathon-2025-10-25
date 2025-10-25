@@ -13,6 +13,7 @@ services:
     environment:
       - PORT=${PORT}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - CLASSIFIER_TYPE=${CLASSIFIER_TYPE:-openrouter}
     deploy:
       resources:
         limits:

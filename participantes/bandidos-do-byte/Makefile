@@ -60,3 +60,4 @@ help:
 	@echo "  clean               - Clean build artifacts"
 	@echo "  fmt                 - Format code"
 	@echo "  lint                - Run linter"
+
