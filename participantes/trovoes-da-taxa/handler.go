@@ -248,7 +248,7 @@ func (s *Server) testBatchHandler(w http.ResponseWriter, r *http.Request) {
 	var req TestBatchRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]string{"error": "invalid request body"})
 		return
 	}
@@ -256,7 +256,7 @@ func (s *Server) testBatchHandler(w http.ResponseWriter, r *http.Request) {
 	// Validar que há casos de teste
 	if len(req.TestCases) == 0 {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]string{"error": "test_cases cannot be empty"})
 		return
 	}
