@@ -35,12 +35,32 @@ const (
 
 var openRouterClient *client.Client
 
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
 func main() {
 	// Ler variáveis de ambiente
 	apiKey := os.Getenv("OPENROUTER_API_KEY")
 	if apiKey == "" {
 		log.Fatal("OPENROUTER_API_KEY environment variable is required")
 	}
+
+	// Debug: mostrar tamanho da chave
+	log.Printf("DEBUG: API Key length: %d characters", len(apiKey))
+	log.Printf("DEBUG: API Key starts with: %s", apiKey[:min(20, len(apiKey))])
+
+	// Carregar intents do CSV
+	csvPath := "../../assets/intents_pre_loaded.csv"
+	log.Printf("Loading intents from CSV: %s", csvPath)
+	intents, err := client.LoadIntentsFromCSV(csvPath)
+	if err != nil {
+		log.Fatalf("Failed to load intents from CSV: %v", err)
+	}
+	log.Printf("Loaded %d intents from CSV", len(intents))
 
 	port := os.Getenv("PORT")
 	if port == "" {

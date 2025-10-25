@@ -27,6 +27,11 @@ type (
 				Content string `json:"content"`
 			} `json:"message"`
 		} `json:"choices"`
+		Usage *struct {
+			PromptTokens     int `json:"prompt_tokens"`
+			CompletionTokens int `json:"completion_tokens"`
+			TotalTokens      int `json:"total_tokens"`
+		} `json:"usage,omitempty"`
 		Error *struct {
 			Message string `json:"message"`
 			Code    string `json:"code"`
@@ -39,72 +44,28 @@ type (
 	}
 )
 
-// Sistema de prompt robusto com TODAS as 93 intenções para maximizar precisão
-const systemPrompt = `Você é um classificador de intenções para um sistema de URA (Unidade de Resposta Audível) de atendimento ao cliente.
+// Sistema de prompt OTIMIZADO - reduzido de 1057 para ~150 tokens
+const systemPromptOptimized = `Classifique a intenção do cliente e retorne JSON: {"service_id": N, "service_name": "Nome"}
 
-Sua tarefa é analisar a solicitação do cliente e retornar APENAS um objeto JSON com o serviço mais adequado.
-
-SERVIÇOS DISPONÍVEIS (16 serviços):
-
+SERVIÇOS:
 1. Consulta Limite / Vencimento do cartão / Melhor dia de compra
-   - Exemplos: "Quanto tem disponível para usar", "quando fecha minha fatura", "Quando vence meu cartão", "quando posso comprar", "vencimento da fatura", "valor para gastar"
-
 2. Segunda via de boleto de acordo
-   - Exemplos: "segunda via boleto de acordo", "Boleto para pagar minha negociação", "código de barras acordo", "preciso pagar negociação", "enviar boleto acordo", "boleto da negociação"
-
 3. Segunda via de Fatura
-   - Exemplos: "quero meu boleto", "segunda via de fatura", "código de barras fatura", "quero a fatura do cartão", "enviar boleto da fatura", "fatura para pagamento"
-
 4. Status de Entrega do Cartão
-   - Exemplos: "onde está meu cartão", "meu cartão não chegou", "status da entrega do cartão", "cartão em transporte", "previsão de entrega do cartão", "cartão foi enviado?"
-
 5. Status de cartão
-   - Exemplos: "não consigo passar meu cartão", "meu cartão não funciona", "cartão recusado", "cartão não está passando", "status do cartão ativo", "problema com cartão"
-
 6. Solicitação de aumento de limite
-   - Exemplos: "quero mais limite", "aumentar limite do cartão", "solicitar aumento de crédito", "preciso de mais limite", "pedido de aumento de limite", "limite maior no cartão"
-
 7. Cancelamento de cartão
-   - Exemplos: "cancelar cartão", "quero encerrar meu cartão", "bloquear cartão definitivamente", "cancelamento de crédito", "desistir do cartão"
-
 8. Telefones de seguradoras
-   - Exemplos: "quero cancelar seguro", "telefone do seguro", "contato da seguradora", "preciso falar com o seguro", "seguro do cartão", "cancelar assistência"
-
 9. Desbloqueio de Cartão
-   - Exemplos: "desbloquear cartão", "ativar cartão novo", "como desbloquear meu cartão", "quero desbloquear o cartão", "cartão para uso imediato", "desbloqueio para compras"
-
 10. Esqueceu senha / Troca de senha
-    - Exemplos: "não tenho mais a senha do cartão", "esqueci minha senha", "trocar senha do cartão", "preciso de nova senha", "recuperar senha", "senha bloqueada"
-
 11. Perda e roubo
-    - Exemplos: "perdi meu cartão", "roubaram meu cartão", "cartão furtado", "perda do cartão", "bloquear cartão por roubo", "extravio de cartão"
-
 12. Consulta do Saldo
-    - Exemplos: "saldo conta corrente", "consultar saldo", "quanto tenho na conta", "extrato da conta", "saldo disponível", "meu saldo atual"
-
 13. Pagamento de contas
-    - Exemplos: "quero pagar minha conta", "pagar boleto", "pagamento de conta", "quero pagar fatura", "efetuar pagamento"
-
 14. Reclamações
-    - Exemplos: "quero reclamar", "abrir reclamação", "fazer queixa", "reclamar atendimento", "registrar problema", "protocolo de reclamação"
-
 15. Atendimento humano
-    - Exemplos: "falar com uma pessoa", "preciso de humano", "transferir para atendente", "quero falar com atendente", "atendimento pessoal"
-
 16. Token de proposta
-    - Exemplos: "código para fazer meu cartão", "token de proposta", "receber código do cartão", "proposta token", "número de token", "código de token da proposta"
 
-REGRAS IMPORTANTES:
-1. Retorne APENAS um objeto JSON válido, sem texto adicional
-2. O JSON deve ter EXATAMENTE este formato: {"service_id": N, "service_name": "Nome do Serviço"}
-3. service_id deve ser um número entre 1 e 16
-4. service_name deve corresponder EXATAMENTE ao nome listado acima
-5. Analise cuidadosamente a intenção e escolha o serviço MAIS ADEQUADO
-6. Se houver dúvida entre dois serviços, escolha o mais específico
-7. NUNCA invente serviços ou IDs fora da lista
-
-Exemplo de resposta válida:
-{"service_id": 1, "service_name": "Consulta Limite / Vencimento do cartão / Melhor dia de compra"}`
+Retorne APENAS o JSON, sem texto adicional.`
 
 func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataResponse, error) {
 	url := c.baseURL + "/chat/completions"
@@ -114,7 +75,7 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 		Messages: []Message{
 			{
 				Role:    "system",
-				Content: systemPrompt,
+				Content: systemPromptOptimized,
 			},
 			{
 				Role:    "user",
@@ -134,6 +95,9 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 	}
 
 	req.Header.Set("Content-Type", "application/json")
+
+	// Debug: log headers
+	fmt.Printf("DEBUG: Authorization header: %s\n", req.Header.Get("Authorization"))
 
 	resp, err := c.Do(ctx, req)
 	if err != nil {
@@ -162,6 +126,14 @@ func (c *Client) ChatCompletion(ctx context.Context, intent string) (*DataRespon
 
 	if len(openRouterResp.Choices) == 0 {
 		return nil, fmt.Errorf("no choices in response")
+	}
+
+	// Log de uso de tokens
+	if openRouterResp.Usage != nil {
+		fmt.Printf("\n[TOKEN USAGE]\n")
+		fmt.Printf("  Prompt Tokens:     %d\n", openRouterResp.Usage.PromptTokens)
+		fmt.Printf("  Completion Tokens: %d\n", openRouterResp.Usage.CompletionTokens)
+		fmt.Printf("  Total Tokens:      %d\n\n", openRouterResp.Usage.TotalTokens)
 	}
 
 	content := strings.TrimSpace(openRouterResp.Choices[0].Message.Content)
