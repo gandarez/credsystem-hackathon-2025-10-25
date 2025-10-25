@@ -72,12 +72,13 @@ var httpClient = &http.Client{
 const llmModel = "openai/gpt-4o-mini"
 
 // Prompt mínimo: saída só com {"service_id": N}
-const systemPrompt = `Você classifica a intenção do usuário como UM ÚNICO ID entre 1..17 da lista:
+const systemPrompt = `Você classifica a intenção do usuário como UM ÚNICO ID entre 1..16 da lista:
 1 Limite/Vencimento/Melhor dia; 2 2ª via boleto de acordo; 3 2ª via de Fatura; 4 Status de Entrega do Cartão;
 5 Status de cartão; 6 Aumento de limite; 7 Cancelamento de cartão; 8 Telefones de seguradoras; 9 Desbloqueio de Cartão;
 10 Esqueceu/Troca de senha; 11 Perda e roubo; 12 Saldo Conta do Mais; 13 Pagamento de contas; 14 Reclamações;
-15 Atendimento humano; 16 Token de proposta; 17 Atualização cadastral.
-Regras: Retorne SOMENTE JSON {"service_id":<int>}. Em caso de ambiguidade ou falta de contexto, retorne {"service_id":15}.`
+15 Atendimento humano; 16 Token de proposta;
+Regras: Retorne SOMENTE JSON {"service_id":<int>}. Em caso de ambiguidade ou falta de contexto, retorne {"service_id":15}.
+Dica, verifique bem o texto enviado, talvez o que ele precisa já esta na lista acima.`
 
 func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	apiKey := os.Getenv("OPENROUTER_API_KEY")
