@@ -13,7 +13,7 @@ import (
 
 const (
 	OpenRouterAPIURL = "https://openrouter.ai/api/v1/chat/completions"
-	MistralModel     = "mistralai/mistral-7b-instruct"
+	GPT4oMiniModel   = "openai/gpt-4o-mini"
 )
 
 type OpenRouterClient struct {
@@ -55,12 +55,9 @@ func (c *OpenRouterClient) ClassifyIntent(request domain.IntentClassificationReq
 	prompt := c.buildPrompt(request)
 
 	reqBody := openRouterRequest{
-		Model: MistralModel,
+		Model: GPT4oMiniModel,
 		Messages: []openRouterMsg{
-			{
-				Role:    "user",
-				Content: prompt,
-			},
+			{Role: "user", Content: prompt},
 		},
 	}
 
@@ -85,14 +82,31 @@ func (c *OpenRouterClient) ClassifyIntent(request domain.IntentClassificationReq
 	}
 	defer resp.Body.Close()
 
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
 	if resp.StatusCode != http.StatusOK {
-		body, _ := io.ReadAll(resp.Body)
 		return nil, fmt.Errorf("OpenRouter API returned status %d: %s", resp.StatusCode, string(body))
 	}
 
+	bodyStr := strings.TrimSpace(string(body))
+	if !strings.HasPrefix(bodyStr, "{") {
+		preview := bodyStr
+		if len(preview) > 200 {
+			preview = preview[:200] + "..."
+		}
+		return nil, fmt.Errorf("invalid response format (not JSON): %s", preview)
+	}
+
 	var openRouterResp openRouterResponse
-	if err := json.NewDecoder(resp.Body).Decode(&openRouterResp); err != nil {
-		return nil, fmt.Errorf("failed to decode response: %w", err)
+	if err := json.Unmarshal(body, &openRouterResp); err != nil {
+		preview := bodyStr
+		if len(preview) > 200 {
+			preview = preview[:200] + "..."
+		}
+		return nil, fmt.Errorf("failed to decode response: %w (body: %s)", err, preview)
 	}
 
 	if len(openRouterResp.Choices) == 0 {
@@ -101,10 +115,9 @@ func (c *OpenRouterClient) ClassifyIntent(request domain.IntentClassificationReq
 
 	result, err := c.parseResponse(openRouterResp.Choices[0].Message.Content)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w (content: %s)", err, openRouterResp.Choices[0].Message.Content)
 	}
 
-	// Se o OpenRouter retornou service_id 0, significa que não encontrou um serviço adequado
 	if result.ServiceID == 0 {
 		return nil, domain.ErrNoServiceFound
 	}
@@ -112,7 +125,7 @@ func (c *OpenRouterClient) ClassifyIntent(request domain.IntentClassificationReq
 	return &domain.IntentClassificationResponse{
 		ServiceID:   result.ServiceID,
 		ServiceName: result.ServiceName,
-		Confidence:  0.95, // Mistral doesn't return confidence, using default
+		Confidence:  0.95,
 	}, nil
 }
 
@@ -120,9 +133,8 @@ func (c *OpenRouterClient) buildPrompt(request domain.IntentClassificationReques
 	var sb strings.Builder
 
 	sb.WriteString("Você é um assistente especializado em classificar intenções de clientes de um banco/financeira.\n\n")
-	sb.WriteString("Abaixo está uma lista de serviços disponíveis com exemplos de intenções de clientes:\n\n")
+	sb.WriteString("Serviços disponíveis com exemplos:\n\n")
 
-	// Group examples by service
 	serviceMap := make(map[int][]string)
 	serviceNames := make(map[int]string)
 
@@ -131,36 +143,52 @@ func (c *OpenRouterClient) buildPrompt(request domain.IntentClassificationReques
 		serviceNames[example.ServiceID] = example.ServiceName
 	}
 
-	// Build context with examples
 	for serviceID := 1; serviceID <= 16; serviceID++ {
 		if name, exists := serviceNames[serviceID]; exists {
 			sb.WriteString(fmt.Sprintf("Serviço ID %d - %s:\n", serviceID, name))
-			examples := serviceMap[serviceID]
-			for i, intent := range examples {
-				if i < 3 { // Limit to 3 examples per service to keep prompt concise
-					sb.WriteString(fmt.Sprintf("  - %s\n", intent))
-				}
+			for _, intent := range serviceMap[serviceID] {
+				sb.WriteString(fmt.Sprintf("  - %s\n", intent))
 			}
 			sb.WriteString("\n")
 		}
 	}
 
-	sb.WriteString(fmt.Sprintf("A intenção do cliente é: \"%s\"\n\n", request.UserIntent))
-	sb.WriteString("Analise a intenção do cliente e retorne APENAS um JSON no seguinte formato (sem nenhum texto adicional):\n")
-	sb.WriteString(`{"service_id": <número>, "service_name": "<nome do serviço>"}`)
-	sb.WriteString("\n\nIMPORTANTE: Se a intenção NÃO for claramente compatível com nenhum dos serviços listados acima, ")
-	sb.WriteString(`retorne {"service_id": 0, "service_name": "Não identificado"}`)
+	sb.WriteString("REGRAS (prioridade):\n")
+	sb.WriteString("1. 'quando fecha', 'vencimento', 'melhor dia' + 'fatura' → 1 (Vencimento)\n")
+	sb.WriteString("2. 'pagar fatura', 'quitar fatura' → 13 (Pagamento)\n")
+	sb.WriteString("3. 'segunda via', 'ver fatura', 'enviar fatura' → 3 (Segunda via)\n")
+	sb.WriteString("4. Boleto negociação/acordo → 2\n")
+	sb.WriteString("5. Status geral cartão → 5\n")
+	sb.WriteString("6. Status entrega → 4\n")
+	sb.WriteString("7. Saldo → 12\n")
+	sb.WriteString("8. Limite → 1\n")
+	sb.WriteString("9. Cancelar assistência/seguro → 8\n")
+	sb.WriteString("10. Cancelar cartão → 7\n\n")
+
+	sb.WriteString(fmt.Sprintf("Intenção: \"%s\"\n\n", request.UserIntent))
+	sb.WriteString("Retorne APENAS JSON: {\"service_id\": número, \"service_name\": \"nome\"}\n")
+	sb.WriteString("Resposta:")
 
 	return sb.String()
 }
 
 func (c *OpenRouterClient) parseResponse(content string) (*classificationResult, error) {
-	// Remove markdown code blocks if present
 	content = strings.TrimSpace(content)
 	content = strings.TrimPrefix(content, "```json")
 	content = strings.TrimPrefix(content, "```")
 	content = strings.TrimSuffix(content, "```")
 	content = strings.TrimSpace(content)
+
+	if !strings.HasPrefix(content, "{") {
+		start := strings.Index(content, "{")
+		end := strings.LastIndex(content, "}")
+
+		if start == -1 || end == -1 || start >= end {
+			return nil, fmt.Errorf("no valid JSON found in response")
+		}
+
+		content = content[start : end+1]
+	}
 
 	var result classificationResult
 	if err := json.Unmarshal([]byte(content), &result); err != nil {
@@ -171,7 +199,6 @@ func (c *OpenRouterClient) parseResponse(content string) (*classificationResult,
 }
 
 func (c *OpenRouterClient) HealthCheck() error {
-	// Simple check to verify API key is set
 	if c.apiKey == "" {
 		return fmt.Errorf("OpenRouter API key not configured")
 	}

@@ -178,7 +178,7 @@ func runTests(classifier ports.IntentClassifier, samples []IntentData, examples 
 
 		// Delay para não sobrecarregar API (apenas para OpenRouter)
 		if _, ok := classifier.(*adapters.OpenRouterClient); ok {
-			time.Sleep(100 * time.Millisecond)
+			time.Sleep(500 * time.Millisecond) // Aumentado de 100ms para 500ms
 		}
 	}
 

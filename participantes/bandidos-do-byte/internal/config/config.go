@@ -42,7 +42,7 @@ func NewConfig() *Config {
 	// Caminho do modelo TensorFlow
 	tfModelPath := os.Getenv("TENSORFLOW_MODEL_PATH")
 	if tfModelPath == "" {
-		tfModelPath = filepath.Join(".", "training", "service_intent_model_2.h5")
+		tfModelPath = filepath.Join(".", "training", "service_intent_model_3.h5")
 	}
 
 	// URL do servidor Python TensorFlow
