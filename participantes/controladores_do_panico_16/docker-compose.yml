@@ -1,0 +1,15 @@
+services:
+  backend-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - PORT=8080
+    ports:
+      - "18020:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"
