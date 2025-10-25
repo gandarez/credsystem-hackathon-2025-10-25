@@ -36,3 +36,4 @@ participantes/**/results/
 participantes/**/docker-compose.logs
 load-test/*.logs
 */results.html
+/participantes/Cowboys_do_Contexto/.env
