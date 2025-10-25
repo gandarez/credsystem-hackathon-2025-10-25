@@ -1,0 +1,8 @@
+.git
+.gitignore
+README.md
+.env
+.vscode
+*.md
+build/
+vendor/

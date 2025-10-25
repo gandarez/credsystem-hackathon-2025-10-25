@@ -1,4 +1,4 @@
-FROM golang:1.25-bookworm AS build
+FROM golang:1.23-bookworm AS build
 
 RUN apt-get update && apt-get -y install \
     git \
@@ -7,22 +7,30 @@ RUN apt-get update && apt-get -y install \
 
 WORKDIR /src
 
-# Copy everything but defined in docker ignore file
+# Copy go files
+COPY go.mod go.sum* ./
+RUN go mod download
+
+# Copy source
 COPY . .
 
 # Build
-RUN go mod vendor
-RUN make build-linux-amd64
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    go build -ldflags="-w -s" \
+    -o galaxia-dos-gophers-linux-amd64 \
+    ./cmd
 
 #####################
-# Build final image #
+# Final image       #
 #####################
-FROM scratch AS bin
+FROM alpine:latest
 
-# Copy from build
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=build /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=build /src/build/ivr-service-linux-amd64 .
+RUN apk --no-cache add ca-certificates tzdata
 
-# Specify the container's entrypoint as the action
-ENTRYPOINT ["./ivr-service-linux-amd64"]
+WORKDIR /app
+
+COPY --from=build /src/galaxia-dos-gophers-linux-amd64 .
+
+EXPOSE 8080
+
+ENTRYPOINT ["./galaxia-dos-gophers-linux-amd64"]
