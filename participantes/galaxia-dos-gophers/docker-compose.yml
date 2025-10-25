@@ -1,5 +1,5 @@
 services:
-  galaxia-dos-gophers:
+  backend-api:
     build:
       context: .
       dockerfile: Dockerfile
