@@ -56,7 +56,7 @@ func main() {
 				ServiceID:   int(intent.ServiceID),
 				ServiceName: intent.ServiceName,
 			},
-			Error: "string",
+			Error: "",
 		}
 		b, _ := json.Marshal(message)
 		w.Write(b)

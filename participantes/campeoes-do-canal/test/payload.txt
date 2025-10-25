@@ -1,0 +1,95 @@
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
+
+{
+  "intent": "a conta venceu"
+}
+
+{
+  "intent": "perdi meu cartao"
+}
