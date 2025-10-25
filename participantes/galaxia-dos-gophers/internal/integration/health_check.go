@@ -1,6 +1,13 @@
 package integration
 
-import "net/http"
+import (
+	"encoding/json"
+	"net/http"
+)
+
+type HealthResponse struct {
+	Success bool `json:"success"`
+}
 
 func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -8,6 +15,9 @@ func HealthzHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("OK"))
+
+	response := HealthResponse{Success: true}
+	json.NewEncoder(w).Encode(response)
 }
