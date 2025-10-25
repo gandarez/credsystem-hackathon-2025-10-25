@@ -11,7 +11,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"regexp"
 	"strings"
 	"time"
 )
@@ -55,63 +54,6 @@ var catalog = map[int]string{
 	17: "Atualização de dados cadastrais",
 }
 
-// ---------------------- Fast-path (regex) ----------------------
-// Se bater aqui, não chamamos o LLM (reduz muito a latência média)
-
-type rule struct {
-	re *regexp.Regexp
-	id int
-}
-
-var fastRules = []rule{
-	// 1: Limite / Vencimento / Melhor dia
-	{regexp.MustCompile(`(?i)\b(limite|melhor\s*dia|vencimento|data\s*de\s*vencimento)\b`), 1},
-	// 2: 2ª via boleto de acordo
-	{regexp.MustCompile(`(?i)\b(segunda?\s*via|2.?a\s*via)\b.*\b(boleto)\b.*\b(acordo|renegocia|negocia)\b`), 2},
-	{regexp.MustCompile(`(?i)\b(boleto)\b.*\b(acordo|renegocia|negocia)\b`), 2},
-	// 3: 2ª via de Fatura
-	{regexp.MustCompile(`(?i)\b(segunda?\s*via|2.?a\s*via)\b.*\b(fatura)\b`), 3},
-	{regexp.MustCompile(`(?i)\b(fatura|boleto\s*da\s*fatura)\b`), 3},
-	// 4: Status de entrega do cartão
-	{regexp.MustCompile(`(?i)\b(entrega|rastrea|tracking|rastreamento)\b.*\b(cart[aã]o)\b`), 4},
-	// 5: Status genérico do cartão
-	{regexp.MustCompile(`(?i)\b(status)\b.*\b(cart[aã]o)\b`), 5},
-	// 6: Aumento de limite
-	{regexp.MustCompile(`(?i)\b(aumento\s+de\s+limite|aumentar\s+limite|elevar\s+limite)\b`), 6},
-	// 7: Cancelamento de cartão
-	{regexp.MustCompile(`(?i)\b(cancelar|cancelamento)\b.*\b(cart[aã]o)\b`), 7},
-	// 8: Telefones de seguradoras
-	{regexp.MustCompile(`(?i)\b(telefone|contato)\b.*\b(seguradora|seguros)\b`), 8},
-	// 9: Desbloqueio de cartão
-	{regexp.MustCompile(`(?i)\b(desbloqueio|desbloquear)\b.*\b(cart[aã]o)\b`), 9},
-	// 10: Esqueceu/Troca de senha
-	{regexp.MustCompile(`(?i)\b(esqueci|esqueceu|trocar|redefinir|resetar)\b.*\b(senha|pin)\b`), 10},
-	// 11: Perda e roubo
-	{regexp.MustCompile(`(?i)\b(perdi|perda|roubo|furt[oa]|extravio|sumiu)\b.*\b(cart[aã]o)\b`), 11},
-	// 12: Saldo Conta do Mais
-	{regexp.MustCompile(`(?i)\b(saldo)\b.*\b(conta\s*do\s*mais|conta\s+mais)\b`), 12},
-	// 13: Pagamento de contas
-	{regexp.MustCompile(`(?i)\b(pagamento|pagar)\b.*\b(contas?|boleto[s]?)\b`), 13},
-	// 14: Reclamações
-	{regexp.MustCompile(`(?i)\b(reclama[cç][aã]o|reclamar|queixa)\b`), 14},
-	// 15: Atendimento humano
-	{regexp.MustCompile(`(?i)\b(falar\s+com\s+(atendente|humano)|atendimento\s+humano|transferir)\b`), 15},
-	// 16: Token de proposta
-	{regexp.MustCompile(`(?i)\b(token|c[oó]digo)\b.*\b(proposta)\b`), 16},
-	// 17: Atualização cadastral
-	{regexp.MustCompile(`(?i)\b(atualizar|atualiza[cç][aã]o|corrigir|alterar)\b.*\b(dados|cadastro|telefone|endereco|endereço|email|e-mail)\b`), 17},
-}
-
-func fastPath(intent string) (int, bool) {
-	s := strings.ToLower(intent)
-	for _, r := range fastRules {
-		if r.re.MatchString(s) {
-			return r.id, true
-		}
-	}
-	return 0, false
-}
-
 // ---------------------- HTTP client global (keep-alive/HTTP2) ----------------------
 
 var httpClient = &http.Client{
@@ -122,7 +64,7 @@ var httpClient = &http.Client{
 		IdleConnTimeout:     90 * time.Second,
 		ForceAttemptHTTP2:   true,
 	},
-	Timeout: 8 * time.Second, // fail-fast geral; o handler ainda impõe um deadline próprio
+	Timeout: 8 * time.Second, // fail-fast
 }
 
 // ---------------------- LLM (OpenRouter) ----------------------
@@ -137,7 +79,6 @@ const systemPrompt = `Você classifica a intenção do usuário como UM ÚNICO I
 15 Atendimento humano; 16 Token de proposta; 17 Atualização cadastral.
 Regras: Retorne SOMENTE JSON {"service_id":<int>}. Em caso de ambiguidade ou falta de contexto, retorne {"service_id":15}.`
 
-// classifyWithLLM chama o provedor com payload mínimo e extrai apenas o service_id
 func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	apiKey := os.Getenv("OPENROUTER_API_KEY")
 	if apiKey == "" {
@@ -152,7 +93,7 @@ func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 	payload := map[string]interface{}{
 		"model":       llmModel,
 		"temperature": 0,
-		"max_tokens":  8, // suficiente para {"service_id":N}
+		"max_tokens":  8, // só precisa do {"service_id":N}
 		"messages":    messages,
 		"response_format": map[string]string{
 			"type": "json_object",
@@ -200,8 +141,7 @@ func classifyWithLLM(ctx context.Context, intent string) (int, error) {
 		return 0, fmt.Errorf("resposta não-JSON do LLM: %s", content)
 	}
 	if out.ServiceID < 1 || out.ServiceID > 17 {
-		// regra de segurança: se vier inválido, force atendimento humano
-		return 15, nil
+		return 15, nil // fallback seguro
 	}
 	return out.ServiceID, nil
 }
@@ -235,30 +175,18 @@ func makeServer() http.Handler {
 
 		intent := strings.TrimSpace(reqBody.Intent)
 
-		// 1) Fast-path determinístico (latência ~0)
-		if id, ok := fastPath(intent); ok {
-			name := catalog[id]
-			returnJSON(w, http.StatusOK, apiResponse{
-				Success: true,
-				Data:    &responseData{ServiceID: id, ServiceName: name},
-			})
-			return
-		}
-
-		// 2) Chamada ao LLM com deadline curto (SLA)
-		ctx, cancel := context.WithTimeout(r.Context(), 800*time.Millisecond)
+		// chama o LLM sempre (sem fast-path)
+		ctx, cancel := context.WithTimeout(r.Context(), 1*time.Second)
 		defer cancel()
 
 		id, err := classifyWithLLM(ctx, intent)
 		if err != nil {
-			// Em erro/transiente, degrade para humano (15) rapidamente
 			returnJSON(w, http.StatusBadGateway, apiResponse{Success: false, Error: err.Error()})
 			return
 		}
 
 		name := catalog[id]
 		if name == "" {
-			// sanity-check adicional
 			id = 15
 			name = catalog[id]
 		}
