@@ -6,6 +6,4 @@ response = requests.get(
     "Authorization": f"Bearer <seu_token_aqui>"
   }
 )
-data = response.json()
-data["data"]["usage"]
-print(f'${data["data"]["usage"]:.2f} used today.')
+print(json.dumps(response.json(), indent=2))
