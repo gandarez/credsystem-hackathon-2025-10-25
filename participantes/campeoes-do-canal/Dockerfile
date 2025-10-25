@@ -12,7 +12,6 @@ COPY . .
 
 # Build
 RUN go mod vendor
-ENV GOFLAGS=-mod=vendor
 RUN make build-linux-amd64
 
 #####################
