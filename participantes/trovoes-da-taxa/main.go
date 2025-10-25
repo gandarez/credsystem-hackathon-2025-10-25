@@ -42,6 +42,9 @@ func main() {
 
 	// Criar cliente AI para fallback
 	aiClient := NewAIClient()
+	// Configurar intents no cliente AI para melhorar os prompts
+	aiClient.SetIntents(intents)
+	log.Println("AI client configured with intents")
 
 	// Criar servidor
 	server := NewServer(knnService, aiClient, intents)
