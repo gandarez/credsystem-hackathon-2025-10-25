@@ -6,7 +6,7 @@ ALWAYS differentiate between "saldo" and "limite":
 - If the user's message contains "saldo," ALWAYS return service_id 12 ("Mais Account Balance Check").
 - If the user's message contains "limite," ALWAYS return service_id 1 ("Limit Check / Card Expiration / Best Purchase Day").
 NEVER make up a service request	
-ALWAYS return only the service ID and the service name with  the following pattern:
+ALWAYS return the service ID and the service name with  the following pattern:
 {
     "service_id": 1,
     "service_name": "Consulta Limite.
