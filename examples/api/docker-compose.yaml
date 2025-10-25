@@ -1,6 +1,8 @@
 services:
   backend-api:
-    image: <preencher com a sua imagem Docker>
+    build:
+      context: .
+      dockerfile: Dockerfile
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
     ports:
