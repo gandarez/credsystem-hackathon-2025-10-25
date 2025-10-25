@@ -278,7 +278,7 @@ func (c *TensorFlowClassifier) ClassifyIntent(request domain.IntentClassificatio
 	}
 
 	if len(serviceScores) == 0 {
-		return nil, fmt.Errorf("no similar services found")
+		return nil, domain.ErrNoServiceFound
 	}
 
 	// Calcula média ponderada (dá mais peso aos melhores scores)
