@@ -328,7 +328,7 @@ func (c *TensorFlowClassifier) ClassifyIntent(request domain.IntentClassificatio
 	}
 
 	// Threshold mínimo de confiança - retorna erro se muito baixo
-	if bestService.AvgScore < 0.20 {
+	if bestService.AvgScore < 0.40 {
 		return nil, domain.ErrNoServiceFound
 	}
 
