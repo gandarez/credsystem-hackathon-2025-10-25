@@ -1,10 +1,10 @@
-
-version: '3.8'
+version: "3.8"
 
 services:
   velocistas-api:
-    image: rogeriogregorio/velocistas-da-pilha:latest  # SUBSTITUIR pela sua imagem
-    container_name: velocistas-da-pilha
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "18020:18020"
     environment:
@@ -13,6 +13,6 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 128M
     restart: unless-stopped
