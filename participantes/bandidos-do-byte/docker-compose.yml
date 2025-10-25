@@ -7,9 +7,8 @@ services:
       dockerfile: Dockerfile
       args:
         - PORT=${PORT}
-    container_name: bandidos_do_byte_api
     ports:
-      - "${PORT}:${PORT}"
+      - "18020:${PORT}"
     environment:
       - PORT=${PORT}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
