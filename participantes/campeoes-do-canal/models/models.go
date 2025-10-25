@@ -27,7 +27,6 @@ func BindAndValidate(data interface{}, r *http.Request) error {
 		return fmt.Errorf("invalid request body: %w", err)
 	}
 
-	// ensure there's no extra JSON after the first value
 	if dec.More() {
 		return fmt.Errorf("unexpected additional JSON in body")
 	}
