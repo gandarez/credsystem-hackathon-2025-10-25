@@ -1,13 +1,12 @@
 services:
   backend-api:
-    image: campeoes-do-canal:local
     build:
       context: .
       dockerfile: Dockerfile
     environment:
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
     ports:
-      - "${PORT}:${PORT}"
+      - "18020:8080"
     deploy:
       resources:
         limits:
