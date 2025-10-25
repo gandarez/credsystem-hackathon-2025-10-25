@@ -163,7 +163,7 @@ func (s *Server) findServiceHandler(w http.ResponseWriter, r *http.Request) {
 	// Validar método HTTP
 	if r.Method != http.MethodPost {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(APIResponse{
 			Success: false,
 			Error:   "method not allowed",
@@ -175,7 +175,7 @@ func (s *Server) findServiceHandler(w http.ResponseWriter, r *http.Request) {
 	var req APIRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(APIResponse{
 			Success: false,
 			Error:   "invalid request body",
@@ -186,7 +186,7 @@ func (s *Server) findServiceHandler(w http.ResponseWriter, r *http.Request) {
 	// Validar intent
 	if req.Intent == "" {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(APIResponse{
 			Success: false,
 			Error:   "intent cannot be empty",
@@ -203,7 +203,7 @@ func (s *Server) findServiceHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("VALIDATION ERROR - Intent: %q, Error: %v, Time: %v", req.Intent, result.err, elapsed)
 
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(APIResponse{
 			Success: false,
 			Error:   result.err.Error(),
@@ -239,7 +239,7 @@ func (s *Server) testBatchHandler(w http.ResponseWriter, r *http.Request) {
 	// Validar método HTTP
 	if r.Method != http.MethodPost {
 		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(map[string]string{"error": "method not allowed"})
 		return
 	}
