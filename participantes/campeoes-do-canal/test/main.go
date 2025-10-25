@@ -14,9 +14,7 @@ import (
 )
 
 type ServiceData struct {
-	// Add any fields your API returns if you want to inspect them
-	// Example:
-	// Intent string `json:"intent"`
+	// Add fields if needed
 }
 
 type Message struct {
@@ -39,51 +37,38 @@ func readPayloads(path string) ([]string, error) {
 	}
 	defer f.Close()
 
-	data, err := io.ReadAll(f)
-	if err != nil {
+	scanner := bufio.NewScanner(f)
+	var payloads []string
+
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" {
+			continue
+		}
+		// Convert single quotes to double quotes for valid JSON
+		line = strings.ReplaceAll(line, "'", "\"")
+
+		// Validate JSON
+		var js json.RawMessage
+		if err := json.Unmarshal([]byte(line), &js); err != nil {
+			fmt.Printf("⚠️ Invalid JSON skipped: %s\n", line)
+			continue
+		}
+		payloads = append(payloads, line)
+	}
+
+	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
 
-	blocks := bytes.Split(data, []byte("\n\n"))
-	var payloads []string
-	for _, b := range blocks {
-		s := strings.TrimSpace(string(b))
-		if s != "" {
-			payloads = append(payloads, s)
-		}
-	}
-
-	if len(payloads) < 2 {
-		if _, err := f.Seek(0, 0); err != nil {
-			return nil, err
-		}
-		scanner := bufio.NewScanner(f)
-		for scanner.Scan() {
-			line := strings.TrimSpace(scanner.Text())
-			if line != "" {
-				payloads = append(payloads, line)
-			}
-		}
-	}
-
-	valid := make([]string, 0, len(payloads))
-	for _, p := range payloads {
-		var js json.RawMessage
-		if err := json.Unmarshal([]byte(p), &js); err == nil {
-			valid = append(valid, p)
-		} else {
-			fmt.Printf("⚠️ Invalid JSON skipped: %s\n", p)
-		}
-	}
-
-	return valid, nil
+	return payloads, nil
 }
 
 func saveResponse(intent string, response string, duration time.Duration, success bool, errMsg string) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	f, err := os.OpenFile("responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile("./participantes/campeoes-do-canal/test/responses.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Printf("❌ Error opening file: %v\n", err)
 		return
