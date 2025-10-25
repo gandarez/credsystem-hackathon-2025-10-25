@@ -37,3 +37,13 @@ func BindAndValidate(data interface{}, r *http.Request) error {
 	}
 	return nil
 }
+
+type ServiceData struct {
+	ServiceID   int    `json:"service_id"`
+	ServiceName string `json:"service_name"`
+}
+type Message struct {
+	Success bool        `json:"success"`
+	Data    ServiceData `json:"data"`
+	Error   string      `json:"error"`
+}

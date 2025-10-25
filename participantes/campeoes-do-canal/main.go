@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/configs"
+	"github.com/andre-bernardes200/credsystem-hackathon-2025-10-25/participantes/campeoes-do-canal/models"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -25,7 +26,16 @@ func main() {
 			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			return
 		}
-		w.Write([]byte("ok"))
+		message := models.Message{
+			Success: true,
+			Data: models.ServiceData{
+				ServiceID:   123,
+				ServiceName: "example_service",
+			},
+			Error: "string",
+		}
+		b, _ := json.Marshal(message)
+		w.Write(b)
 	})
 	fmt.Printf("\n running on http://localhost%s \n", configs.GetPort())
 	http.ListenAndServe(configs.GetPort(), r)
