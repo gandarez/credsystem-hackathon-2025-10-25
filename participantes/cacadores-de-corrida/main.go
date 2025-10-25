@@ -17,9 +17,9 @@ type FindServiceRequest struct {
 }
 
 type FindServiceResponse struct {
-	Success bool                   `json:"success"`
-	Data    *ServiceData           `json:"data,omitempty"`
-	Error   string                 `json:"error,omitempty"`
+	Success bool         `json:"success"`
+	Data    *ServiceData `json:"data,omitempty"`
+	Error   string       `json:"error,omitempty"`
 }
 
 type ServiceData struct {
@@ -72,31 +72,31 @@ func findServiceHandler(w http.ResponseWriter, r *http.Request) {
 
 	var req FindServiceRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		sendErrorResponse(w, "Erro ao decodificar requisição", http.StatusBadRequest)
+		sendErrorResponse(w, "Erro ao decodificar requisição")
 		return
 	}
 
 	if req.Intent == "" {
-		sendErrorResponse(w, "Intent não pode ser vazio", http.StatusBadRequest)
+		sendErrorResponse(w, "Intent não pode ser vazio")
 		return
 	}
 
 	// Classificar a intenção usando o agente
 	serviceID, serviceName, err := classifier.Classify(req.Intent)
 	if err != nil {
-		sendErrorResponse(w, fmt.Sprintf("Erro ao classificar intenção: %v", err), http.StatusInternalServerError)
+		sendErrorResponse(w, fmt.Sprintf("Erro ao classificar intenção: %v", err))
 		return
 	}
 
 	// Verificar se a intenção é inválida (não relacionada a serviços bancários)
 	if serviceID == 0 || serviceName == "INVALID" {
-		sendErrorResponse(w, "Intent não está relacionado a serviços bancários ou financeiros", http.StatusBadRequest)
+		sendErrorResponse(w, "Intent não está relacionado a serviços bancários ou financeiros")
 		return
 	}
 
 	// Validar a resposta do agente
 	if !validator.IsValidService(serviceID) {
-		sendErrorResponse(w, "Serviço inválido retornado pelo classificador", http.StatusInternalServerError)
+		sendErrorResponse(w, "Serviço inválido retornado pelo classificador")
 		return
 	}
 
@@ -110,6 +110,7 @@ func findServiceHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK) // Sempre retorna 200
 	json.NewEncoder(w).Encode(response)
 }
 
@@ -127,14 +128,14 @@ func healthzHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-func sendErrorResponse(w http.ResponseWriter, errorMsg string, statusCode int) {
+func sendErrorResponse(w http.ResponseWriter, errorMsg string) {
 	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(statusCode)
-	
+	w.WriteHeader(http.StatusOK) // Sempre retorna 200, mesmo com erro
+
 	response := FindServiceResponse{
 		Success: false,
 		Error:   errorMsg,
 	}
-	
+
 	json.NewEncoder(w).Encode(response)
 }
