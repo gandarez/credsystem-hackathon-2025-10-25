@@ -1,14 +1,27 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 )
 
-var Intent struct {
-	Intent string `json:"intent"`
+type IntentUser struct {
+	Intent string
+}
+
+type Response struct {
+	success     bool
+	error       string
+	dataService DataService
+}
+
+type DataService struct {
+	service_id   int
+	service_name string
 }
 
 func main() {
@@ -38,7 +51,7 @@ func ConsultaHealthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindService(w http.ResponseWriter, r *http.Request) {
-	/*var intent Intent
+	var intent IntentUser
 	err := json.NewDecoder(r.Body).Decode(&intent)
 	if err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
@@ -46,5 +59,5 @@ func FindService(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Println(intent.Intent)
 	// Lógica simples para determinar o serviço com base na intenção
-	*/
+
 }
