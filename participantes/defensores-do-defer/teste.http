@@ -1,9 +1,9 @@
-GET http://localhost:8080/api/healthz/ HTTP/1.1
+GET http://localhost:18020/api/healthz/ HTTP/1.1
 Content-Type: application/json
 
 
 ###
-POST http://localhost:8000/api/find-service HTTP/1.1
+POST http://localhost:18020/api/find-service HTTP/1.1
 Content-Type: application/json
 
 {"intent":"agendar uma consulta"}

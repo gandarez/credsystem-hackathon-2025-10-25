@@ -2,10 +2,10 @@ package main
 
 import (
 	"defensoresdefer/cmd/api/openrouter"
-	"defensoresdefer/cmd/configs"
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
@@ -43,9 +43,10 @@ func ConsultaHealthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindService(w http.ResponseWriter, r *http.Request) {
-	cfg, err := configs.LoadConfig(".")
-	if err != nil {
-		http.Error(w, fmt.Sprintf("failed to load configs: %v", err), http.StatusInternalServerError)
+	var cfg = os.Getenv("OPENROUTER_API_KEY")
+
+	if cfg == "" {
+		http.Error(w, "OPENROUTER_API_KEY not set", http.StatusInternalServerError)
 		return
 	}
 
@@ -57,7 +58,7 @@ func FindService(w http.ResponseWriter, r *http.Request) {
 
 	client := openrouter.NewClient(
 		"https://openrouter.ai/api/v1",
-		openrouter.WithAuth(cfg.OPENROUTER_API_KEY),
+		openrouter.WithAuth(cfg),
 	)
 
 	dataResp, err := client.ChatCompletion(r.Context(), intent.Intent)
