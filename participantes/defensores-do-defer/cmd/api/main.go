@@ -13,75 +13,68 @@ import (
 )
 
 type IntentUser struct {
-	Intent string
+	Intent string `json:"intent"`
 }
 
 type Response struct {
-	success     bool
-	error       string
-	dataService DataService
+	Success bool        `json:"success"`
+	Error   string      `json:"error,omitempty"`
+	Data    *DataService `json:"data,omitempty"`
 }
 
 type DataService struct {
-	service_id   int
-	service_name string
+	ServiceID   int    `json:"service_id"`
+	ServiceName string `json:"service_name"`
 }
 
 func main() {
 	r := chi.NewRouter()
-	//r.Use(LogRequest)
 	r.Use(middleware.Logger)
 
-	//r.Post("/users", )
-	//r.Post("/users/generate_token", userHandler.GetJwt)
-	r.Get("/api/healthz/*", ConsultaHealthz)
+	r.Get("/api/healthz", ConsultaHealthz)
 	r.Post("/api/find-service", FindService)
 
-	http.ListenAndServe(":8000", r)
-
+	fmt.Println("🚀 Server running on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 func ConsultaHealthz(w http.ResponseWriter, r *http.Request) {
-	// Consulta serviço
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(`{"status":"ok"}`))
 }
 
 func FindService(w http.ResponseWriter, r *http.Request) {
-	configs, err := configs.LoadConfig(".")
+	cfg, err := configs.LoadConfig(".")
 	if err != nil {
-		log.Fatalf("failed to load configs: %v", err)
+		http.Error(w, fmt.Sprintf("failed to load configs: %v", err), http.StatusInternalServerError)
+		return
 	}
+
 	var intent IntentUser
-	fmt.Printf("Recebido request para FindService %s", intent.Intent)
-	err = json.NewDecoder(r.Body).Decode(&intent)
-	if err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&intent); err != nil {
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
+	fmt.Printf("📩 Received intent: %s\n", intent.Intent)
 
-	// Lógica simples para determinar o serviço com base na intenção
-	var response Response
-
-	var client openrouter.Client
-	client = *openrouter.NewClient("https://openrouter.ai/api/v1",
-		openrouter.WithAuth(configs.OPENROUTER_API_KEY),
+	client := openrouter.NewClient(
+		"https://openrouter.ai/api/v1",
+		openrouter.WithAuth(cfg.OPENROUTER_API_KEY),
 	)
-	fmt.Printf("Client OpenRouter criado %v", client)
+	fmt.Println("✅ OpenRouter client created")
 
 	dataResp, err := client.ChatCompletion(r.Context(), intent.Intent)
 	if err != nil {
-		http.Error(w, "Error processing request: "+err.Error(), http.StatusInternalServerError)
+		http.Error(w, fmt.Sprintf("Error processing request: %v", err), http.StatusInternalServerError)
 		return
 	}
-	fmt.Printf("Resposta recebida do OpenRouter %v", dataResp)
 
-	response = Response{
-		success: true,
-		dataService: DataService{
-			service_id:   int(dataResp.ServiceID),
-			service_name: dataResp.ServiceName,
+	response := Response{
+		Success: true,
+		Data: &DataService{
+			ServiceID:   int(dataResp.ServiceID),
+			ServiceName: dataResp.ServiceName,
 		},
 	}
 
