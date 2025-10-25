@@ -17,8 +17,8 @@ type IntentUser struct {
 }
 
 type Response struct {
-	Success bool        `json:"success"`
-	Error   string      `json:"error,omitempty"`
+	Success bool         `json:"success"`
+	Error   string       `json:"error,omitempty"`
 	Data    *DataService `json:"data,omitempty"`
 }
 

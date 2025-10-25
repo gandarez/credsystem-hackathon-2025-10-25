@@ -1,33 +1,26 @@
 FROM golang:1.25-bookworm AS build
 
-RUN apt-get update && apt-get -y install \
-    git \
-    make \
-    ca-certificates
 
-WORKDIR /src
+WORKDIR /app
 
 # Copy everything but defined in docker ignore file
 COPY . .
 
 # Build
 RUN go mod vendor
-#RUN go build -o build/ivr-service-linux-amd64 ./cmd/api/main.go
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o build/ivr-service-linux-amd64 ./cmd/api/main.go
-RUN chmod +x build/ivr-service-linux-amd64
-
-#RUN make build-linux-amd64
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o defendoresDefer ./cmd/api/main.go
 
 #####################
 # Build final image #
 #####################
-FROM scratch AS bin
+FROM scratch
 
-# Copy from build
+# Copy certificates and timezone from build stage (necessário para TLS e timezone)
 COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=build /usr/share/zoneinfo /usr/share/zoneinfo
-COPY --from=build /src/build/ivr-service-linux-amd64 .
+# Copia o binário gerado para a localização raiz da imagem
+COPY --from=build /app/defendoresDefer /defendoresDefer
 
+EXPOSE 8080
 
-# Specify the container's entrypoint as the action
-ENTRYPOINT ["/ivr-service-linux-amd64"]
+ENTRYPOINT ["/defendoresDefer"]
