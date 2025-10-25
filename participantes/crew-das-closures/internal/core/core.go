@@ -77,34 +77,27 @@ func (c *Core) AskQuestion(question []byte) (*model.FindServiceResponse, error) 
 		ServiceName: normalizedName,
 	}
 
-	diagnostics := analyzeCoherence(obj, sData)
+	// Analyze coherence but treat findings as warnings, not hard failures.
+	warnings := analyzeCoherence(obj, sData)
 	if normDiag != "" {
-		diagnostics = append(diagnostics, normDiag)
+		// Keep normalization notes as debug-only warnings
+		warnings = append(warnings, normDiag)
 	}
 
-	if len(diagnostics) > 0 {
-		// logar os diagnósticos para análise futura
-		for _, diag := range diagnostics {
-			log.Printf("Coherence issue detected: %s", diag)
+	if len(warnings) > 0 {
+		// logar os diagnósticos/avisos para análise futura
+		for _, w := range warnings {
+			log.Printf("Coherence warning: %s", w)
 		}
 	}
 
-	state := len(diagnostics) == 0
-
-	if !state {
-		sData.ServiceID = 0
-		sData.ServiceName = ""
-
-		return &model.FindServiceResponse{
-			Success: false,
-			Data:    sData,
-			Error:   "coherence issues detected between request and response",
-		}, nil
-	}
+	// Consider the response successful if it has a valid, normalized pair
+	state := sData.ServiceID > 0 && sData.ServiceName != ""
 
 	return &model.FindServiceResponse{
 		Success: state,
 		Data:    sData,
+		// Keep error empty to not interfere with clients; warnings are only logged
 	}, nil
 }
 

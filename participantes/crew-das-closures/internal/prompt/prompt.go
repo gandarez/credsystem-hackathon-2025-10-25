@@ -190,7 +190,7 @@ AVAILABLE SERVICES WITH EXAMPLES:
     - Examples: "Perdi meu cartão", "Roubaram meu cartão", "Fui assaltado", "não acho meu cartão", "não encontro meu cartão"
     - Note: "Não acho meu cartão" = lost card (Service 11), not a status inquiry.
 
-12. Consulta do Saldo
+12. Consulta do Saldo Conta do Mais
     - Keywords: saldo, conta, mais, consulta, extrato, ver meu saldo, dinheiro na conta, conta corrente, saldo disponível
     - Examples: "Qual meu saldo na Conta do Mais?", "Quero um extrato da conta", "Saldo conta corrente", "Quanto tenho na conta?"
     - Note: This refers to a deposit account balance inquiry. Use this for any balance/account balance questions, including "saldo conta corrente".
@@ -254,6 +254,7 @@ CLASSIFICATION INSTRUCTIONS:
 RESPONSE REQUIREMENTS:
 - First, provide your step-by-step reasoning within reasoning tags.
 - After the reasoning, you MUST respond with a valid JSON object.
+- The JSON MUST include both fields service_id and service_name, and they MUST exactly match the canonical IDs and names listed above; never leave them empty.
 - MUST use the exact service names and IDs from the list (1-16).
 - If the input is NOT related to banking/credit card services, use service_id 0 with service_name "não mapeado".
 - NO additional text outside the reasoning tags and the final JSON response.
