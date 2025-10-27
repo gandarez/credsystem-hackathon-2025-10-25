@@ -7,5 +7,4 @@ response = requests.get(
   }
 )
 data = response.json()
-data["data"]["usage"]
 print(f'${data["data"]["usage"]:.2f} used today.')
