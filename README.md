@@ -146,4 +146,10 @@ Para consultar os créditos restantes na sua conta da OpenRouter, você pode uti
 python ./utils/check_limit_openrouter.py
 ```
 
+## Parceiros
+
+[![Ardan Labs](./assets/ardan-labs-logo.png)](https://www.ardanlabs.com)
+
+[![Jetbrains](./assets/jetbrains-logo.png)](https://www.jetbrains.com)
+
 Made with :heart: by the Golang SP.
