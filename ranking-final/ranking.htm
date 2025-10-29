@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8080/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Results - Participant Rankings</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: #28a745;
+        }
+
+        .status-dot.disconnected {
+            background: #dc3545;
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .last-update {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .scoring-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-bottom: 3px solid #e9ecef;
+        }
+
+        .scoring-info h2 {
+            color: #495057;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .scoring-formula {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+        }
+
+        .scoring-formula code {
+            background: #f1f3f5;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #495057;
+        }
+
+        .criteria-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .criteria-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+        }
+
+        .criteria-item.penalty {
+            border-left-color: #dc3545;
+        }
+
+        .criteria-item.time {
+            border-left-color: #ffc107;
+        }
+
+        .rankings {
+            padding: 40px;
+        }
+
+        .rankings h2 {
+            color: #495057;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .ranking-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .ranking-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        .ranking-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .ranking-table tbody tr {
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .ranking-table tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        .ranking-table tbody tr.new-entry {
+            animation: highlightNew 2s ease-in-out;
+        }
+
+        @keyframes highlightNew {
+            0%, 100% { background: inherit; }
+            50% { background: #d4edda; }
+        }
+
+        .ranking-table tbody tr.rank-up {
+            animation: rankUp 0.8s ease-out;
+        }
+
+        .ranking-table tbody tr.rank-down {
+            animation: rankDown 0.8s ease-out;
+        }
+
+        @keyframes rankUp {
+            0% {
+                transform: translateY(50px);
+                background: #d4edda;
+            }
+            50% {
+                background: #d4edda;
+            }
+            100% {
+                transform: translateY(0);
+                background: inherit;
+            }
+        }
+
+        @keyframes rankDown {
+            0% {
+                transform: translateY(-50px);
+                background: #f8d7da;
+            }
+            50% {
+                background: #f8d7da;
+            }
+            100% {
+                transform: translateY(0);
+                background: inherit;
+            }
+        }
+
+        .champion-crown {
+            display: inline-block;
+            margin-left: 10px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .rank-1 {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .rank-2 {
+            background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+            color: white;
+            box-shadow: 0 4px 10px rgba(192, 192, 192, 0.4);
+        }
+
+        .rank-3 {
+            background: linear-gradient(135deg, #CD7F32, #8B4513);
+            color: white;
+            box-shadow: 0 4px 10px rgba(205, 127, 50, 0.4);
+        }
+
+        .rank-other {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .participant-name {
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        .metric {
+            font-weight: 500;
+        }
+
+        .metric.success {
+            color: #28a745;
+        }
+
+        .metric.failed {
+            color: #dc3545;
+        }
+
+        .score {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .notification.champion {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            font-size: 1.2em;
+            padding: 20px 30px;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+            animation: slideIn 0.3s ease-out, pulse-glow 1s ease-in-out 3;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 12px 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .details {
+            margin-top: 40px;
+        }
+
+        .participant-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid #e9ecef;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .participant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .participant-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .participant-card-header .rank-badge {
+            margin-right: 15px;
+        }
+
+        .participant-card-header h3 {
+            color: #495057;
+            font-size: 1.5em;
+        }
+
+        .test-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .test-result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .test-result-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .test-result-box.no-data {
+            border-left-color: #6c757d;
+            opacity: 0.6;
+        }
+
+        .test-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .test-stat:last-child {
+            border-bottom: none;
+        }
+
+        .test-stat-label {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .test-stat-value {
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .combined-score {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .status-indicator {
+                position: static;
+                margin-top: 15px;
+                justify-content: center;
+            }
+
+            .criteria-list {
+                grid-template-columns: 1fr;
+            }
+
+            .test-results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <script src="./ranking_files/confetti.browser.min.js"></script>
+</head>
+<body data-feedly-mini="yes">
+    <div class="container">
+        <div class="header">
+            <div class="status-indicator">
+                <span class="status-dot disconnected" id="statusDot"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+            <h1>🏆 Live Results</h1>
+            <div class="subtitle">Real-time Participant Rankings - Credsystem Hackathon 2025</div>
+            <div class="last-update" id="lastUpdate">Last updated: 5:59:42 PM</div>
+        </div>
+
+        <div class="scoring-info">
+            <h2>📊 Scoring Criteria</h2>
+            <div class="scoring-formula">
+                <strong>Formula:</strong> <code>Score = (Total_Success × 10.0) - (Total_Failed × 50.0) - (Avg_Time_ms × 0.01)</code>
+            </div>
+            <div class="criteria-list">
+                <div class="criteria-item">
+                    <strong>✅ Success Weight:</strong> +10.0 points per success
+                </div>
+                <div class="criteria-item penalty">
+                    <strong>❌ Failure Penalty:</strong> -50.0 points per failure
+                </div>
+                <div class="criteria-item time">
+                    <strong>⏱️ Time Penalty:</strong> -0.01 points per millisecond
+                </div>
+            </div>
+        </div>
+
+        <div class="rankings">
+            <h2>🏅 Rankings</h2>
+            <div id="loadingContainer" class="loading" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Loading results...</p>
+            </div>
+            <table class="ranking-table" id="rankingTable" style="display: table;">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Participant</th>
+                        <th>Total Success</th>
+                        <th>Total Failed</th>
+                        <th>Avg Time (93)</th>
+                        <th>Avg Time (80)</th>
+                        <th>Final Score</th>
+                    </tr>
+                </thead>
+                <tbody id="rankingBody"><tr>
+                    <td>
+                        <span class="rank-badge rank-1">1</span>
+                    </td>
+                    <td><span class="participant-name">Gurus-das-Rotinas<span class="champion-crown">👑</span></span></td>
+                    <td><span class="metric success">173</span></td>
+                    <td><span class="metric failed">0</span></td>
+                    <td>1174ms</td>
+                    <td>765ms</td>
+                    <td><span class="score">1720.31</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-2">2</span>
+                    </td>
+                    <td><span class="participant-name">galaxia-dos-gophers</span></td>
+                    <td><span class="metric success">173</span></td>
+                    <td><span class="metric failed">0</span></td>
+                    <td>1568ms</td>
+                    <td>1133ms</td>
+                    <td><span class="score">1716.49</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-3">3</span>
+                    </td>
+                    <td><span class="participant-name">mavericks-do-mapa</span></td>
+                    <td><span class="metric success">173</span></td>
+                    <td><span class="metric failed">0</span></td>
+                    <td>3445ms</td>
+                    <td>3225ms</td>
+                    <td><span class="score">1696.65</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">4</span>
+                    </td>
+                    <td><span class="participant-name">cacadores-de-corrida</span></td>
+                    <td><span class="metric success">172</span></td>
+                    <td><span class="metric failed">1</span></td>
+                    <td>1580ms</td>
+                    <td>1022ms</td>
+                    <td><span class="score">1656.99</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">5</span>
+                    </td>
+                    <td><span class="participant-name">herois-da-pilha</span></td>
+                    <td><span class="metric success">169</span></td>
+                    <td><span class="metric failed">4</span></td>
+                    <td>4065ms</td>
+                    <td>4583ms</td>
+                    <td><span class="score">1446.76</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">6</span>
+                    </td>
+                    <td><span class="participant-name">velocistas-da-pilha</span></td>
+                    <td><span class="metric success">167</span></td>
+                    <td><span class="metric failed">6</span></td>
+                    <td>8ms</td>
+                    <td>886ms</td>
+                    <td><span class="score">1365.53</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">7</span>
+                    </td>
+                    <td><span class="participant-name">bandidos-do-byte</span></td>
+                    <td><span class="metric success">166</span></td>
+                    <td><span class="metric failed">7</span></td>
+                    <td>11ms</td>
+                    <td>9ms</td>
+                    <td><span class="score">1309.90</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">8</span>
+                    </td>
+                    <td><span class="participant-name">crew-das-closures</span></td>
+                    <td><span class="metric success">161</span></td>
+                    <td><span class="metric failed">12</span></td>
+                    <td>3352ms</td>
+                    <td>2300ms</td>
+                    <td><span class="score">981.74</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">9</span>
+                    </td>
+                    <td><span class="participant-name">esquadrao-do-scheduler</span></td>
+                    <td><span class="metric success">160</span></td>
+                    <td><span class="metric failed">13</span></td>
+                    <td>1116ms</td>
+                    <td>723ms</td>
+                    <td><span class="score">940.80</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">10</span>
+                    </td>
+                    <td><span class="participant-name">Cowboys-do-Contexto</span></td>
+                    <td><span class="metric success">154</span></td>
+                    <td><span class="metric failed">19</span></td>
+                    <td>2021ms</td>
+                    <td>800ms</td>
+                    <td><span class="score">575.89</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">11</span>
+                    </td>
+                    <td><span class="participant-name">defensores-do-defer</span></td>
+                    <td><span class="metric success">153</span></td>
+                    <td><span class="metric failed">20</span></td>
+                    <td>1533ms</td>
+                    <td>1089ms</td>
+                    <td><span class="score">516.89</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">12</span>
+                    </td>
+                    <td><span class="participant-name">piratas-do-pacote</span></td>
+                    <td><span class="metric success">149</span></td>
+                    <td><span class="metric failed">24</span></td>
+                    <td>2011ms</td>
+                    <td>1245ms</td>
+                    <td><span class="score">273.72</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">13</span>
+                    </td>
+                    <td><span class="participant-name">alquimistas-atomicos</span></td>
+                    <td><span class="metric success">109</span></td>
+                    <td><span class="metric failed">64</span></td>
+                    <td>1580ms</td>
+                    <td>997ms</td>
+                    <td><span class="score">-2122.89</span></td>
+                </tr><tr>
+                    <td>
+                        <span class="rank-badge rank-other">14</span>
+                    </td>
+                    <td><span class="participant-name">desviadores-de-deadlock</span></td>
+                    <td><span class="metric success">0</span></td>
+                    <td><span class="metric failed">173</span></td>
+                    <td>4ms</td>
+                    <td>5ms</td>
+                    <td><span class="score">-8650.05</span></td>
+                </tr></tbody>
+            </table>
+
+            <div id="breakdownSection" style="display: block;">
+                <h2 style="margin-top: 40px;">📋 Detailed Breakdown</h2>
+                <div class="details" id="detailsContainer"><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-1">1</span>
+                        <h3>Gurus-das-Rotinas<span class="champion-crown">👑</span></h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1174ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">407ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">3062ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">765ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">414ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">2116ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1720.31 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-2">2</span>
+                        <h3>galaxia-dos-gophers</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1568ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">747ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">6659ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1133ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">796ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">2117ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1716.49 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-3">3</span>
+                        <h3>mavericks-do-mapa</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">3445ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">908ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">6801ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">3225ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">2521ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">5448ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1696.65 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">4</span>
+                        <h3>cacadores-de-corrida</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1580ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">662ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">3860ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">79</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">1</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">98.8%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1022ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">645ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">5085ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1656.99 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">5</span>
+                        <h3>herois-da-pilha</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">4065ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">1001ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">5351ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">76</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">4</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">95.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">4583ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">1032ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">7462ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1446.76 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">6</span>
+                        <h3>velocistas-da-pilha</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">8ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">0ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">34ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">74</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">6</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">92.5%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">886ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">0ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">3678ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1365.53 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">7</span>
+                        <h3>bandidos-do-byte</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">92</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">1</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">98.9%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">11ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">0ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">47ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">74</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">6</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">92.5%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">9ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">2ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">30ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 1309.90 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">8</span>
+                        <h3>crew-das-closures</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">86</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">7</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">92.5%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">3352ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">1297ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">7185ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">75</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">5</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">93.8%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">2300ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">1172ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">4916ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 981.74 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">9</span>
+                        <h3>esquadrao-do-scheduler</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">87</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">6</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">93.5%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1116ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">336ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">4419ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">73</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">7</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">91.3%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">723ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">322ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">1944ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 940.80 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">10</span>
+                        <h3>Cowboys-do-Contexto</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">100.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">2021ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">460ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">4925ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">61</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">19</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">76.3%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">800ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">462ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">1779ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 575.89 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">11</span>
+                        <h3>defensores-do-defer</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">81</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">12</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">87.1%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1533ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">725ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">4907ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">72</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">8</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">90.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1089ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">695ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">2273ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 516.89 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">12</span>
+                        <h3>piratas-do-pacote</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">13</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">86.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">2011ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">467ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">7656ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">69</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">11</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">86.3%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1245ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">405ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">4138ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: 273.72 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">13</span>
+                        <h3>alquimistas-atomicos</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">56</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">37</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">60.2%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">1580ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">386ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">3774ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">53</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">27</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">66.3%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">997ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">300ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">3153ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: -2122.89 points
+                    </div>
+                </div><div class="participant-card">
+                    <div class="participant-card-header">
+                        <span class="rank-badge rank-other">14</span>
+                        <h3>desviadores-de-deadlock</h3>
+                    </div>
+
+                    <div class="test-results">
+                        
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">93</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">0.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">4ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">0ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">16ms</span>
+                            </div>
+                        </div>
+                    
+                        
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">0</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">80</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">0.0%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">5ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">0ms</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">12ms</span>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: -8650.05 points
+                    </div>
+                </div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8080';
+        const SSE_URL = `${API_URL}/events`;
+        const RESULTS_URL = `${API_URL}/api/results`;
+
+        let eventSource = null;
+        let knownParticipants = new Set();
+        let previousRankings = new Map(); // Store previous positions: name -> rank
+        let previousFirstPlace = null;
+
+        function formatTime(ms) {
+            if (ms === 0 || ms == null) return 'N/A';
+            return `${Math.round(ms)}ms`;
+        }
+
+        function safeToFixed(value, decimals) {
+            if (value == null || isNaN(value)) {
+                return decimals === 1 ? '0.0' : '0.00';
+            }
+            return Number(value).toFixed(decimals);
+        }
+
+        function getRankBadgeClass(index) {
+            if (index === 0) return 'rank-1';
+            if (index === 1) return 'rank-2';
+            if (index === 2) return 'rank-3';
+            return 'rank-other';
+        }
+
+        function fireConfetti() {
+            const duration = 3000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 2000 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+
+                // Launch confetti from two different origins
+                confetti({
+                    ...defaults,
+                    particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+                });
+                confetti({
+                    ...defaults,
+                    particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+                });
+            }, 250);
+        }
+
+        function updateTable(participants) {
+            const tbody = document.getElementById('rankingBody');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const table = document.getElementById('rankingTable');
+
+            if (participants.length === 0) {
+                loadingContainer.style.display = 'block';
+                table.style.display = 'none';
+                return;
+            }
+
+            loadingContainer.style.display = 'none';
+            table.style.display = 'table';
+
+            const currentParticipants = new Set(participants.map(p => p.Name));
+            const newParticipants = [...currentParticipants].filter(p => !knownParticipants.has(p));
+
+            // Check if first place changed
+            const currentFirstPlace = participants.length > 0 ? participants[0].Name : null;
+            if (previousFirstPlace && currentFirstPlace && previousFirstPlace !== currentFirstPlace) {
+                console.log(`🏆 NEW CHAMPION! ${currentFirstPlace} overtook ${previousFirstPlace}!`);
+                fireConfetti();
+                showNotification(`🏆 NEW CHAMPION! ${currentFirstPlace} is now in first place!`, true);
+            }
+            previousFirstPlace = currentFirstPlace;
+
+            // Build new rankings map
+            const currentRankings = new Map();
+            participants.forEach((participant, index) => {
+                currentRankings.set(participant.Name, index + 1);
+            });
+
+            tbody.innerHTML = '';
+
+            participants.forEach((participant, index) => {
+                const row = document.createElement('tr');
+                const isNew = newParticipants.includes(participant.Name);
+                const currentRank = index + 1;
+                const previousRank = previousRankings.get(participant.Name);
+
+                if (isNew) {
+                    row.classList.add('new-entry');
+                    knownParticipants.add(participant.Name);
+                } else if (previousRank !== undefined && previousRank !== currentRank) {
+                    // Position changed
+                    if (currentRank < previousRank) {
+                        // Moved up in ranking (lower number = better)
+                        row.classList.add('rank-up');
+                        console.log(`📈 ${participant.Name} moved UP from #${previousRank} to #${currentRank}`);
+                    } else {
+                        // Moved down in ranking
+                        row.classList.add('rank-down');
+                        console.log(`📉 ${participant.Name} moved DOWN from #${previousRank} to #${currentRank}`);
+                    }
+                }
+
+                const crownIcon = (index === 0) ? '<span class="champion-crown">👑</span>' : '';
+
+                row.innerHTML = `
+                    <td>
+                        <span class="rank-badge ${getRankBadgeClass(index)}">${currentRank}</span>
+                    </td>
+                    <td><span class="participant-name">${participant.Name}${crownIcon}</span></td>
+                    <td><span class="metric success">${participant.TotalSuccess || 0}</span></td>
+                    <td><span class="metric failed">${participant.TotalFailed || 0}</span></td>
+                    <td>${formatTime(participant.AvgTime93)}</td>
+                    <td>${formatTime(participant.AvgTime80)}</td>
+                    <td><span class="score">${safeToFixed(participant.Score, 2)}</span></td>
+                `;
+
+                tbody.appendChild(row);
+            });
+
+            // Update previous rankings
+            previousRankings = currentRankings;
+
+            // Update detailed breakdown
+            updateDetails(participants);
+
+            // Update last update time
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent =
+                `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+        function updateDetails(participants) {
+            const container = document.getElementById('detailsContainer');
+            const breakdownSection = document.getElementById('breakdownSection');
+
+            console.log('Updating details for participants:', participants);
+
+            if (participants.length === 0) {
+                breakdownSection.style.display = 'none';
+                return;
+            }
+
+            breakdownSection.style.display = 'block';
+            container.innerHTML = '';
+
+            participants.forEach((participant, index) => {
+                const card = document.createElement('div');
+                card.className = 'participant-card';
+
+                const crownIcon = (index === 0) ? '<span class="champion-crown">👑</span>' : '';
+
+                console.log(`Participant ${participant.Name}:`, participant);
+
+                let test93HTML = '';
+                if (participant.Test93 && participant.Test93 !== null) {
+                    test93HTML = `
+                        <div class="test-result-box">
+                            <h4>Test 93 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">${participant.Test93.total_requests || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">${participant.Test93.total_success || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">${participant.Test93.total_failed || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">${safeToFixed(participant.Test93.success_rate, 1)}%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">${participant.Test93.average_time || 'N/A'}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">${participant.Test93.fastest_time || 'N/A'}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">${participant.Test93.slowest_time || 'N/A'}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    test93HTML = `
+                        <div class="test-result-box no-data">
+                            <h4>Test 93 Results</h4>
+                            <p>No data available</p>
+                        </div>
+                    `;
+                }
+
+                let test80HTML = '';
+                if (participant.Test80 && participant.Test80 !== null) {
+                    test80HTML = `
+                        <div class="test-result-box">
+                            <h4>Test 80 Results</h4>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Total Requests:</span>
+                                <span class="test-stat-value">${participant.Test80.total_requests || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success:</span>
+                                <span class="test-stat-value" style="color: #28a745;">${participant.Test80.total_success || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Failed:</span>
+                                <span class="test-stat-value" style="color: #dc3545;">${participant.Test80.total_failed || 0}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Success Rate:</span>
+                                <span class="test-stat-value">${safeToFixed(participant.Test80.success_rate, 1)}%</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Average Time:</span>
+                                <span class="test-stat-value">${participant.Test80.average_time || 'N/A'}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Fastest Time:</span>
+                                <span class="test-stat-value">${participant.Test80.fastest_time || 'N/A'}</span>
+                            </div>
+                            <div class="test-stat">
+                                <span class="test-stat-label">Slowest Time:</span>
+                                <span class="test-stat-value">${participant.Test80.slowest_time || 'N/A'}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    test80HTML = `
+                        <div class="test-result-box no-data">
+                            <h4>Test 80 Results</h4>
+                            <p>No data available</p>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="participant-card-header">
+                        <span class="rank-badge ${getRankBadgeClass(index)}">${index + 1}</span>
+                        <h3>${participant.Name}${crownIcon}</h3>
+                    </div>
+
+                    <div class="test-results">
+                        ${test93HTML}
+                        ${test80HTML}
+                    </div>
+
+                    <div class="combined-score">
+                        Combined Score: ${safeToFixed(participant.Score, 2)} points
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function showNotification(message, isChampion = false) {
+            const notification = document.createElement('div');
+            notification.className = isChampion ? 'notification champion' : 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            const duration = isChampion ? 5000 : 3000;
+            setTimeout(() => {
+                notification.remove();
+            }, duration);
+        }
+
+        function loadResults() {
+            fetch(RESULTS_URL)
+                .then(response => response.json())
+                .then(data => {
+                    updateTable(data);
+                })
+                .catch(error => {
+                    console.error('Error loading results:', error);
+                });
+        }
+
+        function connectSSE() {
+            eventSource = new EventSource(SSE_URL);
+
+            eventSource.onopen = () => {
+                console.log('SSE Connected');
+                document.getElementById('statusDot').className = 'status-dot connected';
+                document.getElementById('statusText').textContent = 'Live';
+            };
+
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                console.log('SSE Event:', data);
+
+                if (data.type === 'connected') {
+                    loadResults();
+                } else if (data.type === 'update') {
+                    showNotification(`🎉 New results from ${data.participant}!`);
+                    loadResults();
+                }
+            };
+
+            eventSource.onerror = (error) => {
+                console.error('SSE Error:', error);
+                document.getElementById('statusDot').className = 'status-dot disconnected';
+                document.getElementById('statusText').textContent = 'Disconnected';
+
+                eventSource.close();
+
+                // Reconnect after 5 seconds
+                setTimeout(connectSSE, 5000);
+            };
+        }
+
+        // Initial load
+        loadResults();
+
+        // Connect to SSE
+        connectSSE();
+
+        // Refresh every 5 seconds as backup
+        setInterval(loadResults, 5000);
+    </script>
+
+
+<div id="feedly-mini" title="feedly Mini tookit"></div></body></html>

@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+    ports:
+      - "18020:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - CLASSIFIER_TYPE=${CLASSIFIER_TYPE:-tensorflow}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 128M
+    restart: unless-stopped

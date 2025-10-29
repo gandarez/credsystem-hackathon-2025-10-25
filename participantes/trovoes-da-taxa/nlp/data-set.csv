@@ -1,0 +1,581 @@
+service_id;service_name;intent
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto tem disponível para usar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando fecha minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando vence meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;valor para gastar
+2;Segunda via de boleto de acordo;segunda via boleto de acordo
+2;Segunda via de boleto de acordo;Boleto para pagar minha negociação
+2;Segunda via de boleto de acordo;código de barras acordo
+2;Segunda via de boleto de acordo;preciso pagar negociação
+2;Segunda via de boleto de acordo;enviar boleto acordo
+2;Segunda via de boleto de acordo;boleto da negociação
+3;Segunda via de Fatura;quero meu boleto
+3;Segunda via de Fatura;segunda via de fatura
+3;Segunda via de Fatura;código de barras fatura
+3;Segunda via de Fatura;quero a fatura do cartão
+3;Segunda via de Fatura;enviar boleto da fatura
+3;Segunda via de Fatura;fatura para pagamento
+4;Status de Entrega do Cartão;onde está meu cartão
+4;Status de Entrega do Cartão;meu cartão não chegou
+4;Status de Entrega do Cartão;status da entrega do cartão
+4;Status de Entrega do Cartão;cartão em transporte
+4;Status de Entrega do Cartão;previsão de entrega do cartão
+4;Status de Entrega do Cartão;cartão foi enviado?
+5;Status de cartão;não consigo passar meu cartão
+5;Status de cartão;meu cartão não funciona
+5;Status de cartão;cartão recusado
+5;Status de cartão;cartão não está passando
+5;Status de cartão;status do cartão ativo
+5;Status de cartão;problema com cartão
+6;Solicitação de aumento de limite;quero mais limite
+6;Solicitação de aumento de limite;aumentar limite do cartão
+6;Solicitação de aumento de limite;solicitar aumento de crédito
+6;Solicitação de aumento de limite;preciso de mais limite
+6;Solicitação de aumento de limite;pedido de aumento de limite
+6;Solicitação de aumento de limite;limite maior no cartão
+7;Cancelamento de cartão;cancelar cartão
+7;Cancelamento de cartão;quero encerrar meu cartão
+7;Cancelamento de cartão;bloquear cartão definitivamente
+7;Cancelamento de cartão;cancelamento de crédito
+7;Cancelamento de cartão;desistir do cartão
+8;Telefones de seguradoras;quero cancelar seguro
+8;Telefones de seguradoras;telefone do seguro
+8;Telefones de seguradoras;contato da seguradora
+8;Telefones de seguradoras;preciso falar com o seguro
+8;Telefones de seguradoras;seguro do cartão
+8;Telefones de seguradoras;cancelar assistência
+9;Desbloqueio de Cartão;desbloquear cartão
+9;Desbloqueio de Cartão;ativar cartão novo
+9;Desbloqueio de Cartão;como desbloquear meu cartão
+9;Desbloqueio de Cartão;quero desbloquear o cartão
+9;Desbloqueio de Cartão;cartão para uso imediato
+9;Desbloqueio de Cartão;desbloqueio para compras
+10;Esqueceu senha / Troca de senha;não tenho mais a senha do cartão
+10;Esqueceu senha / Troca de senha;esqueci minha senha
+10;Esqueceu senha / Troca de senha;trocar senha do cartão
+10;Esqueceu senha / Troca de senha;preciso de nova senha
+10;Esqueceu senha / Troca de senha;recuperar senha
+10;Esqueceu senha / Troca de senha;senha bloqueada
+11;Perda e roubo;perdi meu cartão
+11;Perda e roubo;roubaram meu cartão
+11;Perda e roubo;cartão furtado
+11;Perda e roubo;perda do cartão
+11;Perda e roubo;bloquear cartão por roubo
+11;Perda e roubo;extravio de cartão
+12;Consulta do Saldo;saldo conta corrente
+12;Consulta do Saldo;consultar saldo
+12;Consulta do Saldo;quanto tenho na conta
+12;Consulta do Saldo;extrato da conta
+12;Consulta do Saldo;saldo disponível
+12;Consulta do Saldo;meu saldo atual
+13;Pagamento de contas;quero pagar minha conta
+13;Pagamento de contas;pagar boleto
+13;Pagamento de contas;pagamento de conta
+13;Pagamento de contas;quero pagar fatura
+13;Pagamento de contas;efetuar pagamento
+14;Reclamações;quero reclamar
+14;Reclamações;abrir reclamação
+14;Reclamações;fazer queixa
+14;Reclamações;reclamar atendimento
+14;Reclamações;registrar problema
+14;Reclamações;protocolo de reclamação
+15;Atendimento humano;falar com uma pessoa
+15;Atendimento humano;preciso de humano
+15;Atendimento humano;transferir para atendente
+15;Atendimento humano;quero falar com atendente
+15;Atendimento humano;atendimento pessoal
+16;Token de proposta;código para fazer meu cartão
+16;Token de proposta;token de proposta
+16;Token de proposta;receber código do cartão
+16;Token de proposta;proposta token
+16;Token de proposta;número de token
+16;Token de proposta;código de token da proposta
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;gostaria de saber o limite total do meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual o valor disponível para compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;me informa qual a melhor data para eu usar o cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar meu limite de crédito atual
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;verificar a data exata que a fatura fecha
+2;Segunda via de boleto de acordo;preciso da fatura da minha renegociação de dívida
+2;Segunda via de boleto de acordo;gerar o boleto do meu parcelamento
+2;Segunda via de boleto de acordo;quero pagar a parcela do acordo que fiz no mês passado
+2;Segunda via de boleto de acordo;me envia o código de barras da negociação
+2;Segunda via de boleto de acordo;perdi a data do acordo, como gero um novo boleto?
+3;Segunda via de Fatura;quero o boleto da minha fatura mensal do cartão
+3;Segunda via de Fatura;gerar a conta do cartão referente a este mês
+3;Segunda via de Fatura;não recebi a fatura por e-mail, preciso pagar
+3;Segunda via de Fatura;me manda a segunda via da conta para pagamento
+5;Status de cartão;minha compra foi recusada na maquininha
+5;Status de cartão;fui passar o cartão no mercado e não autorizou
+5;Status de cartão;meu cartão está ativo ou foi cancelado?
+5;Status de cartão;verificar se meu cartão possui algum bloqueio para uso
+5;Status de cartão;o cartão está funcionando normalmente?
+6;Solicitação de aumento de limite;gostaria de pedir uma análise para aumentar meu crédito
+6;Solicitação de aumento de limite;como faço para ter mais limite de compra?
+6;Solicitação de aumento de limite;acho meu limite baixo, quero solicitar um maior
+6;Solicitação de aumento de limite;avaliar um novo valor de limite para mim
+7;Cancelamento de cartão;quero desativar meu cartão de crédito permanentemente
+7;Cancelamento de cartão;como proceder para o encerramento definitivo do meu cartão?
+7;Cancelamento de cartão;não tenho mais interesse, quero o cancelamento
+7;Cancelamento de cartão;gostaria de encerrar meu vínculo e cancelar o plástico
+9;Desbloqueio de Cartão;recebi o cartão novo, preciso ativar para usar
+9;Desbloqueio de Cartão;como faço o desbloqueio para minha primeira compra?
+9;Desbloqueio de Cartão;liberar o cartão que chegou pelos correios
+9;Desbloqueio de Cartão;o cartão que recebi está bloqueado, como libero?
+9;Desbloqueio de Cartão;ativar meu cartão para começar a comprar
+10;Esqueceu senha / Troca de senha;preciso redefinir a senha de 4 dígitos
+10;Esqueceu senha / Troca de senha;esqueci a senha e o cartão bloqueou
+10;Esqueceu senha / Troca de senha;criar uma senha nova para o cartão
+11;Perda e roubo;fui roubado e levaram meu cartão, preciso bloquear urgente
+11;Perda e roubo;comunicar o extravio do meu cartão para bloqueio
+11;Perda e roubo;bloquear por motivo de furto
+11;Perda e roubo;acho que perdi minha carteira com o cartão dentro
+12;Consulta do Saldo;quero saber o saldo da minha conta corrente
+12;Consulta do Saldo;quanto dinheiro tenho na conta para saque ou pix?
+12;Consulta do Saldo;verificar o valor exato que tenho na conta
+12;Consulta do Saldo;consultar o extrato da conta corrente
+13;Pagamento de contas;usar o app para quitar um boleto de outra loja
+13;Pagamento de contas;quero pagar uma conta de luz com meu saldo
+13;Pagamento de contas;efetuar o pagamento de um título
+14;Reclamações;quero registrar uma queixa formal sobre o atendimento
+14;Reclamações;tive uma cobrança indevida e quero abrir uma reclamação
+14;Reclamações;o serviço não funcionou e quero reclamar
+14;Reclamações;fui mal atendido e gostaria de registrar o ocorrido
+3;Segunda via de Fatura;quero a conta mensal para conferir os gastos
+5;Status de cartão;minha compra foi negada, o cartão está com problema?
+5;Status de cartão;deu erro na transação, meu cartão está ativo?
+5;Status de cartão;gostaria de saber o status do meu cartão, se está bloqueado ou não
+5;Status de cartão;verificar se o cartão está habilitado para uso
+5;Status de cartão;o pagamento foi recusado na maquininha
+10;Esqueceu senha / Troca de senha;a senha que eu digitei deu como incorreta
+10;Esqueceu senha / Troca de senha;o caixa eletrônico informou que a senha está errada
+11;Perda e roubo;suspeito que meu cartão foi clonado, tem compras estranhas
+11;Perda e roubo;apareceram compras que não fiz, acho que é fraude
+14;Reclamações;quero reclamar que meu cartão ainda não chegou
+14;Reclamações;estou insatisfeito com a demora na entrega
+14;Reclamações;gostaria de abrir uma queixa sobre o serviço
+15;Atendimento humano;o robô não está ajudando, preciso falar com uma pessoa
+15;Atendimento humano;meu problema é complexo, preciso de um especialista humano
+15;Atendimento humano;quero ser transferido para um atendente de verdade
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual o valor do meu limite depois que a fatura vira?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;se eu estourar o limite, quando ele renova?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quero consultar o limite de parcelamento de compras
+3;Segunda via de Fatura;quero a conta mensal para verificar um estorno
+3;Segunda via de Fatura;me manda a fatura pra eu ver se um pagamento já caiu
+5;Status de cartão;o cartão não passou no ônibus, está com algum problema?
+5;Status de cartão;mesmo com o app dizendo que está ativo, a compra é sempre recusada
+6;Solicitação de aumento de limite;preciso de mais margem de crédito para uma viagem
+9;Desbloqueio de Cartão;o cartão adicional que chegou para minha esposa precisa ser desbloqueado
+11;Perda e roubo;usei o cartão num site estranho, é mais seguro bloquear
+11;Perda e roubo;meu cartão caiu no chão e não achei mais, preciso bloquear
+12;Consulta do Saldo;quero saber o dinheiro que tenho na conta, não o crédito do cartão
+12;Consulta do Saldo;me mostra as últimas transações e o saldo da conta
+13;Pagamento de contas;quero pagar um boleto vencido, ainda dá?
+14;Reclamações;quero contestar o valor dos juros na minha fatura
+14;Reclamações;o atendente foi grosso, quero registrar uma queixa
+15;Atendimento humano;meu problema não está na lista de opções, preciso de um especialista
+2;Segunda via de boleto de acordo;Não é a fatura, é o boleto da minha negociação
+2;Segunda via de boleto de acordo;Quero o código de barras pra quitar o acordo
+2;Segunda via de boleto de acordo;Como gero a guia de pagamento do meu parcelamento?
+2;Segunda via de boleto de acordo;Me envia o boleto referente ao acordo que fiz
+2;Segunda via de boleto de acordo;Preciso pagar a renegociação da minha dívida
+2;Segunda via de boleto de acordo;O boleto do acordo não chegou, preciso da segunda via
+2;Segunda via de boleto de acordo;Pagar o boleto do meu acordo
+3;Segunda via de Fatura;Quero o boleto da minha fatura mensal
+3;Segunda via de Fatura;Preciso da conta do cartão de crédito deste mês
+3;Segunda via de Fatura;Como emito a segunda via do boleto de cobrança normal?
+13;Pagamento de contas;Quero quitar uma conta de consumo usando o app
+13;Pagamento de contas;Pagar um boleto de outra loja
+13;Pagamento de contas;Como faço pra pagar a conta de água?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me informa o saldo de crédito que tenho?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Verificar o limite total do meu cartão
+5;Status de cartão;Meu cartão não passou, está com algum problema?
+5;Status de cartão;A compra foi negada, pode verificar o status do cartão?
+11;Perda e roubo;Acho que clonaram meu cartão, preciso bloquear
+11;Perda e roubo;Meu cartão foi furtado da minha bolsa
+14;Reclamações;Estou com um problema no meu cartão e quero reclamar
+14;Reclamações;Quero fazer uma queixa sobre uma cobrança
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quero saber qual a minha margem de crédito atual
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar o valor de crédito que tenho liberado
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;me informa o meu limite disponível para uso
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;verificar o crédito do meu cartão
+6;Solicitação de aumento de limite;gostaria de solicitar uma margem de crédito maior
+6;Solicitação de aumento de limite;preciso de mais crédito, como faço para pedir?
+6;Solicitação de aumento de limite;avaliar um aumento no valor do meu crédito
+6;Solicitação de aumento de limite;quero pedir um limite mais alto
+2;Segunda via de boleto de acordo;preciso pagar o boleto da minha renegociação
+2;Segunda via de boleto de acordo;gerar a guia de pagamento do acordo
+3;Segunda via de Fatura;quero pagar a fatura do cartão, não um acordo
+13;Pagamento de contas;quero pagar um boleto de outra empresa, não a fatura
+14;Reclamações;quero contestar uma transação na minha fatura
+14;Reclamações;a entrega do meu cartão está atrasada e quero registrar uma queixa
+5;Status de cartão;o cartão chegou, mas as compras estão sendo recusadas. ele está ativo?
+9;Desbloqueio de Cartão;o cartão chegou, como faço para ativar ele?
+11;Perda e roubo;bloquear meu cartão por suspeita de fraude
+15;Atendimento humano;o problema que eu tenho não está na lista, preciso de um especialista
+12;Consulta do Saldo;qual o dinheiro que tenho em conta? não o limite de crédito.
+4;Status de Entrega do Cartão;quero rastrear a entrega do meu cartão
+4;Status de Entrega do Cartão;o meu novo cartão já foi enviado?
+4;Status de Entrega do Cartão;qual a previsão de chegada do meu cartão?
+4;Status de Entrega do Cartão;consultar o status de transporte do cartão
+8;Telefones de seguradoras;preciso do contato para acionar o seguro
+8;Telefones de seguradoras;qual o telefone da seguradora do cartão?
+8;Telefones de seguradoras;quero o número da assistência para falar sobre o seguro
+8;Telefones de seguradoras;cancelar apenas o seguro, não o cartão
+16;Token de proposta;código de validação para finalizar a proposta do cartão
+16;Token de proposta;token de adesão para o novo cartão
+16;Token de proposta;finalizar meu cadastro com o token da proposta
+3;Segunda via de Fatura;preciso do boleto da fatura mensal
+3;Segunda via de Fatura;quero a segunda via da conta do meu cartão, não de acordo
+3;Segunda via de Fatura;gerar o código de barras da fatura do cartão
+13;Pagamento de contas;quero efetuar o pagamento da minha fatura
+13;Pagamento de contas;como faço para pagar um boleto de acordo?
+13;Pagamento de contas;pagar uma conta de luz ou água
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando vence a fatura do cartão?
+7;Cancelamento de cartão;bloquear meu cartão de forma definitiva
+15;Atendimento humano;quero ser transferido para falar com um atendente
+12;Consulta do Saldo;quero consultar o saldo da minha conta, não do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o saldo de crédito que ainda posso usar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me informa a minha margem de compra disponível
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Verificar o valor exato que tenho de limite
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando meu limite renova?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Até que data posso comprar para vir só no outro mês?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o dia de corte da minha fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Checar o limite do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Poder de compra atual
+2;Segunda via de boleto de acordo;Preciso do boleto da minha renegociação de dívida
+2;Segunda via de boleto de acordo;Gerar a guia de pagamento do meu parcelamento
+2;Segunda via de boleto de acordo;Quero pagar a parcela do acordo que fiz
+2;Segunda via de boleto de acordo;Me envia o código de barras da negociação que fechei
+2;Segunda via de boleto de acordo;Não é a fatura, é o boleto do acordo
+2;Segunda via de boleto de acordo;Como emito o boleto para quitar meu acordo?
+2;Segunda via de boleto de acordo;Pagamento da renegociação
+3;Segunda via de Fatura;Quero o boleto da minha fatura mensal do cartão
+3;Segunda via de Fatura;Gerar a conta do cartão deste mês
+3;Segunda via de Fatura;Preciso da 2ª via da cobrança do cartão
+3;Segunda via de Fatura;Me manda a fatura com o código de barras
+3;Segunda via de Fatura;Não recebi a conta, como faço pra pagar?
+3;Segunda via de Fatura;Boleto da fatura normal, não de acordo
+3;Segunda via de Fatura;Fatura para conferência e pagamento
+4;Status de Entrega do Cartão;Qual a previsão de chegada do meu cartão novo?
+4;Status de Entrega do Cartão;Quero rastrear o envio do meu cartão
+4;Status de Entrega do Cartão;O cartão já foi postado nos correios?
+4;Status de Entrega do Cartão;Acompanhar a entrega do cartão
+4;Status de Entrega do Cartão;Meu cartão está em transporte?
+4;Status de Entrega do Cartão;Consultar status de envio
+4;Status de Entrega do Cartão;Onde está o cartão que pedi?
+5;Status de cartão;Minha compra foi recusada, o cartão está com problema?
+5;Status de cartão;O cartão não passou, qual o status dele?
+5;Status de cartão;Verificar se meu cartão está ativo para compras
+5;Status de cartão;A transação não foi autorizada, pode checar?
+5;Status de cartão;Por que não consigo usar meu cartão?
+5;Status de cartão;O cartão está bloqueado para uso?
+5;Status de cartão;Meu cartão está funcionando?
+6;Solicitação de aumento de limite;Quero solicitar uma margem de crédito maior
+6;Solicitação de aumento de limite;Como peço uma nova análise para aumentar o limite?
+6;Solicitação de aumento de limite;Meu limite atual é insuficiente, quero mais
+6;Solicitação de aumento de limite;Avaliar um aumento no meu poder de compra
+6;Solicitação de aumento de limite;Pedir mais crédito
+6;Solicitação de aumento de limite;Aumentar o valor do cartão
+6;Solicitação de aumento de limite;Gostaria de mais limite
+7;Cancelamento de cartão;Quero encerrar o meu vínculo e cancelar o cartão
+7;Cancelamento de cartão;Como faço para desativar meu cartão permanentemente?
+7;Cancelamento de cartão;Não tenho mais interesse neste cartão, quero cancelar
+7;Cancelamento de cartão;Solicitar o cancelamento definitivo
+7;Cancelamento de cartão;Cancelar o plástico do cartão
+7;Cancelamento de cartão;Bloqueio definitivo por minha escolha
+7;Cancelamento de cartão;Encerrar conta do cartão
+8;Telefones de seguradoras;Qual o número para acionar o seguro do cartão?
+8;Telefones de seguradoras;Preciso do contato da assistência residencial
+8;Telefones de seguradoras;Quero o telefone para falar do seguro de vida
+8;Telefones de seguradoras;Como aciono o seguro por perda de bagagem?
+8;Telefones de seguradoras;Contato da seguradora parceira
+8;Telefones de seguradoras;Falar sobre a assistência do cartão
+8;Telefones de seguradoras;Cancelar apenas o seguro, não o cartão
+9;Desbloqueio de Cartão;Recebi o cartão novo, como faço para ativar?
+9;Desbloqueio de Cartão;Preciso liberar meu cartão para a primeira compra
+9;Desbloqueio de Cartão;Ativação do cartão que chegou pelo correio
+9;Desbloqueio de Cartão;Meu cartão está bloqueado, como desbloqueio?
+9;Desbloqueio de Cartão;Liberar o cartão para uso
+9;Desbloqueio de Cartão;Como ativar o plástico novo
+9;Desbloqueio de Cartão;Desbloqueio de cartão
+10;Esqueceu senha / Troca de senha;Preciso redefinir a senha de 4 dígitos
+10;Esqueceu senha / Troca de senha;Bloqueei a senha na maquininha, e agora?
+10;Esqueceu senha / Troca de senha;Como crio uma nova senha para o cartão?
+10;Esqueceu senha / Troca de senha;Não me lembro da senha, preciso recuperar
+10;Esqueceu senha / Troca de senha;Alterar a senha atual do meu cartão
+10;Esqueceu senha / Troca de senha;A senha está incorreta
+10;Esqueceu senha / Troca de senha;Trocar a senha de compras
+11;Perda e roubo;Fui assaltado e levaram minha carteira, preciso bloquear o cartão
+11;Perda e roubo;Acho que clonaram meu cartão, tem compras que não fiz
+11;Perda e roubo;Comprar furto do cartão para bloqueio imediato
+11;Perda e roubo;Meu cartão sumiu, quero bloquear por segurança
+11;Perda e roubo;Bloqueio por suspeita de fraude
+11;Perda e roubo;Cartão perdido ou roubado
+11;Perda e roubo;Bloquear cartão agora
+12;Consulta do Saldo;Quero saber o dinheiro que tenho na conta, não o limite
+12;Consulta do Saldo;Qual o valor em conta que posso usar para um PIX?
+12;Consulta do Saldo;Verificar o extrato da minha conta corrente
+12;Consulta do Saldo;Quanto tenho de saldo em conta?
+12;Consulta do Saldo;Saldo para débito ou transferência
+12;Consulta do Saldo;Consultar o saldo da conta
+12;Consulta do Saldo;Ver o que entrou e saiu da conta
+13;Pagamento de contas;Quero pagar uma conta de luz usando o saldo do app
+13;Pagamento de contas;Como faço para pagar um boleto de outra loja?
+13;Pagamento de contas;Efetuar o pagamento de um título de cobrança
+13;Pagamento de contas;Pagar a fatura de outro cartão
+13;Pagamento de contas;Quero usar a câmera para pagar um boleto
+13;Pagamento de contas;Agendar pagamento de conta
+13;Pagamento de contas;Pagar boletos diversos
+14;Reclamações;Quero registrar uma queixa formal sobre uma cobrança indevida
+14;Reclamações;Estou insatisfeito com o atendimento e quero reclamar
+14;Reclamações;Tive um problema com um produto e quero abrir um chamado
+14;Reclamações;Contestar um valor na minha fatura
+14;Reclamações;A entrega do meu cartão atrasou e quero fazer uma queixa
+14;Reclamações;Registrar uma reclamação
+14;Reclamações;Fazer uma crítica sobre o serviço
+15;Atendimento humano;O robô não entende meu problema, preciso de uma pessoa
+15;Atendimento humano;Meu caso é complexo, quero falar com um especialista
+15;Atendimento humano;Me transfere para um funcionário, por favor
+15;Atendimento humano;Quero sair do atendimento eletrônico
+15;Atendimento humano;Falar com um consultor
+15;Atendimento humano;Preciso de ajuda de uma pessoa real
+15;Atendimento humano;Atendimento com um humano
+16;Token de proposta;Preciso do código de validação para finalizar a proposta
+16;Token de proposta;Onde eu insiro o token de adesão do novo cartão?
+16;Token de proposta;O SMS com o código da proposta não chegou
+16;Token de proposta;Finalizar meu cadastro com o token
+16;Token de proposta;Validação da proposta de cartão
+16;Token de proposta;Código para aprovação do cartão
+16;Token de proposta;Token para fazer o cartão
+7;Cancelamento de cartão;Quero cancelar meu cartão e bloqueá-lo para sempre
+7;Cancelamento de cartão;Solicito o encerramento do meu contrato e o bloqueio definitivo do plástico
+7;Cancelamento de cartão;Não é um bloqueio por perda, é um cancelamento que eu quero
+7;Cancelamento de cartão;Gostaria de cancelar, não apenas bloquear temporariamente
+11;Perda e roubo;Preciso de um bloqueio temporário, pois acho que perdi meu cartão
+11;Perda e roubo;Bloquear meu cartão por motivo de segurança, suspeito de fraude
+3;Segunda via de Fatura;Preciso do boleto da fatura deste mês, a cobrança normal
+3;Segunda via de Fatura;Me envia a conta mensal do cartão, não é de acordo
+3;Segunda via de Fatura;Quero a segunda via do boleto de cobrança padrão
+2;Segunda via de boleto de acordo;Preciso do boleto referente à minha renegociação
+13;Pagamento de contas;Quero realizar o pagamento da minha fatura agora
+13;Pagamento de contas;Como faço para pagar um boleto de acordo que já tenho?
+9;Desbloqueio de Cartão;O cartão acabou de chegar, preciso fazer o desbloqueio
+9;Desbloqueio de Cartão;Recebi meu cartão, qual o procedimento para ativar?
+9;Desbloqueio de Cartão;Liberar o cartão novo que recebi para uso
+4;Status de Entrega do Cartão;O cartão que pedi ainda não chegou, quero rastrear
+4;Status de Entrega do Cartão;Acompanhar o envio do meu novo cartão
+12;Consulta do Saldo;Qual o dinheiro disponível na minha conta corrente?
+12;Consulta do Saldo;Verificar o saldo da conta, não o limite de crédito do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando meu limite de crédito é restabelecido?
+5;Status de cartão;Tentei passar o cartão e a compra foi recusada, qual o problema?
+10;Esqueceu senha / Troca de senha;A senha está bloqueada por excesso de tentativas
+15;Atendimento humano;Preciso falar com um agente para resolver meu problema
+16;Token de proposta;O vendedor pediu o token para finalizar a proposta do cartão
+14;Reclamações;A anuidade veio com valor errado e quero registrar uma queixa
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Verificar minha margem de crédito para compras
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o valor de crédito que tenho liberado?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando meu limite é restabelecido?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o dia de corte para as compras da fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Consultar o limite, não o saldo da conta
+2;Segunda via de boleto de acordo;Quero o boleto para quitar a dívida que negociei
+2;Segunda via de boleto de acordo;Como gero a guia de pagamento do meu refinanciamento?
+2;Segunda via de boleto de acordo;Recebi um SMS sobre um acordo, preciso do boleto para pagar
+2;Segunda via de boleto de acordo;Não é a fatura, é o boleto do meu parcelamento de dívida
+2;Segunda via de boleto de acordo;Preciso pagar a parcela da minha renegociação
+3;Segunda via de Fatura;Preciso da segunda via da conta normal do cartão
+3;Segunda via de Fatura;Me envia o boleto da fatura mensal, por favor
+3;Segunda via de Fatura;Quero a cobrança do cartão, não é de nenhum acordo
+3;Segunda via de Fatura;Como emito o boleto da minha fatura de crédito?
+3;Segunda via de Fatura;A conta do cartão para pagamento
+4;Status de Entrega do Cartão;O rastreamento do meu cartão não atualiza
+4;Status de Entrega do Cartão;Ainda não recebi o cartão, qual o status da entrega?
+4;Status de Entrega do Cartão;Como posso acompanhar o envio do meu novo cartão?
+4;Status de Entrega do Cartão;O carteiro disse que não me encontrou para entregar o cartão
+4;Status de Entrega do Cartão;Verificar onde está meu cartão
+5;Status de cartão;Tentei usar o cartão e a transação foi recusada
+5;Status de cartão;Meu cartão está habilitado para uso no exterior?
+5;Status de cartão;O pagamento por aproximação não funcionou, qual o problema?
+5;Status de cartão;O cartão está ativo mas a compra é negada
+5;Status de cartão;Verificar se há algum bloqueio no meu cartão
+6;Solicitação de aumento de limite;Gostaria de solicitar uma margem de crédito maior
+6;Solicitação de aumento de limite;Meu poder de compra está baixo, quero mais limite
+6;Solicitação de aumento de limite;Pedir uma nova análise de crédito para ter um limite maior
+6;Solicitação de aumento de limite;Preciso de mais limite para uma viagem
+6;Solicitação de aumento de limite;Aumentar a margem do cartão
+7;Cancelamento de cartão;Quero o cancelamento, um bloqueio definitivo e permanente
+7;Cancelamento de cartão;Não quero mais ser cliente, como encerro o contrato do cartão?
+7;Cancelamento de cartão;Solicito o bloqueio final, não é por perda
+7;Cancelamento de cartão;Desativar meu cartão para sempre
+7;Cancelamento de cartão;Como faço o cancelamento total do meu cartão?
+8;Telefones de seguradoras;Preciso do contato para acionar o seguro de viagem
+8;Telefones de seguradoras;Qual o telefone da seguradora para cancelar a apólice?
+8;Telefones de seguradoras;Gostaria do número da assistência do seguro
+8;Telefones de seguradoras;Falar com a seguradora, não com o banco
+8;Telefones de seguradoras;Contato para sinistro do seguro
+9;Desbloqueio de Cartão;Meu cartão acabou de chegar, preciso ativar para usar
+9;Desbloqueio de Cartão;Recebi o cartão, qual o próximo passo para o desbloqueio?
+9;Desbloqueio de Cartão;Como habilito meu novo cartão para compras?
+9;Desbloqueio de Cartão;O cartão chegou, quero liberar ele agora
+9;Desbloqueio de Cartão;Ativação do cartão que recebi
+10;Esqueceu senha / Troca de senha;A senha está bloqueada por muitas tentativas erradas
+10;Esqueceu senha / Troca de senha;Errei a senha e agora o cartão não passa, o que faço?
+10;Esqueceu senha / Troca de senha;Preciso cadastrar uma nova senha de 4 dígitos
+10;Esqueceu senha / Troca de senha;Como altero a senha de segurança?
+10;Esqueceu senha / Troca de senha;Recuperação da senha do cartão
+11;Perda e roubo;Preciso de um bloqueio de segurança, não um cancelamento
+11;Perda e roubo;Bloquear o cartão por suspeita de clonagem
+11;Perda e roubo;Meu cartão sumiu da minha carteira, quero bloquear
+11;Perda e roubo;Comunicação de perda para bloqueio imediato
+11;Perda e roubo;Bloqueio preventivo de cartão
+12;Consulta do Saldo;Quanto dinheiro eu tenho na conta para sacar ou transferir?
+12;Consulta do Saldo;Quero ver o saldo da minha conta corrente, não o limite de crédito
+12;Consulta do Saldo;Me mostra as últimas movimentações da conta
+12;Consulta do Saldo;Verificar o saldo disponível em conta
+12;Consulta do Saldo;Extrato da conta para conferência
+13;Pagamento de contas;Quero usar o app para efetuar o pagamento de um boleto de faculdade
+13;Pagamento de contas;Como faço para pagar a fatura do meu cartão que já tenho em mãos?
+13;Pagamento de contas;É possível pagar um boleto de acordo por aqui?
+13;Pagamento de contas;Pagar uma conta de consumo, como água ou luz
+13;Pagamento de contas;Realizar pagamento de boleto
+14;Reclamações;Quero contestar uma cobrança de anuidade na minha fatura
+14;Reclamações;O atendente foi rude, quero registrar uma queixa
+14;Reclamações;A promoção de cashback não foi aplicada, quero reclamar
+14;Reclamações;Estou insatisfeito e quero abrir um protocolo
+14;Reclamações;Contestar um lançamento
+15;Atendimento humano;O robô não está resolvendo, me passe para um agente
+15;Atendimento humano;Preciso de um especialista para analisar meu caso
+15;Atendimento humano;Quero falar com um humano, não uma máquina
+15;Atendimento humano;Opção de falar com um atendente
+15;Atendimento humano;Transferir para um consultor
+16;Token de proposta;O vendedor da loja pediu o token para finalizar o cartão
+16;Token de proposta;O código de validação da proposta expirou
+16;Token de proposta;Preciso do número para concluir a adesão ao cartão
+16;Token de proposta;Finalizar o preenchimento da proposta com o token
+16;Token de proposta;Código de segurança da proposta
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;checar o valor que ainda posso usar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;data de fechamento da fatura
+2;Segunda via de boleto de acordo;segunda via do meu parcelamento de dívida
+2;Segunda via de boleto de acordo;boleto da renegociação
+3;Segunda via de Fatura;pdf da conta do cartão de crédito
+3;Segunda via de Fatura;boleto mensal
+4;Status de Entrega do Cartão;rastreio do cartão
+4;Status de Entrega do Cartão;previsão de quando chega o cartão
+5;Status de cartão;minha compra deu negada
+5;Status de cartão;verificar status do cartão
+6;Solicitação de aumento de limite;quero um limite maior
+6;Solicitação de aumento de limite;análise para aumento de crédito
+7;Cancelamento de cartão;encerrar meu cartão de vez
+7;Cancelamento de cartão;cancelamento por completo
+8;Telefones de seguradoras;contato do seguro
+8;Telefones de seguradoras;acionar o seguro do cartão
+9;Desbloqueio de Cartão;habilitar cartão novo
+9;Desbloqueio de Cartão;liberar o cartão que chegou
+10;Esqueceu senha / Troca de senha;resetar a senha do cartão
+10;Esqueceu senha / Troca de senha;minha senha foi bloqueada
+11;Perda e roubo;bloquear por roubo
+11;Perda e roubo;comunicar perda
+12;Consulta do Saldo;saldo da minha conta
+12;Consulta do Saldo;extrato rápido da conta
+13;Pagamento de contas;pagar conta de luz
+13;Pagamento de contas;quitar boleto
+14;Reclamações;abrir uma queixa
+14;Reclamações;reclamar de cobrança
+15;Atendimento humano;falar com uma pessoa de verdade
+15;Atendimento humano;atendente humano
+16;Token de proposta;token para finalizar o cartão
+16;Token de proposta;código de adesão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto tem disponível para usar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando fecha minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando vence meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;valor para gastar
+2;Segunda via de boleto de acordo;segunda via boleto de acordo
+2;Segunda via de boleto de acordo;Boleto para pagar minha negociação
+2;Segunda via de boleto de acordo;código de barras acordo
+2;Segunda via de boleto de acordo;preciso pagar negociação
+2;Segunda via de boleto de acordo;enviar boleto acordo
+2;Segunda via de boleto de acordo;boleto da negociação
+3;Segunda via de Fatura;quero meu boleto
+3;Segunda via de Fatura;segunda via de fatura
+3;Segunda via de Fatura;código de barras fatura
+3;Segunda via de Fatura;quero a fatura do cartão
+3;Segunda via de Fatura;enviar boleto da fatura
+3;Segunda via de Fatura;fatura para pagamento
+4;Status de Entrega do Cartão;onde está meu cartão
+4;Status de Entrega do Cartão;meu cartão não chegou
+4;Status de Entrega do Cartão;status da entrega do cartão
+4;Status de Entrega do Cartão;cartão em transporte
+4;Status de Entrega do Cartão;previsão de entrega do cartão
+4;Status de Entrega do Cartão;cartão foi enviado?
+5;Status de cartão;não consigo passar meu cartão
+5;Status de cartão;meu cartão não funciona
+5;Status de cartão;cartão recusado
+5;Status de cartão;cartão não está passando
+5;Status de cartão;status do cartão ativo
+5;Status de cartão;problema com cartão
+6;Solicitação de aumento de limite;quero mais limite
+6;Solicitação de aumento de limite;aumentar limite do cartão
+6;Solicitação de aumento de limite;solicitar aumento de crédito
+6;Solicitação de aumento de limite;preciso de mais limite
+6;Solicitação de aumento de limite;pedido de aumento de limite
+6;Solicitação de aumento de limite;limite maior no cartão
+7;Cancelamento de cartão;cancelar cartão
+7;Cancelamento de cartão;quero encerrar meu cartão
+7;Cancelamento de cartão;bloquear cartão definitivamente
+7;Cancelamento de cartão;cancelamento de crédito
+7;Cancelamento de cartão;desistir do cartão
+8;Telefones de seguradoras;quero cancelar seguro
+8;Telefones de seguradoras;telefone do seguro
+8;Telefones de seguradoras;contato da seguradora
+8;Telefones de seguradoras;preciso falar com o seguro
+8;Telefones de seguradoras;seguro do cartão
+8;Telefones de seguradoras;cancelar assistência
+9;Desbloqueio de Cartão;desbloquear cartão
+9;Desbloqueio de Cartão;ativar cartão novo
+9;Desbloqueio de Cartão;como desbloquear meu cartão
+9;Desbloqueio de Cartão;quero desbloquear o cartão
+9;Desbloqueio de Cartão;cartão para uso imediato
+9;Desbloqueio de Cartão;desbloqueio para compras
+10;Esqueceu senha / Troca de senha;não tenho mais a senha do cartão
+10;Esqueceu senha / Troca de senha;esqueci minha senha
+10;Esqueceu senha / Troca de senha;trocar senha do cartão
+10;Esqueceu senha / Troca de senha;preciso de nova senha
+10;Esqueceu senha / Troca de senha;recuperar senha
+10;Esqueceu senha / Troca de senha;senha bloqueada
+11;Perda e roubo;perdi meu cartão
+11;Perda e roubo;roubaram meu cartão
+11;Perda e roubo;cartão furtado
+11;Perda e roubo;perda do cartão
+11;Perda e roubo;bloquear cartão por roubo
+11;Perda e roubo;extravio de cartão
+12;Consulta do Saldo;saldo conta corrente
+12;Consulta do Saldo;consultar saldo
+12;Consulta do Saldo;quanto tenho na conta
+12;Consulta do Saldo;extrato da conta
+12;Consulta do Saldo;saldo disponível
+12;Consulta do Saldo;meu saldo atual
+13;Pagamento de contas;quero pagar minha conta
+13;Pagamento de contas;pagar boleto
+13;Pagamento de contas;pagamento de conta
+13;Pagamento de contas;quero pagar fatura
+13;Pagamento de contas;efetuar pagamento
+14;Reclamações;quero reclamar
+14;Reclamações;abrir reclamação
+14;Reclamações;fazer queixa
+14;Reclamações;reclamar atendimento
+14;Reclamações;registrar problema
+14;Reclamações;protocolo de reclamação
+15;Atendimento humano;falar com uma pessoa
+15;Atendimento humano;preciso de humano
+15;Atendimento humano;transferir para atendente
+15;Atendimento humano;quero falar com atendente
+15;Atendimento humano;atendimento pessoal
+16;Token de proposta;código para fazer meu cartão
+16;Token de proposta;token de proposta
+16;Token de proposta;receber código do cartão
+16;Token de proposta;proposta token
+16;Token de proposta;número de token
+16;Token de proposta;código de token da proposta

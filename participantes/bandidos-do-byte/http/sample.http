@@ -1,0 +1,96 @@
+@baseUrl = http://localhost:18020
+
+### Test 1: Cartão de Crédito
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "quero adquirir um novo cartão de crédito"
+}
+
+###
+
+### Test 2: Empréstimo
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "preciso de um empréstimo urgente"
+}
+
+###
+
+### Test 3: Abertura de Conta
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "quero abrir uma conta"
+}
+
+###
+
+### Test 4: Investimentos
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "gostaria de investir meu dinheiro"
+}
+
+###
+
+### Test 5: Financiamento
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "preciso financiar um imóvel"
+}
+
+###
+
+### Test 6: Renegociação
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "quero renegociar minha dívida"
+}
+
+###
+
+### Test 7: Texto sem relação com serviços (deve retornar success: false)
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "qual o horário de funcionamento?"
+}
+
+###
+
+### Test 8: Texto aleatório (deve retornar success: false)
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "gosto de pizza"
+}
+
+###
+
+### Test 9: Texto vazio (deve retornar success: false)
+POST {{baseUrl}}/api/find-service
+Content-Type: application/json
+
+{
+  "intent": "oi"
+}
+
+###
+
+### Health check
+GET {{baseUrl}}/api/healthz
+
+###

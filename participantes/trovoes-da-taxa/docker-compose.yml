@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  knn-classifier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "18020:18020"
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - PORT=18020
+      - INTENTS_CSV_PATH=/root/nlp/data-set.csv
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "wget",
+          "--quiet",
+          "--tries=1",
+          "--spider",
+          "http://localhost:18020/api/healthz",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "128MB"

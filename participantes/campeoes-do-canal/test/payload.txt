@@ -1,0 +1,100 @@
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'tem algum número de suporte?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'tem algum número de suporte?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'quero negociar meu débito, como faço?'}
+{'intent': 'como faço pra gerar o boleto de novo?'}
+{'intent': 'preciso do boleto atualizado pra pagar'}
+{'intent': 'quero segunda via do meu boleto'}
+{'intent': 'boleto venceu, posso gerar outro?'}
+{'intent': 'boleto venceu, posso gerar outro?'}
+{'intent': 'quero segunda via do meu boleto'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'boleto venceu, posso gerar outro?'}
+{'intent': 'preciso do boleto atualizado pra pagar'}
+{'intent': 'onde encontro o código de barras do boleto?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'como vejo o limite do meu cartão?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'como vejo o limite do meu cartão?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'como vejo o limite do meu cartão?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'meu cartão tá sem limite, como saber quanto tenho?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'tem algum número de suporte?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde olho o limite que ainda tenho no cartão?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'tem algum número de suporte?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'quero saber até quando posso pagar meu cartão'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como ver o vencimento da fatura?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'tem como consultar o valor da fatura do cartão?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'tem algum número de suporte?'}
+{'intent': 'quais as formas de pagamento disponíveis?'}
+{'intent': 'como baixar o boleto pra pagar pelo app?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como entro em contato pra resolver meu problema?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'não tô entendendo essa cobrança, podem me explicar?'}
+{'intent': 'onde posso tirar dúvidas sobre minha conta?'}
+{'intent': 'como saber mais informações sobre meu serviço?'}

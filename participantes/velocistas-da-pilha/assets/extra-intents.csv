@@ -1,0 +1,81 @@
+service_id;service_name;intent
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual é o meu limite disponível?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando vence minha fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o melhor dia para fazer compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar no cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me diz o limite que tenho
+2;Segunda via de boleto de acordo;Preciso de outro boleto
+2;Segunda via de boleto de acordo;Cadê o boleto do acordo?
+2;Segunda via de boleto de acordo;Gostaria de reimprimir o boleto
+2;Segunda via de boleto de acordo;Perdi o boleto de parcelamento
+2;Segunda via de boleto de acordo;Quero uma cópia do boleto
+3;Segunda via de Fatura;Preciso retirar segunda via da fatura
+3;Segunda via de Fatura;Não recebi a fatura do cartão
+3;Segunda via de Fatura;Cadê minha conta do cartão?
+3;Segunda via de Fatura;Gostaria de imprimir a fatura novamente
+3;Segunda via de Fatura;Perdi a fatura como faço?
+4;Status de Entrega do Cartão;Cadê meu cartão novo?
+4;Status de Entrega do Cartão;Quando chega o cartão?
+4;Status de Entrega do Cartão;Meu cartão foi enviado?
+4;Status de Entrega do Cartão;Quero rastrear a entrega do cartão
+4;Status de Entrega do Cartão;Não recebi o cartão ainda
+5;Status de cartão;Meu cartão está ativo?
+5;Status de cartão;Como saber se o cartão foi aprovado?
+5;Status de cartão;Qual a situação do meu cartão?
+5;Status de cartão;O cartão está bloqueado ou desbloqueado?
+5;Status de cartão;Verificar estado do cartão
+6;Solicitação de aumento de limite;Quero aumentar meu limite
+6;Solicitação de aumento de limite;Gostaria de mais crédito
+6;Solicitação de aumento de limite;Como faço para ter limite maior?
+6;Solicitação de aumento de limite;Preciso de aumento no cartão
+6;Solicitação de aumento de limite;Posso solicitar mais limite?
+7;Cancelamento de cartão;Quero cancelar o cartão
+7;Cancelamento de cartão;Gostaria de encerrar minha conta
+7;Cancelamento de cartão;Como faço para desativar o cartão?
+7;Cancelamento de cartão;Não quero mais o cartão
+7;Cancelamento de cartão;Preciso fazer o cancelamento
+8;Telefones de seguradoras;Qual o telefone da seguradora?
+8;Telefones de seguradoras;Preciso acionar o seguro
+8;Telefones de seguradoras;Contato da assistência
+8;Telefones de seguradoras;Como falo com a seguradora?
+8;Telefones de seguradoras;Número para sinistro
+9;Desbloqueio de Cartão;Meu cartão travou
+9;Desbloqueio de Cartão;Cartão bloqueado como liberar?
+9;Desbloqueio de Cartão;Preciso desbloquear o cartão
+9;Desbloqueio de Cartão;O cartão não passa na máquina
+9;Desbloqueio de Cartão;Não consigo usar o cartão
+10;Esqueceu senha / Troca de senha;Não lembro a senha
+10;Esqueceu senha / Troca de senha;Preciso redefinir a senha
+10;Esqueceu senha / Troca de senha;Como alterar a senha?
+10;Esqueceu senha / Troca de senha;Esqueci o código do cartão
+10;Esqueceu senha / Troca de senha;Quero mudar a senha
+11;Perda e roubo;Fui roubado e levaram meu cartão
+11;Perda e roubo;Perdi o cartão o que faço?
+11;Perda e roubo;Roubaram minha carteira
+11;Perda e roubo;Cartão sumiu preciso bloquear
+11;Perda e roubo;Alguém pegou meu cartão
+12;Consulta do Saldo Conta do Mais;Quanto tenho no Mais?
+12;Consulta do Saldo Conta do Mais;Saldo da conta Mais
+12;Consulta do Saldo Conta do Mais;Ver crédito do programa
+12;Consulta do Saldo Conta do Mais;Quantos pontos tenho?
+12;Consulta do Saldo Conta do Mais;Consultar saldo Mais
+13;Pagamento de contas;Quero pagar uma conta
+13;Pagamento de contas;Como pago boleto?
+13;Pagamento de contas;Preciso quitar uma fatura
+13;Pagamento de contas;Fazer pagamento de luz
+13;Pagamento de contas;Pagar conta de água
+14;Reclamações;Estou insatisfeito com o serviço
+14;Reclamações;Quero fazer uma reclamação
+14;Reclamações;Tive um problema preciso reclamar
+14;Reclamações;Não gostei do atendimento
+14;Reclamações;Fui mal atendido
+15;Atendimento humano;Quero falar com alguém
+15;Atendimento humano;Preciso de ajuda de um atendente
+15;Atendimento humano;Me passa para uma pessoa
+15;Atendimento humano;Gostaria de atendimento personalizado
+15;Atendimento humano;Não entendi quero falar com humano
+16;Token de proposta;Qual o código da proposta?
+16;Token de proposta;Preciso do token
+16;Token de proposta;Gerar código de confirmação
+16;Token de proposta;Como pegar o token?
+16;Token de proposta;Cadê o código de validação?

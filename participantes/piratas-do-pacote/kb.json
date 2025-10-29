@@ -1,0 +1,284 @@
+{
+  "version": "1.0",
+  "domain": "cartao_credito_contact_center_ptBR",
+  "instruction_reminder": "Classifique a entrada do usuário em exatamente UM serviço válido (1..16). Responda SOMENTE com o número do ID.",
+  "services": [
+    {
+      "id": 1,
+      "name": "Consulta Limite / Vencimento do cartão / Melhor dia de compra",
+      "keywords": ["limite", "limite disponível", "vencimento", "data de vencimento", "fecha", "melhor dia de compra", "melhor dia"],
+      "positive_examples": [
+        "quanto de limite eu tenho?",
+        "qual o vencimento da minha fatura?",
+        "quando é o melhor dia pra comprar?",
+        "meu cartão fecha que dia?",
+        "limite disponível agora"
+      ],
+      "negative_examples": [
+        "conta do mais", "programa mais", "saldo", "saldo disponível",
+        "quero aumentar meu limite",
+        "segunda via da fatura",
+        "cancelar cartão"
+      ],
+      "disambiguation_notes": "Se mencionar Conta do Mais/saldo → 12; ‘aumentar limite’ → 6; ‘segunda via’ → 3."
+    },
+    {
+      "id": 2,
+      "name": "Segunda via de boleto de acordo",
+      "keywords": [
+        "segunda via", "boleto acordo", "renegociação", "renegociacao",
+        "acordo", "parcela do acordo", "carne do acordo",
+        "pagar negociação", "pagar negociacao", "boleto da negociação",
+        "acordo em aberto", "emitir boleto do acordo"
+      ],
+      "positive_examples": [
+        "preciso do boleto do acordo",
+        "pagar negociação",
+        "segunda via do acordo"
+      ],
+      "negative_examples": [
+        "segunda via da fatura",
+        "pagar conta de luz",
+        "pagar boleto qualquer"
+      ],
+      "disambiguation_notes": "Se mencionar acordo/negociação/renegociação → este serviço (2); se não mencionar acordo e só quiser pagar um boleto genérico → 13."
+    },
+    {
+      "id": 3,
+      "name": "Segunda via de Fatura",
+      "keywords": [
+        "segunda via fatura", "fatura", "código de barras da fatura", "linha digitavel da fatura",
+        "fatura para pagamento", "2a via fatura", "boleto da fatura",
+        "segunda via de boleto", "meu boleto", "boleto para pagamento"
+      ],
+      "positive_examples": [
+        "quero meu boleto",
+        "segunda via de boleto",
+        "me envie o código de barras da fatura"
+      ],
+      "negative_examples": [
+        "pagar fatura", "quero pagar fatura",
+        "boleto do acordo", "acordo", "negociação", "renegociação"
+      ],
+      "disambiguation_notes": "‘Segunda via/código/linha digitável’ → 3. ‘Pagar fatura’ (ação) → 13. ‘Acordo/negociação’ → 2."
+    },
+    {
+      "id": 4,
+      "name": "Status de Entrega do Cartão",
+      "keywords": ["rastreamento", "status de entrega", "rastrear cartão", "previsão de entrega", "meu cartão chegou?"],
+      "positive_examples": [
+        "onde está meu cartão?",
+        "quero rastrear a entrega do cartão",
+        "qual a previsão do meu cartão?",
+        "status de entrega"
+      ],
+      "negative_examples": [
+        "desbloquear cartão",
+        "status do cartão ativo/bloqueado",
+        "cancelar cartão"
+      ],
+      "disambiguation_notes": "Entrega física do cartão, não confundir com status operacional (id 5)."
+    },
+    {
+      "id": 5,
+      "name": "Status de cartão",
+      "keywords": [
+        "status do cartão", "cartão ativo", "bloqueado", "desbloqueado",
+        "cartão recusado", "não passou", "falha no cartão", "problema com cartão",
+        "transação negada", "compra negada", "cartão não funciona", "cartão travado"
+      ],
+      "positive_examples": [
+        "problema com cartão",
+        "meu cartão não está passando",
+        "cartão está bloqueado?"
+      ],
+      "negative_examples": [
+        "quero reclamar do atendimento",
+        "falar com a ouvidoria"
+      ],
+      "disambiguation_notes": "Dúvidas operacionais do cartão; se o usuário explicitamente quiser 'reclamar', vá para 14."
+    },
+    {
+      "id": 6,
+      "name": "Solicitação de aumento de limite",
+      "keywords": ["aumento de limite", "elevar limite", "mais limite", "limite maior", "revisão de limite"],
+      "positive_examples": [
+        "quero aumentar meu limite",
+        "posso elevar meu limite?",
+        "pedido de aumento de limite"
+      ],
+      "negative_examples": [
+        "quanto é meu limite atual",
+        "fatura em aberto",
+        "cancelar cartão"
+      ],
+      "disambiguation_notes": "Se a intenção é consultar valor atual do limite → 1."
+    },
+    {
+      "id": 7,
+      "name": "Cancelamento de cartão",
+      "keywords": ["cancelar cartão", "encerrar cartão", "cancelamento definitivo", "fechar cartão", "cancelamento"],
+      "positive_examples": [
+        "quero cancelar meu cartão",
+        "encerrar meu cartão",
+        "cancelamento imediato"
+      ],
+      "negative_examples": [
+        "bloquear por perda/roubo",
+        "desbloquear cartão",
+        "reclamação"
+      ],
+      "disambiguation_notes": "Se motivo for perda/roubo e foco em bloqueio → 11."
+    },
+    {
+      "id": 8,
+      "name": "Telefones de seguradoras",
+      "keywords": [
+        "telefone seguradora", "contato seguradora", "assistência 24h", "assistencia 24h",
+        "central da seguradora", "número seguradora", "telefone da mapfre", "telefone porto seguro",
+        "telefone azul seguros", "telefone sulamerica", "cancelar assistência", "cancelar assistencia",
+        "cancelar assistência 24h", "cancelar seguro assistência"
+      ],
+      "positive_examples": [
+        "qual o telefone da mapfre?",
+        "contato da seguradora azul",
+        "assistência 24 horas da seguradora",
+        "cancelar assistência"
+      ],
+      "negative_examples": [
+        "reclamação",
+        "quero reclamar",
+        "ouvidoria"
+      ],
+      "disambiguation_notes": "Pedidos de telefone/contato/assistência (inclusive 'cancelar assistência') → 8. Só use 14 se houver reclamação explícita."
+    },
+    {
+      "id": 9,
+      "name": "Desbloqueio de Cartão",
+      "keywords": [
+        "desbloquear", "ativar cartão", "cartão novo", "primeiro uso", "ativação"
+      ],
+      "positive_examples": [
+        "quero desbloquear meu cartão",
+        "como ativar o cartão novo?"
+      ],
+      "negative_examples": [
+        "código da proposta", "token da proposta", "código para fazer meu cartão"
+      ],
+      "disambiguation_notes": "Se houver 'token/código' vinculado a proposta/solicitação, não é 9, é 16."
+    },
+    {
+      "id": 10,
+      "name": "Esqueceu senha / Troca de senha",
+      "keywords": [
+        "esqueci a senha", "trocar senha", "redefinir senha", "senha do app", "reset de senha", "PIN do app"
+      ],
+      "negative_examples": [
+        "token/código da proposta", "desbloquear cartão"
+      ],
+      "disambiguation_notes": "Senha de acesso/app; não confundir com token/código de proposta (16)."
+    },
+    {
+      "id": 11,
+      "name": "Perda e roubo",
+      "keywords": ["perdi o cartão", "roubaram meu cartão", "bloquear urgente", "cartão sumiu", "furto"],
+      "positive_examples": [
+        "roubaram meu cartão, bloquear",
+        "perdi o cartão, preciso bloquear",
+        "bloqueio imediato por roubo"
+      ],
+      "negative_examples": [
+        "cancelar definitivamente o cartão",
+        "desbloquear cartão novo",
+        "status de entrega"
+      ],
+      "disambiguation_notes": "Bloqueio emergencial e reemissão por perda/roubo; cancelamento definitivo é 7."
+    },
+    {
+      "id": 12,
+      "name": "Consulta do Saldo Conta do Mais",
+      "keywords": [
+        "saldo conta do mais", "saldo programa", "pontos do mais", "consultar saldo do mais",
+        "programa mais", "saldo", "saldo disponível", "ver saldo"
+      ],
+      "positive_examples": [
+        "quanto tenho na conta do mais?",
+        "consultar saldo do programa",
+        "meu saldo no conta do mais",
+        "saldo disponível"
+      ],
+      "negative_examples": [
+        "limite", "vencimento", "melhor dia", "fatura", "pagamento de contas"
+      ],
+      "disambiguation_notes": "‘Saldo’/‘saldo disponível’ referem-se ao Conta do Mais neste contexto. Limite/vencimento/melhor dia é 1."
+    },
+    {
+      "id": 13,
+      "name": "Pagamento de contas",
+      "keywords": [
+        "pagar boleto", "pagamento de contas", "quitar boleto", "pagar conta de luz",
+        "pagar com cartão", "pagar fatura", "pagamento da fatura", "quero pagar fatura"
+      ],
+      "positive_examples": [
+        "quero pagar um boleto",
+        "pagar conta de luz",
+        "pagar boleto de 150 reais",
+        "quero pagar fatura"
+      ],
+      "negative_examples": [
+        "segunda via da fatura", "2a via da fatura", "código de barras da fatura",
+        "linha digitável da fatura", "enviar fatura",
+        "acordo", "negociação", "renegociação"
+      ],
+      "disambiguation_notes": "‘Pagar fatura’ (ação de pagamento) → 13. Pedidos de 2ª via/código/linha digitável → 3. Se for ‘acordo/negociação’ → 2."
+    },
+    {
+      "id": 14,
+      "name": "Reclamações",
+      "keywords": ["reclamação", "quero reclamar", "ouvidoria", "insatisfação", "não resolveu", "abrir reclamação", "protocolo de reclamação"],
+      "positive_examples": [
+        "quero fazer uma reclamação",
+        "não resolveram meu problema, quero reclamar",
+        "ouvidoria por favor"
+      ],
+      "negative_examples": [
+        "telefone da seguradora", "assistência 24h", "contato seguradora"
+      ],
+      "disambiguation_notes": "Use 14 apenas quando o usuário declara claramente a intenção de reclamar."
+    },
+    {
+      "id": 15,
+      "name": "Atendimento humano",
+      "keywords": ["falar com atendente", "humano", "transferir para atendente", "representante", "suporte humano"],
+      "positive_examples": [
+        "quero falar com um atendente",
+        "me passa para o humano",
+        "preciso de um atendente"
+      ],
+      "negative_examples": [
+        "assistência", "assistencia", "cancelar assistência", "telefone da seguradora"
+      ],
+      "disambiguation_notes": "Se a intenção for assistência/telefone de seguradora, use 8. Aqui só quando o usuário pede humano genericamente."
+    },
+    {
+      "id": 16,
+      "name": "Token de proposta",
+      "keywords": [
+        "token proposta", "código proposta", "codigo proposta",
+        "código para fazer meu cartão", "codigo para fazer meu cartao",
+        "código por sms", "token por sms", "código para finalizar cadastro",
+        "código da solicitação", "token de abertura", "código de abertura"
+      ],
+      "positive_examples": [
+        "código para fazer meu cartão",
+        "preciso do token da proposta",
+        "me manda o código para concluir a proposta"
+      ],
+      "negative_examples": [
+        "desbloquear cartão", "ativar cartão",
+        "esqueci a senha do app", "trocar senha"
+      ],
+      "disambiguation_notes": "Qualquer menção a 'código/token' para concluir/abrir/solicitar/fazer cartão → 16."
+    }
+  ]
+}

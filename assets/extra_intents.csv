@@ -1,0 +1,81 @@
+service_id;service_name;intent
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me diz vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Como posso vencimento da fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Pode informar sobre quando vence meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me diz quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Pode informar sobre quando fecha minha fatura?
+2;Segunda via de boleto de acordo;Estou com dúvida sobre segunda via boleto de acordo
+2;Segunda via de boleto de acordo;Como posso enviar boleto acordo?
+2;Segunda via de boleto de acordo;Quero saber segunda via boleto de acordo
+2;Segunda via de boleto de acordo;Estou com dúvida sobre código de barras acordo
+2;Segunda via de boleto de acordo;Pode informar sobre enviar boleto acordo?
+3;Segunda via de Fatura;Pode informar sobre código de barras fatura?
+3;Segunda via de Fatura;Estou com dúvida sobre fatura para pagamento
+3;Segunda via de Fatura;Estou com dúvida sobre quero a fatura do cartão
+3;Segunda via de Fatura;Pode informar sobre fatura para pagamento?
+3;Segunda via de Fatura;Pode informar sobre enviar boleto da fatura?
+4;Status de Entrega do Cartão;Como posso cartão foi enviado??
+4;Status de Entrega do Cartão;Estou com dúvida sobre previsão de entrega do cartão
+4;Status de Entrega do Cartão;Me diz onde está meu cartão
+4;Status de Entrega do Cartão;Pode informar sobre previsão de entrega do cartão?
+4;Status de Entrega do Cartão;Estou com dúvida sobre cartão em transporte
+5;Status de cartão;Quero saber problema com cartão
+5;Status de cartão;Pode informar sobre cartão bloqueado??
+5;Status de cartão;Estou com dúvida sobre não consigo passar meu cartão
+5;Status de cartão;Quero saber cartão recusado
+5;Status de cartão;Estou com dúvida sobre problema com cartão
+6;Solicitação de aumento de limite;Estou com dúvida sobre preciso de mais limite
+6;Solicitação de aumento de limite;Me diz quero mais limite
+6;Solicitação de aumento de limite;Quero saber aumentar limite do cartão
+6;Solicitação de aumento de limite;Pode informar sobre quero mais limite?
+6;Solicitação de aumento de limite;Como posso quero mais limite?
+7;Cancelamento de cartão;Pode informar sobre cancelamento de crédito?
+7;Cancelamento de cartão;Quero saber quero encerrar meu cartão
+7;Cancelamento de cartão;Me diz bloquear cartão definitivamente
+7;Cancelamento de cartão;Me diz desistir do cartão
+7;Cancelamento de cartão;Pode informar sobre bloquear cartão definitivamente?
+8;Telefones de seguradoras;Como funciona o seguro do cartão?
+8;Telefones de seguradoras;Quero saber telefone do seguro
+8;Telefones de seguradoras;Como posso cancelar assistência?
+8;Telefones de seguradoras;Pode informar sobre seguro do cartão?
+8;Telefones de seguradoras;Me diz cancelar assistência
+9;Desbloqueio de Cartão;Quero saber quero desbloquear o cartão
+9;Desbloqueio de Cartão;Estou com dúvida sobre ativar cartão novo
+9;Desbloqueio de Cartão;Quero saber desbloqueio para compras
+9;Desbloqueio de Cartão;Meu cartão está bloqueado. Como faço para desbloquear?
+9;Desbloqueio de Cartão;Me diz cartão para uso imediato
+10;Esqueceu senha / Troca de senha;Quero saber recuperar senha
+10;Esqueceu senha / Troca de senha;Me diz não tenho mais a senha do cartão
+10;Esqueceu senha / Troca de senha;Como posso esqueci minha senha?
+10;Esqueceu senha / Troca de senha;Estou com dúvida sobre trocar senha do cartão
+10;Esqueceu senha / Troca de senha;Me diz recuperar senha
+11;Perda e roubo;Quero saber bloquear cartão por roubo
+11;Perda e roubo;Como posso cartão furtado?
+11;Perda e roubo;Quero saber roubaram meu cartão
+11;Perda e roubo;Pode informar sobre bloquear cartão por roubo?
+11;Perda e roubo;Estou com dúvida sobre bloquear cartão por roubo
+12;Consulta do Saldo;Como posso quanto tenho na conta?
+12;Consulta do Saldo;Quero saber saldo conta corrente
+12;Consulta do Saldo;Me diz consultar saldo
+12;Consulta do Saldo;Como posso extrato da conta?
+12;Consulta do Saldo;Pode informar sobre consultar saldo?
+13;Pagamento de contas;Como posso quero pagar fatura?
+13;Pagamento de contas;Estou com dúvida sobre pagamento de conta
+13;Pagamento de contas;Pode informar sobre pagar boleto?
+13;Pagamento de contas;Quero saber quero pagar minha conta
+13;Pagamento de contas;Quero saber pagamento de conta
+14;Reclamações;Me diz quero reclamar
+14;Reclamações;Me diz abrir reclamação
+14;Reclamações;Estou com dúvida sobre protocolo de reclamação
+14;Reclamações;Me diz protocolo de reclamação
+14;Reclamações;Pode informar sobre abrir reclamação?
+15;Atendimento humano;Me diz quero falar com atendente
+15;Atendimento humano;Quero saber quero falar com atendente
+15;Atendimento humano;Estou com dúvida sobre atendimento pessoal
+15;Atendimento humano;Como posso preciso de humano?
+15;Atendimento humano;Me diz transferir para atendente
+16;Token de proposta;Pode informar sobre token de proposta?
+16;Token de proposta;Quero saber código de token da proposta
+16;Token de proposta;Pode informar sobre proposta token?
+16;Token de proposta;Me diz código para fazer meu cartão
+16;Token de proposta;Me diz código de token da proposta

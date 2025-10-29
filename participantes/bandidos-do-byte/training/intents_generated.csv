@@ -1,0 +1,641 @@
+service_id;service_name;intent
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual meu limite disponível
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar limite do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quanto posso gastar no cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;ver saldo disponível cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;data de vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando tenho que pagar o cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;dia do fechamento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;melhor dia para fazer compras
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando fecha e vence minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;limite total do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quanto ainda tenho de limite
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;verificar limite disponível
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual o vencimento do meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;informações sobre limite
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar data de vencimento
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;até quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;prazo para pagar fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;saber meu limite atual
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando pago minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;limite livre para uso
+2;Segunda via de boleto de acordo;preciso do boleto da negociação
+2;Segunda via de boleto de acordo;emitir segunda via acordo
+2;Segunda via de boleto de acordo;gerar boleto da negociação
+2;Segunda via de boleto de acordo;quero pagar meu acordo
+2;Segunda via de boleto de acordo;boleto acordo parcelamento
+2;Segunda via de boleto de acordo;segunda via código de barras acordo
+2;Segunda via de boleto de acordo;não recebi boleto da negociação
+2;Segunda via de boleto de acordo;reenviar boleto acordo
+2;Segunda via de boleto de acordo;perdi boleto da negociação
+2;Segunda via de boleto de acordo;código barras do acordo
+2;Segunda via de boleto de acordo;imprimir boleto negociação
+2;Segunda via de boleto de acordo;atualizar boleto acordo
+2;Segunda via de boleto de acordo;nova via boleto acordo
+2;Segunda via de boleto de acordo;boleto parcelamento dívida
+2;Segunda via de boleto de acordo;solicitar boleto acordo
+2;Segunda via de boleto de acordo;pagar parcela acordo
+2;Segunda via de boleto de acordo;enviar por email boleto acordo
+2;Segunda via de boleto de acordo;baixar boleto negociação
+2;Segunda via de boleto de acordo;boleto atualizado acordo
+2;Segunda via de boleto de acordo;boleto vencido acordo
+3;Segunda via de Fatura;emitir segunda via fatura
+3;Segunda via de Fatura;gerar boleto fatura cartão
+3;Segunda via de Fatura;código de barras para pagar fatura
+3;Segunda via de Fatura;não recebi minha fatura
+3;Segunda via de Fatura;reenviar fatura do cartão
+3;Segunda via de Fatura;perdi o boleto da fatura
+3;Segunda via de Fatura;imprimir fatura cartão
+3;Segunda via de Fatura;nova via da fatura
+3;Segunda via de Fatura;solicitar fatura atualizada
+3;Segunda via de Fatura;preciso da fatura para pagar
+3;Segunda via de Fatura;boleto atualizado da fatura
+3;Segunda via de Fatura;enviar fatura por email
+3;Segunda via de Fatura;baixar fatura do cartão
+3;Segunda via de Fatura;fatura com vencimento atualizado
+3;Segunda via de Fatura;quero pagar minha fatura
+3;Segunda via de Fatura;duplicata da fatura
+3;Segunda via de Fatura;código para pagamento fatura
+3;Segunda via de Fatura;como pagar minha fatura
+3;Segunda via de Fatura;boleto vencido fatura
+3;Segunda via de Fatura;fatura mês atual
+4;Status de Entrega do Cartão;rastrear entrega cartão
+4;Status de Entrega do Cartão;quando chega meu cartão
+4;Status de Entrega do Cartão;acompanhar envio do cartão
+4;Status de Entrega do Cartão;cartão já foi postado
+4;Status de Entrega do Cartão;prazo entrega cartão
+4;Status de Entrega do Cartão;quanto tempo demora cartão
+4;Status de Entrega do Cartão;código rastreamento cartão
+4;Status de Entrega do Cartão;meu cartão está a caminho
+4;Status de Entrega do Cartão;cartão saiu para entrega
+4;Status de Entrega do Cartão;verificar envio cartão
+4;Status de Entrega do Cartão;consultar entrega do cartão
+4;Status de Entrega do Cartão;demora para receber cartão
+4;Status de Entrega do Cartão;cartão foi despachado
+4;Status de Entrega do Cartão;quando vou receber o cartão
+4;Status de Entrega do Cartão;já faz tempo que pedi cartão
+4;Status de Entrega do Cartão;cartão em transito
+4;Status de Entrega do Cartão;atraso na entrega cartão
+4;Status de Entrega do Cartão;rastreio dos correios cartão
+4;Status de Entrega do Cartão;cartão perdido na entrega
+4;Status de Entrega do Cartão;solicitar novo cartão
+5;Status de cartão;cartão está ativo
+5;Status de cartão;verificar situação do cartão
+5;Status de cartão;consultar status cartão
+5;Status de cartão;cartão está bloqueado
+5;Status de cartão;por que meu cartão não funciona
+5;Status de cartão;cartão foi negado na compra
+5;Status de cartão;maquininha não aceita cartão
+5;Status de cartão;erro ao usar cartão
+5;Status de cartão;cartão dá erro
+5;Status de cartão;não consigo comprar com cartão
+5;Status de cartão;cartão inválido
+5;Status de cartão;transação negada cartão
+5;Status de cartão;cartão está cancelado
+5;Status de cartão;checar se cartão está ativo
+5;Status de cartão;situação do meu cartão
+5;Status de cartão;cartão suspenso
+5;Status de cartão;problema para usar cartão
+5;Status de cartão;cartão sem permissão
+5;Status de cartão;validar cartão
+5;Status de cartão;cartão está habilitado
+6;Solicitação de aumento de limite;pedir mais limite
+6;Solicitação de aumento de limite;como aumentar limite cartão
+6;Solicitação de aumento de limite;preciso aumentar crédito
+6;Solicitação de aumento de limite;solicitar crédito maior
+6;Solicitação de aumento de limite;quero limite adicional
+6;Solicitação de aumento de limite;aumento temporário limite
+6;Solicitação de aumento de limite;elevar limite do cartão
+6;Solicitação de aumento de limite;aumentar poder de compra
+6;Solicitação de aumento de limite;limite insuficiente
+6;Solicitação de aumento de limite;expansão de limite
+6;Solicitação de aumento de limite;upgrade limite cartão
+6;Solicitação de aumento de limite;conseguir mais crédito
+6;Solicitação de aumento de limite;ampliar limite disponível
+6;Solicitação de aumento de limite;requisitar aumento limite
+6;Solicitação de aumento de limite;meu limite é baixo
+6;Solicitação de aumento de limite;dobrar limite cartão
+6;Solicitação de aumento de limite;análise aumento crédito
+6;Solicitação de aumento de limite;tenho direito a mais limite
+6;Solicitação de aumento de limite;revisar limite cartão
+6;Solicitação de aumento de limite;quanto posso aumentar limite
+7;Cancelamento de cartão;quero cancelar meu cartão
+7;Cancelamento de cartão;encerrar conta cartão
+7;Cancelamento de cartão;desativar cartão permanentemente
+7;Cancelamento de cartão;não quero mais o cartão
+7;Cancelamento de cartão;como cancelar cartão
+7;Cancelamento de cartão;processo de cancelamento
+7;Cancelamento de cartão;bloquear e cancelar cartão
+7;Cancelamento de cartão;dar baixa no cartão
+7;Cancelamento de cartão;encerramento de contrato cartão
+7;Cancelamento de cartão;extinguir cartão crédito
+7;Cancelamento de cartão;solicitar cancelamento definitivo
+7;Cancelamento de cartão;anular cartão
+7;Cancelamento de cartão;parar de usar cartão
+7;Cancelamento de cartão;rescindir contrato cartão
+7;Cancelamento de cartão;término de cartão
+7;Cancelamento de cartão;abandonar cartão
+7;Cancelamento de cartão;não quero mais ser cliente
+7;Cancelamento de cartão;encerrar relacionamento
+7;Cancelamento de cartão;sair do cartão
+7;Cancelamento de cartão;desfazer cartão
+8;Telefones de seguradoras;número seguradora cartão
+8;Telefones de seguradoras;contato assistência cartão
+8;Telefones de seguradoras;telefone proteção cartão
+8;Telefones de seguradoras;falar com seguro
+8;Telefones de seguradoras;dados da seguradora
+8;Telefones de seguradoras;onde ligar seguro
+8;Telefones de seguradoras;central seguradora
+8;Telefones de seguradoras;atendimento seguro cartão
+8;Telefones de seguradoras;SAC seguradora
+8;Telefones de seguradoras;contatar proteção cartão
+8;Telefones de seguradoras;informações seguro
+8;Telefones de seguradoras;assistência 24 horas
+8;Telefones de seguradoras;número cobertura cartão
+8;Telefones de seguradoras;cancelar proteção
+8;Telefones de seguradoras;desativar seguro cartão
+8;Telefones de seguradoras;remover assistência
+8;Telefones de seguradoras;não quero mais seguro
+8;Telefones de seguradoras;suspender proteção
+8;Telefones de seguradoras;acionar seguro cartão
+8;Telefones de seguradoras;usar assistência cartão
+9;Desbloqueio de Cartão;liberar cartão para uso
+9;Desbloqueio de Cartão;ativar meu cartão novo
+9;Desbloqueio de Cartão;habilitar cartão
+9;Desbloqueio de Cartão;como ativar cartão
+9;Desbloqueio de Cartão;remover bloqueio cartão
+9;Desbloqueio de Cartão;cartão está bloqueado
+9;Desbloqueio de Cartão;preciso desbloquear
+9;Desbloqueio de Cartão;liberar para compras
+9;Desbloqueio de Cartão;validar cartão novo
+9;Desbloqueio de Cartão;autorizar uso cartão
+9;Desbloqueio de Cartão;cartão chegou bloqueado
+9;Desbloqueio de Cartão;ativação de cartão
+9;Desbloqueio de Cartão;cartão travado
+9;Desbloqueio de Cartão;destrancar cartão
+9;Desbloqueio de Cartão;permitir uso cartão
+9;Desbloqueio de Cartão;normalizar cartão
+9;Desbloqueio de Cartão;reativar cartão
+9;Desbloqueio de Cartão;destravar cartão crédito
+9;Desbloqueio de Cartão;habilitar para transações
+9;Desbloqueio de Cartão;quero usar meu cartão
+10;Esqueceu senha / Troca de senha;não lembro minha senha
+10;Esqueceu senha / Troca de senha;resetar senha cartão
+10;Esqueceu senha / Troca de senha;alterar senha
+10;Esqueceu senha / Troca de senha;mudar senha do cartão
+10;Esqueceu senha / Troca de senha;criar nova senha
+10;Esqueceu senha / Troca de senha;recuperação de senha
+10;Esqueceu senha / Troca de senha;senha incorreta
+10;Esqueceu senha / Troca de senha;perdi minha senha
+10;Esqueceu senha / Troca de senha;redefinir senha
+10;Esqueceu senha / Troca de senha;como trocar senha
+10;Esqueceu senha / Troca de senha;senha do cartão
+10;Esqueceu senha / Troca de senha;esqueci código cartão
+10;Esqueceu senha / Troca de senha;recriar senha
+10;Esqueceu senha / Troca de senha;senha expirou
+10;Esqueceu senha / Troca de senha;atualizar senha cartão
+10;Esqueceu senha / Troca de senha;modificar senha
+10;Esqueceu senha / Troca de senha;não sei minha senha
+10;Esqueceu senha / Troca de senha;senha travada
+10;Esqueceu senha / Troca de senha;desbloquear senha
+10;Esqueceu senha / Troca de senha;gerar nova senha
+11;Perda e roubo;fui assaltado
+11;Perda e roubo;me roubaram
+11;Perda e roubo;cartão foi furtado
+11;Perda e roubo;sumiu meu cartão
+11;Perda e roubo;não acho meu cartão
+11;Perda e roubo;bloquear cartão urgente
+11;Perda e roubo;emergência perda cartão
+11;Perda e roubo;cartão desapareceu
+11;Perda e roubo;bloqueio por perda
+11;Perda e roubo;carteira roubada
+11;Perda e roubo;suspeita de roubo
+11;Perda e roubo;trancar cartão agora
+11;Perda e roubo;cartão extraviado
+11;Perda e roubo;sofri furto
+11;Perda e roubo;bloqueio imediato
+11;Perda e roubo;alguém pegou meu cartão
+11;Perda e roubo;bloquear por segurança
+11;Perda e roubo;perdi carteira
+11;Perda e roubo;solicitar bloqueio
+11;Perda e roubo;cancelar cartão perdido
+12;Consulta do Saldo;ver saldo conta
+12;Consulta do Saldo;quanto dinheiro tenho
+12;Consulta do Saldo;checar saldo
+12;Consulta do Saldo;verificar meu saldo
+12;Consulta do Saldo;extrato conta corrente
+12;Consulta do Saldo;saldo em conta
+12;Consulta do Saldo;consultar extrato
+12;Consulta do Saldo;quanto tenho de dinheiro
+12;Consulta do Saldo;informação de saldo
+12;Consulta do Saldo;ver extrato bancário
+12;Consulta do Saldo;movimentação da conta
+12;Consulta do Saldo;saldo atualizado
+12;Consulta do Saldo;dinheiro disponível
+12;Consulta do Saldo;conferir saldo
+12;Consulta do Saldo;valor na conta
+12;Consulta do Saldo;quanto sobrou na conta
+12;Consulta do Saldo;saldo bancário
+12;Consulta do Saldo;posição da conta
+12;Consulta do Saldo;verificar extrato
+12;Consulta do Saldo;meu dinheiro
+13;Pagamento de contas;pagar conta luz
+13;Pagamento de contas;quitar boleto
+13;Pagamento de contas;efetuar pagamento conta
+13;Pagamento de contas;pagar água
+13;Pagamento de contas;quitar débito
+13;Pagamento de contas;fazer pagamento
+13;Pagamento de contas;pagar telefone
+13;Pagamento de contas;liquidar conta
+13;Pagamento de contas;saldar boleto
+13;Pagamento de contas;pagar internet
+13;Pagamento de contas;quitar fatura
+13;Pagamento de contas;realizar pagamento
+13;Pagamento de contas;pagar aluguel
+13;Pagamento de contas;quitar parcela
+13;Pagamento de contas;pagar condomínio
+13;Pagamento de contas;efetuar quitação
+13;Pagamento de contas;pagamento código barras
+13;Pagamento de contas;pagar mensalidade
+13;Pagamento de contas;quitar compromisso
+13;Pagamento de contas;fazer transferência pagamento
+14;Reclamações;fazer reclamação
+14;Reclamações;estou insatisfeito
+14;Reclamações;péssimo atendimento
+14;Reclamações;queixa formal
+14;Reclamações;registrar insatisfação
+14;Reclamações;problema não resolvido
+14;Reclamações;reclamar serviço
+14;Reclamações;abrir chamado
+14;Reclamações;ouvidoria
+14;Reclamações;SAC reclamação
+14;Reclamações;manifestação de descontentamento
+14;Reclamações;protocolar reclamação
+14;Reclamações;muito insatisfeito
+14;Reclamações;quero me queixar
+14;Reclamações;serviço ruim
+14;Reclamações;falar com supervisor
+14;Reclamações;escalação atendimento
+14;Reclamações;denunciar problema
+14;Reclamações;reportar falha
+14;Reclamações;fazer queixa formal
+15;Atendimento humano;quero atendente
+15;Atendimento humano;falar com pessoa
+15;Atendimento humano;atendimento personalizado
+15;Atendimento humano;preciso de ajuda humana
+15;Atendimento humano;transferir ligação
+15;Atendimento humano;operador humano
+15;Atendimento humano;não quero robô
+15;Atendimento humano;atendente por favor
+15;Atendimento humano;gente de verdade
+15;Atendimento humano;conversar com alguém
+15;Atendimento humano;pessoa real
+15;Atendimento humano;sair do robô
+15;Atendimento humano;atendimento pessoal
+15;Atendimento humano;funcionário humano
+15;Atendimento humano;sair da URA
+15;Atendimento humano;quero ser atendido
+15;Atendimento humano;colaborador humano
+15;Atendimento humano;consultor presencial
+15;Atendimento humano;encaminhar para pessoa
+15;Atendimento humano;central atendimento humano
+16;Token de proposta;enviar token
+16;Token de proposta;código proposta cartão
+16;Token de proposta;gerar token
+16;Token de proposta;não recebi token
+16;Token de proposta;reenviar código proposta
+16;Token de proposta;solicitar token
+16;Token de proposta;validar proposta
+16;Token de proposta;chave proposta
+16;Token de proposta;código validação
+16;Token de proposta;token aprovação
+16;Token de proposta;perdi meu token
+16;Token de proposta;código autorização proposta
+16;Token de proposta;número validação cartão
+16;Token de proposta;token contratação
+16;Token de proposta;senha proposta
+16;Token de proposta;autenticação proposta
+16;Token de proposta;verificação token
+16;Token de proposta;confirmar proposta token
+16;Token de proposta;código liberação cartão
+16;Token de proposta;token ativação proposta
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual meu limite disponível
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar limite do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quanto posso gastar no cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;ver saldo disponível cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;data de vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando tenho que pagar o cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;dia do fechamento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;melhor dia para fazer compras
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando fecha e vence minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;limite total do cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quanto ainda tenho de limite
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;verificar limite disponível
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;qual o vencimento do meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;informações sobre limite
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;consultar data de vencimento
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;até quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;prazo para pagar fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;saber meu limite atual
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando pago minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;limite livre para uso
+2;Segunda via de boleto de acordo;preciso do boleto da negociação
+2;Segunda via de boleto de acordo;emitir segunda via acordo
+2;Segunda via de boleto de acordo;gerar boleto da negociação
+2;Segunda via de boleto de acordo;quero pagar meu acordo
+2;Segunda via de boleto de acordo;boleto acordo parcelamento
+2;Segunda via de boleto de acordo;segunda via código de barras acordo
+2;Segunda via de boleto de acordo;não recebi boleto da negociação
+2;Segunda via de boleto de acordo;reenviar boleto acordo
+2;Segunda via de boleto de acordo;perdi boleto da negociação
+2;Segunda via de boleto de acordo;código barras do acordo
+2;Segunda via de boleto de acordo;imprimir boleto negociação
+2;Segunda via de boleto de acordo;atualizar boleto acordo
+2;Segunda via de boleto de acordo;nova via boleto acordo
+2;Segunda via de boleto de acordo;boleto parcelamento dívida
+2;Segunda via de boleto de acordo;solicitar boleto acordo
+2;Segunda via de boleto de acordo;pagar parcela acordo
+2;Segunda via de boleto de acordo;enviar por email boleto acordo
+2;Segunda via de boleto de acordo;baixar boleto negociação
+2;Segunda via de boleto de acordo;boleto atualizado acordo
+2;Segunda via de boleto de acordo;boleto vencido acordo
+3;Segunda via de Fatura;emitir segunda via fatura
+3;Segunda via de Fatura;gerar boleto fatura cartão
+3;Segunda via de Fatura;código de barras para pagar fatura
+3;Segunda via de Fatura;não recebi minha fatura
+3;Segunda via de Fatura;reenviar fatura do cartão
+3;Segunda via de Fatura;perdi o boleto da fatura
+3;Segunda via de Fatura;imprimir fatura cartão
+3;Segunda via de Fatura;nova via da fatura
+3;Segunda via de Fatura;solicitar fatura atualizada
+3;Segunda via de Fatura;preciso da fatura para pagar
+3;Segunda via de Fatura;boleto atualizado da fatura
+3;Segunda via de Fatura;enviar fatura por email
+3;Segunda via de Fatura;baixar fatura do cartão
+3;Segunda via de Fatura;fatura com vencimento atualizado
+3;Segunda via de Fatura;quero pagar minha fatura
+3;Segunda via de Fatura;duplicata da fatura
+3;Segunda via de Fatura;código para pagamento fatura
+3;Segunda via de Fatura;como pagar minha fatura
+3;Segunda via de Fatura;boleto vencido fatura
+3;Segunda via de Fatura;fatura mês atual
+4;Status de Entrega do Cartão;rastrear entrega cartão
+4;Status de Entrega do Cartão;quando chega meu cartão
+4;Status de Entrega do Cartão;acompanhar envio do cartão
+4;Status de Entrega do Cartão;cartão já foi postado
+4;Status de Entrega do Cartão;prazo entrega cartão
+4;Status de Entrega do Cartão;quanto tempo demora cartão
+4;Status de Entrega do Cartão;código rastreamento cartão
+4;Status de Entrega do Cartão;meu cartão está a caminho
+4;Status de Entrega do Cartão;cartão saiu para entrega
+4;Status de Entrega do Cartão;verificar envio cartão
+4;Status de Entrega do Cartão;consultar entrega do cartão
+4;Status de Entrega do Cartão;demora para receber cartão
+4;Status de Entrega do Cartão;cartão foi despachado
+4;Status de Entrega do Cartão;quando vou receber o cartão
+4;Status de Entrega do Cartão;já faz tempo que pedi cartão
+4;Status de Entrega do Cartão;cartão em transito
+4;Status de Entrega do Cartão;atraso na entrega cartão
+4;Status de Entrega do Cartão;rastreio dos correios cartão
+4;Status de Entrega do Cartão;cartão perdido na entrega
+4;Status de Entrega do Cartão;solicitar novo cartão
+5;Status de cartão;cartão está ativo
+5;Status de cartão;verificar situação do cartão
+5;Status de cartão;consultar status cartão
+5;Status de cartão;cartão está bloqueado
+5;Status de cartão;por que meu cartão não funciona
+5;Status de cartão;cartão foi negado na compra
+5;Status de cartão;maquininha não aceita cartão
+5;Status de cartão;erro ao usar cartão
+5;Status de cartão;cartão dá erro
+5;Status de cartão;não consigo comprar com cartão
+5;Status de cartão;cartão inválido
+5;Status de cartão;transação negada cartão
+5;Status de cartão;cartão está cancelado
+5;Status de cartão;checar se cartão está ativo
+5;Status de cartão;situação do meu cartão
+5;Status de cartão;cartão suspenso
+5;Status de cartão;problema para usar cartão
+5;Status de cartão;cartão sem permissão
+5;Status de cartão;validar cartão
+5;Status de cartão;cartão está habilitado
+6;Solicitação de aumento de limite;pedir mais limite
+6;Solicitação de aumento de limite;como aumentar limite cartão
+6;Solicitação de aumento de limite;preciso aumentar crédito
+6;Solicitação de aumento de limite;solicitar crédito maior
+6;Solicitação de aumento de limite;quero limite adicional
+6;Solicitação de aumento de limite;aumento temporário limite
+6;Solicitação de aumento de limite;elevar limite do cartão
+6;Solicitação de aumento de limite;aumentar poder de compra
+6;Solicitação de aumento de limite;limite insuficiente
+6;Solicitação de aumento de limite;expansão de limite
+6;Solicitação de aumento de limite;upgrade limite cartão
+6;Solicitação de aumento de limite;conseguir mais crédito
+6;Solicitação de aumento de limite;ampliar limite disponível
+6;Solicitação de aumento de limite;requisitar aumento limite
+6;Solicitação de aumento de limite;meu limite é baixo
+6;Solicitação de aumento de limite;dobrar limite cartão
+6;Solicitação de aumento de limite;análise aumento crédito
+6;Solicitação de aumento de limite;tenho direito a mais limite
+6;Solicitação de aumento de limite;revisar limite cartão
+6;Solicitação de aumento de limite;quanto posso aumentar limite
+7;Cancelamento de cartão;quero cancelar meu cartão
+7;Cancelamento de cartão;encerrar conta cartão
+7;Cancelamento de cartão;desativar cartão permanentemente
+7;Cancelamento de cartão;não quero mais o cartão
+7;Cancelamento de cartão;como cancelar cartão
+7;Cancelamento de cartão;processo de cancelamento
+7;Cancelamento de cartão;bloquear e cancelar cartão
+7;Cancelamento de cartão;dar baixa no cartão
+7;Cancelamento de cartão;encerramento de contrato cartão
+7;Cancelamento de cartão;extinguir cartão crédito
+7;Cancelamento de cartão;solicitar cancelamento definitivo
+7;Cancelamento de cartão;anular cartão
+7;Cancelamento de cartão;parar de usar cartão
+7;Cancelamento de cartão;rescindir contrato cartão
+7;Cancelamento de cartão;término de cartão
+7;Cancelamento de cartão;abandonar cartão
+7;Cancelamento de cartão;não quero mais ser cliente
+7;Cancelamento de cartão;encerrar relacionamento
+7;Cancelamento de cartão;sair do cartão
+7;Cancelamento de cartão;desfazer cartão
+8;Telefones de seguradoras;número seguradora cartão
+8;Telefones de seguradoras;contato assistência cartão
+8;Telefones de seguradoras;telefone proteção cartão
+8;Telefones de seguradoras;falar com seguro
+8;Telefones de seguradoras;dados da seguradora
+8;Telefones de seguradoras;onde ligar seguro
+8;Telefones de seguradoras;central seguradora
+8;Telefones de seguradoras;atendimento seguro cartão
+8;Telefones de seguradoras;SAC seguradora
+8;Telefones de seguradoras;contatar proteção cartão
+8;Telefones de seguradoras;informações seguro
+8;Telefones de seguradoras;assistência 24 horas
+8;Telefones de seguradoras;número cobertura cartão
+8;Telefones de seguradoras;cancelar proteção
+8;Telefones de seguradoras;desativar seguro cartão
+8;Telefones de seguradoras;remover assistência
+8;Telefones de seguradoras;não quero mais seguro
+8;Telefones de seguradoras;suspender proteção
+8;Telefones de seguradoras;acionar seguro cartão
+8;Telefones de seguradoras;usar assistência cartão
+9;Desbloqueio de Cartão;liberar cartão para uso
+9;Desbloqueio de Cartão;ativar meu cartão novo
+9;Desbloqueio de Cartão;habilitar cartão
+9;Desbloqueio de Cartão;como ativar cartão
+9;Desbloqueio de Cartão;remover bloqueio cartão
+9;Desbloqueio de Cartão;cartão está bloqueado
+9;Desbloqueio de Cartão;preciso desbloquear
+9;Desbloqueio de Cartão;liberar para compras
+9;Desbloqueio de Cartão;validar cartão novo
+9;Desbloqueio de Cartão;autorizar uso cartão
+9;Desbloqueio de Cartão;cartão chegou bloqueado
+9;Desbloqueio de Cartão;ativação de cartão
+9;Desbloqueio de Cartão;cartão travado
+9;Desbloqueio de Cartão;destrancar cartão
+9;Desbloqueio de Cartão;permitir uso cartão
+9;Desbloqueio de Cartão;normalizar cartão
+9;Desbloqueio de Cartão;reativar cartão
+9;Desbloqueio de Cartão;destravar cartão crédito
+9;Desbloqueio de Cartão;habilitar para transações
+9;Desbloqueio de Cartão;quero usar meu cartão
+10;Esqueceu senha / Troca de senha;não lembro minha senha
+10;Esqueceu senha / Troca de senha;resetar senha cartão
+10;Esqueceu senha / Troca de senha;alterar senha
+10;Esqueceu senha / Troca de senha;mudar senha do cartão
+10;Esqueceu senha / Troca de senha;criar nova senha
+10;Esqueceu senha / Troca de senha;recuperação de senha
+10;Esqueceu senha / Troca de senha;senha incorreta
+10;Esqueceu senha / Troca de senha;perdi minha senha
+10;Esqueceu senha / Troca de senha;redefinir senha
+10;Esqueceu senha / Troca de senha;como trocar senha
+10;Esqueceu senha / Troca de senha;senha do cartão
+10;Esqueceu senha / Troca de senha;esqueci código cartão
+10;Esqueceu senha / Troca de senha;recriar senha
+10;Esqueceu senha / Troca de senha;senha expirou
+10;Esqueceu senha / Troca de senha;atualizar senha cartão
+10;Esqueceu senha / Troca de senha;modificar senha
+10;Esqueceu senha / Troca de senha;não sei minha senha
+10;Esqueceu senha / Troca de senha;senha travada
+10;Esqueceu senha / Troca de senha;desbloquear senha
+10;Esqueceu senha / Troca de senha;gerar nova senha
+11;Perda e roubo;fui assaltado
+11;Perda e roubo;me roubaram
+11;Perda e roubo;cartão foi furtado
+11;Perda e roubo;sumiu meu cartão
+11;Perda e roubo;não acho meu cartão
+11;Perda e roubo;bloquear cartão urgente
+11;Perda e roubo;emergência perda cartão
+11;Perda e roubo;cartão desapareceu
+11;Perda e roubo;bloqueio por perda
+11;Perda e roubo;carteira roubada
+11;Perda e roubo;suspeita de roubo
+11;Perda e roubo;trancar cartão agora
+11;Perda e roubo;cartão extraviado
+11;Perda e roubo;sofri furto
+11;Perda e roubo;bloqueio imediato
+11;Perda e roubo;alguém pegou meu cartão
+11;Perda e roubo;bloquear por segurança
+11;Perda e roubo;perdi carteira
+11;Perda e roubo;solicitar bloqueio
+11;Perda e roubo;cancelar cartão perdido
+12;Consulta do Saldo;ver saldo conta
+12;Consulta do Saldo;quanto dinheiro tenho
+12;Consulta do Saldo;checar saldo
+12;Consulta do Saldo;verificar meu saldo
+12;Consulta do Saldo;extrato conta corrente
+12;Consulta do Saldo;saldo em conta
+12;Consulta do Saldo;consultar extrato
+12;Consulta do Saldo;quanto tenho de dinheiro
+12;Consulta do Saldo;informação de saldo
+12;Consulta do Saldo;ver extrato bancário
+12;Consulta do Saldo;movimentação da conta
+12;Consulta do Saldo;saldo atualizado
+12;Consulta do Saldo;dinheiro disponível
+12;Consulta do Saldo;conferir saldo
+12;Consulta do Saldo;valor na conta
+12;Consulta do Saldo;quanto sobrou na conta
+12;Consulta do Saldo;saldo bancário
+12;Consulta do Saldo;posição da conta
+12;Consulta do Saldo;verificar extrato
+12;Consulta do Saldo;meu dinheiro
+13;Pagamento de contas;pagar conta luz
+13;Pagamento de contas;quitar boleto
+13;Pagamento de contas;efetuar pagamento conta
+13;Pagamento de contas;pagar água
+13;Pagamento de contas;quitar débito
+13;Pagamento de contas;fazer pagamento
+13;Pagamento de contas;pagar telefone
+13;Pagamento de contas;liquidar conta
+13;Pagamento de contas;saldar boleto
+13;Pagamento de contas;pagar internet
+13;Pagamento de contas;quitar fatura
+13;Pagamento de contas;realizar pagamento
+13;Pagamento de contas;pagar aluguel
+13;Pagamento de contas;quitar parcela
+13;Pagamento de contas;pagar condomínio
+13;Pagamento de contas;efetuar quitação
+13;Pagamento de contas;pagamento código barras
+13;Pagamento de contas;pagar mensalidade
+13;Pagamento de contas;quitar compromisso
+13;Pagamento de contas;fazer transferência pagamento
+14;Reclamações;fazer reclamação
+14;Reclamações;estou insatisfeito
+14;Reclamações;péssimo atendimento
+14;Reclamações;queixa formal
+14;Reclamações;registrar insatisfação
+14;Reclamações;problema não resolvido
+14;Reclamações;reclamar serviço
+14;Reclamações;abrir chamado
+14;Reclamações;ouvidoria
+14;Reclamações;SAC reclamação
+14;Reclamações;manifestação de descontentamento
+14;Reclamações;protocolar reclamação
+14;Reclamações;muito insatisfeito
+14;Reclamações;quero me queixar
+14;Reclamações;serviço ruim
+14;Reclamações;falar com supervisor
+14;Reclamações;escalação atendimento
+14;Reclamações;denunciar problema
+14;Reclamações;reportar falha
+14;Reclamações;fazer queixa formal
+15;Atendimento humano;quero atendente
+15;Atendimento humano;falar com pessoa
+15;Atendimento humano;atendimento personalizado
+15;Atendimento humano;preciso de ajuda humana
+15;Atendimento humano;transferir ligação
+15;Atendimento humano;operador humano
+15;Atendimento humano;não quero robô
+15;Atendimento humano;atendente por favor
+15;Atendimento humano;gente de verdade
+15;Atendimento humano;conversar com alguém
+15;Atendimento humano;pessoa real
+15;Atendimento humano;sair do robô
+15;Atendimento humano;atendimento pessoal
+15;Atendimento humano;funcionário humano
+15;Atendimento humano;sair da URA
+15;Atendimento humano;quero ser atendido
+15;Atendimento humano;colaborador humano
+15;Atendimento humano;consultor presencial
+15;Atendimento humano;encaminhar para pessoa
+15;Atendimento humano;central atendimento humano
+16;Token de proposta;enviar token
+16;Token de proposta;código proposta cartão
+16;Token de proposta;gerar token
+16;Token de proposta;não recebi token
+16;Token de proposta;reenviar código proposta
+16;Token de proposta;solicitar token
+16;Token de proposta;validar proposta
+16;Token de proposta;chave proposta
+16;Token de proposta;código validação
+16;Token de proposta;token aprovação
+16;Token de proposta;perdi meu token
+16;Token de proposta;código autorização proposta
+16;Token de proposta;número validação cartão
+16;Token de proposta;token contratação
+16;Token de proposta;senha proposta
+16;Token de proposta;autenticação proposta
+16;Token de proposta;verificação token
+16;Token de proposta;confirmar proposta token
+16;Token de proposta;código liberação cartão
+16;Token de proposta;token ativação proposta

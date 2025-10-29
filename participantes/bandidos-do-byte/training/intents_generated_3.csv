@@ -1,0 +1,982 @@
+service_id;service_name;intent
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto tem disponível para usar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando fecha minha fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando vence meu cartão
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;quando posso comprar
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;vencimento da fatura
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;valor para gastar
+2;Segunda via de boleto de acordo;segunda via boleto de acordo
+2;Segunda via de boleto de acordo;Boleto para pagar minha negociação
+2;Segunda via de boleto de acordo;código de barras acordo
+2;Segunda via de boleto de acordo;preciso pagar negociação
+2;Segunda via de boleto de acordo;enviar boleto acordo
+2;Segunda via de boleto de acordo;boleto da negociação
+3;Segunda via de Fatura;quero meu boleto
+3;Segunda via de Fatura;segunda via de fatura
+3;Segunda via de Fatura;código de barras fatura
+3;Segunda via de Fatura;quero a fatura do cartão
+3;Segunda via de Fatura;enviar boleto da fatura
+3;Segunda via de Fatura;fatura para pagamento
+4;Status de Entrega do Cartão;onde está meu cartão
+4;Status de Entrega do Cartão;meu cartão não chegou
+4;Status de Entrega do Cartão;status da entrega do cartão
+4;Status de Entrega do Cartão;cartão em transporte
+4;Status de Entrega do Cartão;previsão de entrega do cartão
+4;Status de Entrega do Cartão;cartão foi enviado?
+5;Status de cartão;não consigo passar meu cartão
+5;Status de cartão;meu cartão não funciona
+5;Status de cartão;cartão recusado
+5;Status de cartão;cartão não está passando
+5;Status de cartão;status do cartão ativo
+5;Status de cartão;problema com cartão
+6;Solicitação de aumento de limite;quero mais limite
+6;Solicitação de aumento de limite;aumentar limite do cartão
+6;Solicitação de aumento de limite;solicitar aumento de crédito
+6;Solicitação de aumento de limite;preciso de mais limite
+6;Solicitação de aumento de limite;pedido de aumento de limite
+6;Solicitação de aumento de limite;limite maior no cartão
+7;Cancelamento de cartão;cancelar cartão
+7;Cancelamento de cartão;quero encerrar meu cartão
+7;Cancelamento de cartão;bloquear cartão definitivamente
+7;Cancelamento de cartão;cancelamento de crédito
+7;Cancelamento de cartão;desistir do cartão
+7;Cancelamento de cartão;cancelar cartão
+7;Cancelamento de cartão;quero encerrar meu cartão
+7;Cancelamento de cartão;bloquear cartão definitivamente
+7;Cancelamento de cartão;cancelamento de crédito
+7;Cancelamento de cartão;desistir do cartão
+7;Cancelamento de cartão;cancelar cartão
+7;Cancelamento de cartão;quero encerrar meu cartão
+7;Cancelamento de cartão;bloquear cartão definitivamente
+7;Cancelamento de cartão;cancelamento de crédito
+7;Cancelamento de cartão;desistir do cartão
+8;Telefones de seguradoras;quero cancelar seguro
+8;Telefones de seguradoras;telefone do seguro
+8;Telefones de seguradoras;contato da seguradora
+8;Telefones de seguradoras;preciso falar com o seguro
+8;Telefones de seguradoras;seguro do cartão
+8;Telefones de seguradoras;cancelar assistência
+9;Desbloqueio de Cartão;desbloquear cartão
+9;Desbloqueio de Cartão;ativar cartão novo
+9;Desbloqueio de Cartão;como desbloquear meu cartão
+9;Desbloqueio de Cartão;quero desbloquear o cartão
+9;Desbloqueio de Cartão;cartão para uso imediato
+9;Desbloqueio de Cartão;desbloqueio para compras
+10;Esqueceu senha / Troca de senha;não tenho mais a senha do cartão
+10;Esqueceu senha / Troca de senha;esqueci minha senha
+10;Esqueceu senha / Troca de senha;trocar senha do cartão
+10;Esqueceu senha / Troca de senha;preciso de nova senha
+10;Esqueceu senha / Troca de senha;recuperar senha
+10;Esqueceu senha / Troca de senha;senha bloqueada
+11;Perda e roubo;perdi meu cartão
+11;Perda e roubo;roubaram meu cartão
+11;Perda e roubo;cartão furtado
+11;Perda e roubo;perda do cartão
+11;Perda e roubo;bloquear cartão por roubo
+11;Perda e roubo;extravio de cartão
+12;Consulta do Saldo;saldo conta corrente
+12;Consulta do Saldo;consultar saldo
+12;Consulta do Saldo;quanto tenho na conta
+12;Consulta do Saldo;extrato da conta
+12;Consulta do Saldo;saldo disponível
+12;Consulta do Saldo;meu saldo atual
+13;Pagamento de contas;quero pagar minha conta
+13;Pagamento de contas;pagar boleto
+13;Pagamento de contas;pagamento de conta
+13;Pagamento de contas;quero pagar fatura
+13;Pagamento de contas;efetuar pagamento
+14;Reclamações;quero reclamar
+14;Reclamações;abrir reclamação
+14;Reclamações;fazer queixa
+14;Reclamações;reclamar atendimento
+14;Reclamações;registrar problema
+14;Reclamações;protocolo de reclamação
+15;Atendimento humano;falar com uma pessoa
+15;Atendimento humano;preciso de humano
+15;Atendimento humano;transferir para atendente
+15;Atendimento humano;quero falar com atendente
+15;Atendimento humano;atendimento pessoal
+16;Token de proposta;código para fazer meu cartão
+16;Token de proposta;token de proposta
+16;Token de proposta;receber código do cartão
+16;Token de proposta;proposta token
+16;Token de proposta;número de token
+16;Token de proposta;código de token da proposta
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite disponível?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha conta é paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando meu cartão vai expirar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando posso fazer compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando é a data do meu vencimento?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura se encerra?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura é paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando posso comprar com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto tenho para gastar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura é?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o limite do meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando posso fazer compras com o meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar no meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai expirar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite para compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar agora?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura é paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite atual?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com o meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite atual para compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite hoje para compras?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite hoje para compras com o meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite atual para compras com o meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje com minha cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai ser paga?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai se encerrar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto posso gastar hoje?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando minha fatura vai?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quanto é o meu limite hoje para compras com meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai ser pago?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando o meu cartão vai
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual é o meu limite disponível?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Fala ae, quando é que a minha fatura fecha?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o valor disponível no meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Me fala o vencimento da minha fatura, por favor
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Ai meu, qual a data de fechamento da fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;E ai, quanto tá disponível pra usar no cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o meu limite atual?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Vou fazer uma compra, mas qual a data de fechamento da fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Tô querendo saber quando o cartão vence
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Preciso saber o dia que a fatura fecha, pode ser?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Como fico sabendo o limite do meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Meu limite está zerado, posso saber quanto sobrou?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Aí, qual é o limite do meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual a data de vencimento da minha fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Quando fecha a minha fatura?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o limite atual do meu cartão?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Pq meu cartão ta bloqueado? (ou será que o limite tava zerado?)
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Meu cartão tá aceitando compra agora?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Qual o dia que minha fatura fecha?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Meu limite do cartão tá zerado, será que vou poder usar?
+1;Consulta Limite / Vencimento do cartão / Melhor dia de compra;Queria saber o limite do meu cartão.
+2;Segunda via de boleto de acordo;Segunda via do boleto de acordo
+2;Segunda via de boleto de acordo;Preciso do boleto da negociação
+2;Segunda via de boleto de acordo;Me manda o boleto pra pagar o acordo
+2;Segunda via de boleto de acordo;Onde eu consigo o boleto do acordo?
+2;Segunda via de boleto de acordo;Quero gerar a 2ª via do boleto da negociação
+2;Segunda via de boleto de acordo;Me envia o código de barras do acordo
+2;Segunda via de boleto de acordo;Como faço pra pagar o acordo?
+2;Segunda via de boleto de acordo;Preciso da segunda via do boleto da negociação
+2;Segunda via de boleto de acordo;Me manda o boleto do acordo
+2;Segunda via de boleto de acordo;Onde posso emitir o boleto do acordo?
+2;Segunda via de boleto de acordo;Quero gerar a segunda via do boleto de acordo
+2;Segunda via de boleto de acordo;Preciso do boleto da minha negociação
+2;Segunda via de boleto de acordo;Onde consigo a segunda via do meu boleto de acordo?
+2;Segunda via de boleto de acordo;Manda o boleto do acordo p mim
+2;Segunda via de boleto de acordo;Preciso do código de barras da negociação
+2;Segunda via de boleto de acordo;Me envia o boleto do acordo, por favor
+2;Segunda via de boleto de acordo;O boleto da negociação tá em atraso, como faço para emitir?
+2;Segunda via de boleto de acordo;Cadê o boleto do acordo que eu preciso pagar?
+2;Segunda via de boleto de acordo;Me manda o código de barras do meu acordo
+2;Segunda via de boleto de acordo;Tá com o boleto da negociação pra eu pagar?
+2;Segunda via de boleto de acordo;<s> [OUT]
+2;Segunda via de boleto de acordo;preciso de uma segunda via do boleto de acordo
+2;Segunda via de boleto de acordo;onde consigo o boleto da negociação?
+2;Segunda via de boleto de acordo;mandar o boleto da negociação
+2;Segunda via de boleto de acordo;como faço pra pegar o boleto do acordo?
+2;Segunda via de boleto de acordo;preciso do código de barras do acordo, urgente
+2;Segunda via de boleto de acordo;qual o boleto pra pagar o acordo?
+2;Segunda via de boleto de acordo;me manda o boleto da negociação por favor
+2;Segunda via de boleto de acordo;como emitir segunda via do boleto de acordo?
+2;Segunda via de boleto de acordo;me fala onde pegar o boleto da negociação
+2;Segunda via de boleto de acordo;precizo do boleto pra pagar o acordo
+3;Segunda via de Fatura;Preciso meu boleto de segunda via, por favor.
+3;Segunda via de Fatura;Quero minha fatura, mano.
+3;Segunda via de Fatura;Envie o código de barras da segunda via.
+3;Segunda via de Fatura;Preciso da minha conta, página.
+3;Segunda via de Fatura;Pode mandar o boleto da minha fatura de crédito?
+3;Segunda via de Fatura;Quero meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Gostaria da segunda via de fatura, obrigado.
+3;Segunda via de Fatura;Eu preciso da fatura do meu cartão, por favor.
+3;Segunda via de Fatura;Você tem o código de barras da fatura para eu imprimir?
+3;Segunda via de Fatura;Meu boleto de segunda via, por favor?
+3;Segunda via de Fatura;Pode me enviar o boleto da fatura do meu cartão, por favor?
+3;Segunda via de Fatura;Preciso do código de barras da fatura de minha conta, por favor.
+3;Segunda via de Fatura;Eu preciso da segunda via de fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Pode me enviar a fatura do meu cartão, por favor?
+3;Segunda via de Fatura;Eu preciso da fatura do cartão, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu código de barras da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Pode me enviar a fatura do meu cartão, por favor?
+3;Segunda via de Fatura;Quero meu boleto da segunda via, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso da minha fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da segunda via, por favor.
+3;Segunda via de Fatura;Meu boleto da fatura, por favor?
+3;Segunda via de Fatura;Quero meu boleto da fatura, obrigado.
+3;Segunda via de Fatura;Preciso do meu boleto da fatura, por favor.
+3;Segunda via de Fatura;<s> [OUT]
+3;Segunda via de Fatura;manda a fatura do cartão
+3;Segunda via de Fatura;me ajuda a achar o boleto
+3;Segunda via de Fatura;ta faltando meu boleto da fatura
+3;Segunda via de Fatura;como que eu consigo o código de barras?
+3;Segunda via de Fatura;preciso do boleto urgente
+3;Segunda via de Fatura;me manda a segunda via, por favor
+3;Segunda via de Fatura;não recebi minha fatura ainda
+3;Segunda via de Fatura;cadê o código pra pagar?
+3;Segunda via de Fatura;onde eu acho a fatura pra pagar?
+3;Segunda via de Fatura;tô precisando do boleto do cartão
+3;Segunda via de Fatura;<s> [OUT]
+3;Segunda via de Fatura;me manda a fatura do meu cartão
+3;Segunda via de Fatura;preciso da fatura do meu cartão de credito
+3;Segunda via de Fatura;código de barras da minha fatura
+3;Segunda via de Fatura;quero a fatura do meu cartão de crédito
+3;Segunda via de Fatura;segunda via da minha fatura do cartão
+3;Segunda via de Fatura;me manda o boleto do cartão
+3;Segunda via de Fatura;preciso da segunda via da fatura do meu cartão
+3;Segunda via de Fatura;fatura do cartão tá atrasada
+3;Segunda via de Fatura;me manda o código de barras do meu cartão
+3;Segunda via de Fatura;onde que eu vejo o código de barras da minha fatura
+4;Status de Entrega do Cartão;Onde tá meu cartão?
+4;Status de Entrega do Cartão;Cadê o meu cartão?
+4;Status de Entrega do Cartão;O cartão chegou?
+4;Status de Entrega do Cartão;Qual o prazo pra entrega do cartão?
+4;Status de Entrega do Cartão;O cartão ainda não chegou, o que fazer?
+4;Status de Entrega do Cartão;Meu cartão tá demorando pra chegar
+4;Status de Entrega do Cartão;Qual o status da entrega do cartão?
+4;Status de Entrega do Cartão;O cartão vai demorar pra chegar?
+4;Status de Entrega do Cartão;Ainda não recebi meu cartão
+4;Status de Entrega do Cartão;Qual a previsão de chegada do cartão?
+4;Status de Entrega do Cartão;Onde está o meu cartão de crédito?
+4;Status de Entrega do Cartão;Meu cartão não chegou, ele é qualquer lugar?
+4;Status de Entrega do Cartão;Qual é o status da minha entrega do cartão?
+4;Status de Entrega do Cartão;Meu cartão está em transporte, certo?
+4;Status de Entrega do Cartão;Você tem alguma previsão de entrega do meu cartão?
+4;Status de Entrega do Cartão;O meu cartão não chegou, por acaso?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum local?
+4;Status de Entrega do Cartão;Entrega do meu cartão de crédito, qual a situação atual?
+4;Status de Entrega do Cartão;Minha carteira de crédito não chegou, tem alguma notícia?
+4;Status de Entrega do Cartão;O meu cartão ainda não chegou, tem previsão de quando ele vai chegar?
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, sabem o que aconteceu?
+4;Status de Entrega do Cartão;Está meu cartão de crédito por aí?
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, por acaso?
+4;Status de Entrega do Cartão;Qual a situação do meu cartão de crédito, ele ainda não chegou?
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, tem alguma dica sobre onde ele está?
+4;Status de Entrega do Cartão;Onde está meu cartão de crédito, ele já foi entregue?
+4;Status de Entrega do Cartão;Meu cartão de crédito ainda não chegou, por favor, me avise sobre a previsão de entrega.
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, tem algum problema?
+4;Status de Entrega do Cartão;Onde está meu cartão, ele ainda não chegou?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum lugar? Tem alguma dica?
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, o que está acontecendo?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em transporte, por acaso?
+4;Status de Entrega do Cartão;Minha carteira de crédito ainda não chegou, tem algum retardo?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum lugar, por favor, me informe.
+4;Status de Entrega do Cartão;Onde está meu cartão, ele ainda não chegou?
+4;Status de Entrega do Cartão;Meu cartão de crédito ainda não chegou, tem alguma dica sobre o status?
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, por favor, me informe sobre a situação.
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, qual é o status da minha entrega?
+4;Status de Entrega do Cartão;Minha carteira de crédito ainda não chegou, tem alguma dica sobre o que aconteceu?
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, tem alguma notícia sobre o status?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum lugar, por favor, me informe sobre o status.
+4;Status de Entrega do Cartão;Minha carteira de crédito ainda não chegou, por favor, me avise sobre o status.
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, tem alguma previsão de quando ele vai chegar?
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, tem alguma dica sobre a previsão de entrega?
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, por favor, me avise sobre a previsão de entrega.
+4;Status de Entrega do Cartão;A minha carteira de crédito ainda não chegou, tem alguma dica sobre o status?
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, tem alguma notícia sobre o status?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum lugar, por favor, me informe sobre o status.
+4;Status de Entrega do Cartão;Minha carteira de crédito ainda não chegou, por favor, me informe sobre o status.
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou, tem alguma dica sobre o status?
+4;Status de Entrega do Cartão;Está meu cartão de crédito em algum lugar, por favor, me informe sobre o status.
+4;Status de Entrega do Cartão;Minha carteira de crédito ainda não chegou, tem alguma dica sobre o status?
+4;Status de Entrega do Cartão;Meu cartão
+4;Status de Entrega do Cartão;Meu cartão ainda não chegou
+4;Status de Entrega do Cartão;Onde tá meu cartão de crédito?
+4;Status de Entrega do Cartão;O cartão demorou pra chegar?
+4;Status de Entrega do Cartão;Quando será entregue meu cartão?
+4;Status de Entrega do Cartão;Meu cartão não foi entregue ainda
+4;Status de Entrega do Cartão;Ainda não recebi meu cartão, qual o problema?
+4;Status de Entrega do Cartão;O cartão está em transporte?
+4;Status de Entrega do Cartão;Preciso do status da entrega do cartão
+4;Status de Entrega do Cartão;Cartão não chegou, o que fazer?
+4;Status de Entrega do Cartão;Meu cartão tá atrasado
+5;Status de cartão;Cartão está travado
+5;Status de cartão;Meu cartão está bloqueado
+5;Status de cartão;Cartão rejeitado, preciso saber o status
+5;Status de cartão;Meu cartão não está funcionando, qual é o status?
+5;Status de cartão;Cartão em quê estado está?
+5;Status de cartão;Cartão não passa, preciso saber se está ativo
+5;Status de cartão;Meu cartão não está sendo aceito
+5;Status de cartão;Meu cartão não está indo para o caixa, qual é o status?
+5;Status de cartão;Meu cartão recusado, o status é?
+5;Status de cartão;Cartão não esta passando, qual é o status atual?
+5;Status de cartão;Cartão bloqueado, qual é o status atual?
+5;Status de cartão;Cartão não funciona, qual é o status?
+5;Status de cartão;Cartão rejeitado, preciso saber se está ativo ou bloqueado
+5;Status de cartão;Cartão está travado, qual é o status?
+5;Status de cartão;Cartão não está indo, qual é o status?
+5;Status de cartão;Meu cartão não está funcionando, qual é o status do mesmo?
+5;Status de cartão;Meu cartão está bloqueado, o status é?
+5;Status de cartão;Meu cartão não está passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Cartão não esta passando, qual é o status do mesmo?
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status atual?
+5;Status de cartão;Cartão está travado, preciso saber o status
+5;Status de cartão;Cartão não esta passando, preciso saber o status atual
+5;Status de cartão;Cartão rejeitado, preciso saber se está ativo ou bloqueado
+5;Status de cartão;Meu cartão está travado, qual é o status do mesmo?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Cartão não esta passando, preciso saber o status do mesmo
+5;Status de cartão;Cartão rejeitado, preciso saber se está bloqueado ou ativo
+5;Status de cartão;Meu cartão não esta funcionando, qual é o status do mesmo?
+5;Status de cartão;Cartão está travado, qual é o status atual?
+5;Status de cartão;Meu cartão tá bloqueado
+5;Status de cartão;Não consigo usar meu cartão
+5;Status de cartão;Cartão está travado
+5;Status de cartão;Cartão não está liberado
+5;Status de cartão;Não consigo autorizar a compra
+5;Status de cartão;O cartão não está funcionando
+5;Status de cartão;Por que meu cartão foi bloqueado?
+5;Status de cartão;Cartão recusado no pagamento
+5;Status de cartão;Não dá pra passar meu cartão
+5;Status de cartão;Tá bloqueado meu cartão de crédito
+5;Status de cartão;Não consigo passar o cartão
+5;Status de cartão;Meu cartão tá bloqueado?
+5;Status de cartão;Meu cartão está com problema
+5;Status de cartão;O cartão não tá funcionando
+5;Status de cartão;Cartão recusou na hora de pagar
+5;Status de cartão;O cartão não está autorizando a compra
+5;Status de cartão;O cartão não tá aceitando
+5;Status de cartão;Por que o cartão não passa?
+5;Status de cartão;Cartão está bloqueado ou algo assim?
+5;Status de cartão;Não consigo usar meu cartão
+6;Solicitação de aumento de limite;Quero aumentar o limite do cartão de crédito, por favor.
+6;Solicitação de aumento de limite;Aumentar o limite do cartão, não?
+6;Solicitação de aumento de limite;Preciso mais crédito no meu cartão, por favor.
+6;Solicitação de aumento de limite;Meu limite do cartão está cheio, preciso de um aumento.
+6;Solicitação de aumento de limite;Olá, preciso de um aumento no limite do meu cartão.
+6;Solicitação de aumento de limite;Eu preciso de mais crédito aqui, posso fazer um pedido de aumento?
+6;Solicitação de aumento de limite;Meu limite está baixo, quero aumentar, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento, obrigado.
+6;Solicitação de aumento de limite;Aumentar o limite do cartão, por favor? Eu preciso de mais crédito. (com erro de digitação)
+6;Solicitação de aumento de limite;O que é necessário para fazer um pedido de aumento de limite no meu cartão? (abreviação comum: PL)
+6;Solicitação de aumento de limite;Meu limite é muito pequeno, preciso de um aumento urgente, por favor.
+6;Solicitação de aumento de limite;Eu preciso de mais crédito no cartão, pode fazer um pedido de aumento para mim, por favor?
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento de crédito urgente.
+6;Solicitação de aumento de limite;Quero aumentar meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, quero aumentar, por favor? Preciso de mais crédito. (com erro de digitação)
+6;Solicitação de aumento de limite;Preciso de um aumento no limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento urgente de crédito, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento urgente de crédito, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento urgente de crédito, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento urgente de crédito, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite de crédito, por favor.
+6;Solicitação de aumento de limite;Meu limite está muito baixo, preciso de um aumento urgente, obrigado.
+6;Solicitação de aumento de limite;Meu limite está cheio, preciso de um aumento urgente de crédito, por favor.
+6;Solicitação de aumento de limite;Gostaria de um aumento
+6;Solicitação de aumento de limite;Eu preciso de um aumento de limite no meu cartão, por favor.
+6;Solicitação de aumento de limite;Ola, queria pedir um aumento de limite no meu cartão de crédito.
+6;Solicitação de aumento de limite;Tem como aumentar o limite do meu cartão?
+6;Solicitação de aumento de limite;Gostaria de solicitar um aumento de crédito no meu cartão, se possível.
+6;Solicitação de aumento de limite;Meu limite do cartão está cheio, preciso de mais, obrigado!
+6;Solicitação de aumento de limite;Olá, preciso de um aumento de limite no meu cartão, é possível?
+6;Solicitação de aumento de limite;Quero aumentar o limite do meu cartão de crédito, por favor.
+6;Solicitação de aumento de limite;Preciso de um aumento no limite do meu cartão, pode me ajudar?
+6;Solicitação de aumento de limite;Oi, estou precisando de mais crédito, podem aumentar o limite do meu cartão?
+6;Solicitação de aumento de limite;Olá, preciso de um aumento no limite do meu cartão, aí tem como? (Gíria: Aí tem como = Por favor, é possível)
+6;Solicitação de aumento de limite;Quero um aumento no limite do meu cartão de crédito
+6;Solicitação de aumento de limite;Preciso de um aumento de crédito, por favor
+6;Solicitação de aumento de limite;Meu limite precisa ser aumentado, obrigado
+6;Solicitação de aumento de limite;Aumente meu limite, por favor
+6;Solicitação de aumento de limite;Eu queria mais crédito, se possível
+6;Solicitação de aumento de limite;Vou te pedir um aumento no meu limite aqui
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão de crédito, por favor
+6;Solicitação de aumento de limite;Preciso de um aumento de limite para meu cartão de crédito
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite de crédito
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite de crédito, por favor?
+6;Solicitação de aumento de limite;Quero um aumento no limite do meu cartão, não?
+6;Solicitação de aumento de limite;Eu preciso de um aumento de limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;O meu limite precisa ser aumentado, não é?
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;Você pode aumentar o meu limite, por favor
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, obrigado
+6;Solicitação de aumento de limite;Eu queria um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Eu preciso de um aumento no meu limite, não é assim?
+6;Solicitação de aumento de limite;Preciso de um aumento no meu limite, por favor, mano
+6;Solicitação de aumento de limite;Aumente o limite do meu cartão, por favor, obrigado
+6;Solicitação de aumento de limite;-
+7;Cancelamento de cartão;]
+7;Cancelamento de cartão;Quero cancelar o cartão de crédito
+7;Cancelamento de cartão;Pode cancelar meu cartão por favor?
+7;Cancelamento de cartão;Tô querendo fechar meu cartão de crédito
+7;Cancelamento de cartão;Vou precisar cancelar o meu cartão
+7;Cancelamento de cartão;Preciso encerrar meu cartão de crédito
+7;Cancelamento de cartão;Quero desativar meu cartão
+7;Cancelamento de cartão;Meu cartão tá no negativo, vou cancelar
+7;Cancelamento de cartão;Cancelar cartão de crédito urgente
+7;Cancelamento de cartão;Quero cancelar o cartão por motivos pessoais
+7;Cancelamento de cartão;Cartão vencendo, vou cancelar
+7;Cancelamento de cartão;quero cancelar meu cartão de crédito
+7;Cancelamento de cartão;precizo cancelar o meu cartão
+7;Cancelamento de cartão;como faço pra cancelar meu cartão?
+7;Cancelamento de cartão;quero cancelar meu cartão de uma vez
+7;Cancelamento de cartão;desejo cancelar meu cartão de crédito
+7;Cancelamento de cartão;como posso cancelar meu cartão de crédito?
+7;Cancelamento de cartão;preciso cancelar meu cartão de crédito
+7;Cancelamento de cartão;quero fechar meu cartão de crédito
+7;Cancelamento de cartão;como faço pra fechar meu cartão de crédito?
+7;Cancelamento de cartão;meu cartão tá me prejudicando, preciso cancelar
+7;Cancelamento de cartão;não quero mais meu cartão, como cancelo?
+7;Cancelamento de cartão;quero cancelar o cartão de crédito
+7;Cancelamento de cartão;meu cartão tá me dando problema, preciso cancelar
+7;Cancelamento de cartão;como faço pra cancelar o cartão de crédito?
+7;Cancelamento de cartão;quero encerrar meu cartão de crédito
+7;Cancelamento de cartão;preciso cancelar meu cartão de crédito, e agora?
+7;Cancelamento de cartão;não quero mais o cartão, como faço pra cancelar?
+7;Cancelamento de cartão;meu cartão não serve mais, quero cancelar
+7;Cancelamento de cartão;quero cancelar meu cartão de crédito, como faço?
+7;Cancelamento de cartão;meu cartão tá me atrapalhando, preciso cancelar
+7;Cancelamento de cartão;não preciso mais do cartão, como faço pra cancelar?
+7;Cancelamento de cartão;quero cancelar meu cartão, e agora?
+7;Cancelamento de cartão;meu cartão tá me dando trabalho, preciso cancelar
+7;Cancelamento de cartão;quero cancelar meu cartão, como faço?
+7;Cancelamento de cartão;meu cartão não tá bom, quero cancelar
+7;Cancelamento de cartão;não quero mais usar meu cartão, como faço pra cancelar?
+7;Cancelamento de cartão;quero cancelar meu cartão, e agora?
+7;Cancelamento de cartão;meu cartão tá me prejudicando, como faço pra cancelar?
+7;Cancelamento de cartão;não preciso mais do cartão, quero cancelar
+7;Cancelamento de cartão;meu cartão não tá me ajudando, preciso cancelar
+7;Cancelamento de cartão;quero cancelar meu cartão, e agora?
+7;Cancelamento de cartão;meu cartão tá me dando problema, como faço pra cancelar?
+7;Cancelamento de cartão;]
+7;Cancelamento de cartão;Quero cancelar meu cartão de crédito
+7;Cancelamento de cartão;Preciso fechar meu cartão de crédito
+7;Cancelamento de cartão;Como faço para cancelar meu cartão?
+7;Cancelamento de cartão;Tá querendo cancelar o cartão?
+7;Cancelamento de cartão;Cancelar cartão de crédito urgente
+7;Cancelamento de cartão;Quero desativar o cartão de crédito
+7;Cancelamento de cartão;Pode cancelar meu cartão de crédito?
+7;Cancelamento de cartão;Quero encerrar meu cartão de crdito
+7;Cancelamento de cartão;Como faço pra cancelar o cartão?
+7;Cancelamento de cartão;Quero dar baixa no meu cartão de crédito
+8;Telefones de seguradoras;Quero falar com minha seguradora
+8;Telefones de seguradoras;Preciso contatar minha seguradora
+8;Telefones de seguradoras;Quero cancelar o meu seguro, tem o telefone?
+8;Telefones de seguradoras;Seguro, onde é o contato?
+8;Telefones de seguradoras;Preciso te dar um chamada para o seguro
+8;Telefones de seguradoras;O que é o número do meu seguro?
+8;Telefones de seguradoras;Tem o telefone da minha seguradora?
+8;Telefones de seguradoras;Preciso cancelar o meu seguro, tem o contato?
+8;Telefones de seguradoras;É pra cancelar o meu seguro, tem o telefone?
+8;Telefones de seguradoras;Obrigado, preciso te falar sobre o meu seguro
+8;Telefones de seguradoras;Quero cancelar o meu seguro, tem o número de contato?
+8;Telefones de seguradoras;Quero falar com alguém da minha seguradora
+8;Telefones de seguradoras;Preciso falar com a minha seguradora
+8;Telefones de seguradoras;O que é o número do meu seguro? Quero cancelar
+8;Telefones de seguradoras;Obrigado, preciso falar com alguém do meu seguro
+8;Telefones de seguradoras;Tem o telefone da minha seguradora? Preciso cancelar
+8;Telefones de seguradoras;Preciso te falar sobre o meu seguro, tem o telefone?
+8;Telefones de seguradoras;Tem o contato da minha seguradora? Preciso cancelar o seguro
+8;Telefones de seguradoras;Quero cancelar o meu seguro, tem o número de contato? Obrigado
+8;Telefones de seguradoras;Preciso falar com a minha seguradora, tem o telefone?
+8;Telefones de seguradoras;Preciso do contato do seguro
+8;Telefones de seguradoras;Quero ligar pra seguradora
+8;Telefones de seguradoras;Me passa o telefone do seguro
+8;Telefones de seguradoras;Como falo com a seguradora?
+8;Telefones de seguradoras;Qual o número do seguro do meu cartão?
+8;Telefones de seguradoras;Preciso entrar em contato com a seguradora
+8;Telefones de seguradoras;Qual o telefone da seguradora?
+8;Telefones de seguradoras;Onde encontro o contato da seguradora?
+8;Telefones de seguradoras;Me ajuda com o telefone do seguro
+8;Telefones de seguradoras;Preciso do fone da seguradora
+9;Desbloqueio de Cartão;Como faço pra liberar o cartão?
+9;Desbloqueio de Cartão;Liberar cartão
+9;Desbloqueio de Cartão;Preciso desbloquear meu cartão novo
+9;Desbloqueio de Cartão;Cartão não tá funcionando, como faço pra ativar?
+9;Desbloqueio de Cartão;Quero liberar o cartão novo
+9;Desbloqueio de Cartão;O cartão novo não tá liberado, ajuda?
+9;Desbloqueio de Cartão;Como é que faz pra desbloquear o cartão?
+9;Desbloqueio de Cartão;Preciso ativar meu cartão novo
+9;Desbloqueio de Cartão;Cartão novo chegou mas não tá liberado
+9;Desbloqueio de Cartão;O cartão novo ainda tá bloqueado, o que faço?
+9;Desbloqueio de Cartão;Desbloqueie meu cartão, por favor!
+9;Desbloqueio de Cartão;Meu cartão está travado, como desbloqueio?
+9;Desbloqueio de Cartão;Preciso desbloquear meu cartão urgente!
+9;Desbloqueio de Cartão;Cartão travado, quero ativá-lo agora mesmo.
+9;Desbloqueio de Cartão;Desbloqueie meu cartão pra eu usar, obrigado!
+9;Desbloqueio de Cartão;Tá meu cartão bloqueado, podem desbloquear pra mim?
+9;Desbloqueio de Cartão;Desbloqueie o meu cartão de crédito, por favor.
+9;Desbloqueio de Cartão;Preciso desbloquear meu cartão pra fazer algumas compras.
+9;Desbloqueio de Cartão;Meu cartão de crédito está bloqueado, preciso desbloquear pra continuar usando.
+9;Desbloqueio de Cartão;Desbloqueie o meu cartão, por favor, vou ter que comprar coisas urgentes.
+9;Desbloqueio de Cartão;como faço pra ativar o meu cartão novo?
+9;Desbloqueio de Cartão;desejo desbloquear meu cartão de crédito
+9;Desbloqueio de Cartão;meu cartão tá bloqueado como desbloqueio?
+9;Desbloqueio de Cartão;cartão novo chegou, como faço pra liberar?
+9;Desbloqueio de Cartão;não consigo usar o cartão, como desbloqueio?
+9;Desbloqueio de Cartão;pq o meu cartão tô bloqueado?
+9;Desbloqueio de Cartão;quero usar meu cartão novo, como faço?
+9;Desbloqueio de Cartão;meu cartão tá bloqueado, por favor liberem
+9;Desbloqueio de Cartão;cartão novo chegou e não tá liberado, oq faço?
+9;Desbloqueio de Cartão;novo cartão não tá funcionando, como resolvo?
+10;Esqueceu senha / Troca de senha;Esqueci minha senha do cartão, preciso mudar
+10;Esqueceu senha / Troca de senha;Olá, preciso trocar a senha do meu cartão de crédito
+10;Esqueceu senha / Troca de senha;Meu cartão de crédito, esqueci a senha
+10;Esqueceu senha / Troca de senha;Tá precisando de nova senha para o cartão?
+10;Esqueceu senha / Troca de senha;Meu caro, esqueceu a senha do cartão de crédito
+10;Esqueceu senha / Troca de senha;Não lembro mais a senha do meu cartão, preciso trocá-la
+10;Esqueceu senha / Troca de senha;Preciso de ajuda para trocar a senha do meu cartão
+10;Esqueceu senha / Troca de senha;Olá, meu cartão de crédito, esqueci a senha do qual
+10;Esqueceu senha / Troca de senha;Esqueci a senha do meu cartão, vou trocar
+10;Esqueceu senha / Troca de senha;Preciso de uma nova senha para o cartão, por favor
+10;Esqueceu senha / Troca de senha;Esqueci minha senha de cartão, preciso trocar
+10;Esqueceu senha / Troca de senha;Tá esquecendo minha senha de cartão de crédito, ajuda-me por favor
+10;Esqueceu senha / Troca de senha;Preciso de nova senha para meu cartão de crédito, esqueci
+10;Esqueceu senha / Troca de senha;Não lembro mais minha senha do cartão de crédito, preciso de ajuda
+10;Esqueceu senha / Troca de senha;Quero trocar minha senha do cartão, esqueceu-se
+10;Esqueceu senha / Troca de senha;Tenho que trocar a senha do meu cartão de crédito, esqueci
+10;Esqueceu senha / Troca de senha;Preciso de uma nova senha para meu cartão, esqueci a minha
+10;Esqueceu senha / Troca de senha;Tive que mudar a senha do cartão, esqueci a minha
+10;Esqueceu senha / Troca de senha;Preciso de uma nova senha para cartão de crédito, esqueci
+10;Esqueceu senha / Troca de senha;Esqueceu-se minha senha do cartão, preciso trocar agora mesmo.
+10;Esqueceu senha / Troca de senha;Não consigo acessar o app porque esqueci a senha do meu cartão
+10;Esqueceu senha / Troca de senha;Não lembro a senha do cartão, como faço pra resetar?
+10;Esqueceu senha / Troca de senha;A senha do cartão está bloqueada, o que eu faço?
+10;Esqueceu senha / Troca de senha;Preciso mudar a senha do meu cartão
+10;Esqueceu senha / Troca de senha;Tô sem a senha do cartão, como eu faço pra recuperar?
+10;Esqueceu senha / Troca de senha;Meu cartão bloqueou por senha errada, preciso de ajuda
+10;Esqueceu senha / Troca de senha;A senha do cartão não tá funcionando mais, o que faço?
+10;Esqueceu senha / Troca de senha;Esqueci a senha do cartão e não consigo acessar
+10;Esqueceu senha / Troca de senha;Cartão tá bloqueado por senha, preciso resetar
+10;Esqueceu senha / Troca de senha;Como faço pra trocar a senha do meu cartão?
+11;Perda e roubo;Perdi o meu cartão de crédito
+11;Perda e roubo;Roubaram o meu cartão de crédito lá no supermercado
+11;Perda e roubo;Meu cartão foi furtado do bolso
+11;Perda e roubo;Minha cartão desapareceu
+11;Perda e roubo;Meu cartão foi roubado no metrô
+11;Perda e roubo;Cartão perdido, bloqueie por favor
+11;Perda e roubo;Bloqueie o meu cartão de crédito, roubado
+11;Perda e roubo;Meu cartão foi levado por um pickpocket
+11;Perda e roubo;Cartão roubado no festival, bloqueie agora
+11;Perda e roubo;Bloqueie meu cartão de crédito, perdeu em casa.
+11;Perda e roubo;Cartão roubado
+11;Perda e roubo;Meu cartão foi perdido
+11;Perda e roubo;Alguém levou meu cartão de crédito
+11;Perda e roubo;Perdem meu cartão na rua
+11;Perda e roubo;Preciso bloquear cartão furtado
+11;Perda e roubo;Sumiu meu cartão, roubaram
+11;Perda e roubo;Cartão foi furtado na balada
+11;Perda e roubo;Alguém roubou meu cartão, socorro
+11;Perda e roubo;Meu cartão de credito foi roubado
+11;Perda e roubo;Cartão de credito perdido no ônibus
+11;Perda e roubo;Meu cartão tá sumido, preciso bloquear
+11;Perda e roubo;"""Meu cartão foi roubado, preciso bloquear urgentemente!"""
+11;Perda e roubo;"""O cartão foi perdido, o que eu faço agora?"""
+11;Perda e roubo;"""Alguém pegou meu cartão de crédito sem eu perceber"""
+11;Perda e roubo;"""Preciso bloquear meu cartão por ter sido furtado"""
+11;Perda e roubo;"""Meu cartão de crédito foi roubado ontem, como faço?"""
+11;Perda e roubo;"""Alguém pegou meu cartão na bolsa, preciso cancelar!"""
+11;Perda e roubo;"""Cartão sumiu, como faço pra bloquear?"""
+11;Perda e roubo;"""Tem como bloquear meu cartão de crédito, pois foi roubado?"""
+11;Perda e roubo;"""Alguém pegou meu cartão no meu bolso, preciso cancelar"""
+11;Perda e roubo;"""Meu cartão foi perdido ou roubado, como faço?"""
+12;Consulta do Saldo;Saldo da minha conta corrente, por favor
+12;Consulta do Saldo;Qual é o meu saldo atual?
+12;Consulta do Saldo;Quanto está o meu extrato na conta?
+12;Consulta do Saldo;Meu saldo disponível, obrigado
+12;Consulta do Saldo;Saldo da conta corrente do meu cartão, por favor
+12;Consulta do Saldo;O que tem na minha conta?
+12;Consulta do Saldo;Extrato da conta corrente, por favor
+12;Consulta do Saldo;Saldo disponível no cartão, obrigado
+12;Consulta do Saldo;Quantos reais tenho na minha conta agora?
+12;Consulta do Saldo;Saldo da conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da conta corrente do meu cartão, por favor. Tks
+12;Consulta do Saldo;O que tem na minha conta agora? Tks
+12;Consulta do Saldo;Saldo disponível, por favor. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Quantum tem na minha conta? Tks
+12;Consulta do Saldo;Meu extrato, por favor. Tks
+12;Consulta do Saldo;Meu saldo atual na conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da conta corrente do meu cartão, por favor. Tks
+12;Consulta do Saldo;Meu saldo, por favor. Tks
+12;Consulta do Saldo;O que tem na minha conta, por favor? Tks
+12;Consulta do Saldo;Meu extrato, obrigado. Tks
+12;Consulta do Saldo;Meu saldo disponível, obrigado. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, obrigado. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;O que tem na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu saldo na conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu saldo atual, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, por favor. Tks
+12;Consulta do Saldo;O que tem na minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Meu extrato, obrigado. Tks
+12;Consulta do Saldo;Meu saldo disponível, obrigado. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, obrigado. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;O que tem na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu saldo na conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato, por favor. Tks
+12;Consulta do Saldo;Meu saldo disponível, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, por favor. Tks
+12;Consulta do Saldo;O que tem na minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Meu extrato, obrigado. Tks
+12;Consulta do Saldo;Meu saldo disponível, obrigado. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, obrigado. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;O que tem na minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu saldo na conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, obrigado. Tks
+12;Consulta do Saldo;Meu extrato, por favor. Tks
+12;Consulta do Saldo;Meu saldo disponível, por favor. Tks
+12;Consulta do Saldo;Saldo da minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Meu extrato da conta corrente, por favor. Tks
+12;Consulta do Saldo;Saldo disponível na minha conta corrente, por favor. Tks
+12;Consulta do Saldo;Quantas granas tenho?
+12;Consulta do Saldo;Qual o meu saldão?
+12;Consulta do Saldo;Posso ver o meu saldo?
+12;Consulta do Saldo;Só pra saber, quanto tá na minha conta?
+12;Consulta do Saldo;Me mostra o extrato, por favor
+12;Consulta do Saldo;Tá com quanto na conta?
+12;Consulta do Saldo;Como tá o saldo do meu cartão?
+12;Consulta do Saldo;Quero ver quanto tenho disponível
+12;Consulta do Saldo;Qual a quantia na conta?
+12;Consulta do Saldo;Me fala meu saldo, por gentileza
+12;Consulta do Saldo;<s> [OUT]
+12;Consulta do Saldo;qual o saldo da minha conta?
+12;Consulta do Saldo;meu saldo atual
+12;Consulta do Saldo;qual o extrato da minha conta?
+12;Consulta do Saldo;quantos reais tenho disponível na minha conta?
+12;Consulta do Saldo;queria saber meu saldo
+12;Consulta do Saldo;quero verificar meu saldo
+12;Consulta do Saldo;saldo conta corrente atualizado
+12;Consulta do Saldo;qual a quantia disponível no meu cartão?
+12;Consulta do Saldo;qual o valor disponível na minha conta?
+12;Consulta do Saldo;como está meu saldo na conta?
+13;Pagamento de contas;Quero pagar minha conta aqui, por favor
+13;Pagamento de contas;Pagamento da fatura por favor, nessa máquina
+13;Pagamento de contas;Eu quero pagar meu boleto agora mesmo
+13;Pagamento de contas;Quero efetuar o pagamento da minha conta
+13;Pagamento de contas;Pagar a conta agora, por favor
+13;Pagamento de contas;Paga minha conta aqui, por favor
+13;Pagamento de contas;Desejo efetuar o pagamento de minha fatura
+13;Pagamento de contas;Pagamento de conta por aqui, por favor
+13;Pagamento de contas;Quero pagar minha fatura lá em cima
+13;Pagamento de contas;"Paga a minha conta, por favor (com erro: ""lá em cima"" em vez de ""lá em cima"")"
+13;Pagamento de contas;Pagar minha conta agora, cara (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu amigo (com gíria)
+13;Pagamento de contas;Quero pagar minha conta agora, né? (com gíria)
+13;Pagamento de contas;Quero pagar minha conta agora, ai (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu parceiro (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu companheiro (com gíria)
+13;Pagamento de contas;Quero pagar minha conta agora, amigo (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu irmão (com gíria)
+13;Pagamento de contas;"Quero pagar minha conta agora, cara (com gíria, com erro: ""cara"" em vez de ""cará"")"
+13;Pagamento de contas;Paga minha conta agora, meu filho (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu amor (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha vida (com gíria)
+13;Pagamento de contas;Paga minha conta agora, meu coração (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha alma (com gíria)
+13;Pagamento de contas;"Paga minha conta agora, minha amigo (com gíria, com erro: ""amigo"" em vez de ""amiga"")"
+13;Pagamento de contas;Paga minha conta agora, minha dona (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha esposa (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha namorada (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha mãe (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha senhora (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha querida (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha amada (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha princesa (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do coração (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do meu mundo (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do universo (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do céu (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha dos céus (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do sol (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha da lua (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do mar (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha das águas (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha dos ventos (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha do ar (com gíria)
+13;Pagamento de contas;Paga minha conta agora, minha rainha das nuvens (com gíria)
+13;Pagamento de contas;P
+13;Pagamento de contas;Como posso pagar minha fatura?
+13;Pagamento de contas;Quanto eu pago hoje?
+13;Pagamento de contas;Quero quitar minha divida
+13;Pagamento de contas;Oi, vou pagar minha fatura por aqui?
+13;Pagamento de contas;Ainda da pra pagar essa conta?
+13;Pagamento de contas;Preciso pagar minha fatura do cartão
+13;Pagamento de contas;Bora pagar a conta
+13;Pagamento de contas;To devendo e preciso regularizar
+13;Pagamento de contas;Quero liquidar minha divida
+13;Pagamento de contas;Vou pagar a conta do meu cartão
+13;Pagamento de contas;preciso pagar uma conta
+13;Pagamento de contas;me ajude a pagar um boleto
+13;Pagamento de contas;como faço pra pagar minha fatura?
+13;Pagamento de contas;preciso quitar uma dívida
+13;Pagamento de contas;como posso pagar essa conta?
+13;Pagamento de contas;tô precisando pagar um boleto
+13;Pagamento de contas;como faço pra pagar essa conta?
+13;Pagamento de contas;pagar essa fatura urgente
+13;Pagamento de contas;preciso pagar essa dívida do cartão
+13;Pagamento de contas;quer pagar essa conta?
+14;Reclamações;Quero abrir um chapa
+14;Reclamações;Tenho um problema com a minha conta, preciso registrar uma queixa
+14;Reclamações;A minha cartão está dando problemas, preciso reclamar
+14;Reclamações;Meu cartão de crédito não funciona, preciso abrir uma reclamação
+14;Reclamações;Preciso fazer uma queixa sobre o meu cartão de crédito
+14;Reclamações;Meu cartão está com problemas, preciso entrar em contato para reclamar
+14;Reclamações;Tenho um problema com o meu cartão de crédito, preciso registrar uma reclamação
+14;Reclamações;Preciso falar com alguém sobre um problema com o meu cartão de crédito
+14;Reclamações;Minha conta está com problema, preciso entrar em contato para abrir uma reclamação
+14;Reclamações;Meu cartão de crédito não está funcionando, preciso reclamar para que isso seja corrigido
+14;Reclamações;denuncio
+14;Reclamações;preciso reclamar
+14;Reclamações;querer fazer uma reclamação
+14;Reclamações;problema no cartão
+14;Reclamações;tenho um problema
+14;Reclamações;gostaria de abrir uma reclamação
+14;Reclamações;problema com o cartão
+14;Reclamações;alguém pra me ajudar
+14;Reclamações;não estou satisfeito
+14;Reclamações;tá dando problema
+14;Reclamações;reclamar de um serviço
+14;Reclamações;Quero fazer uma reclamação, por favor
+14;Reclamações;Tem algum problema com o meu cartão de crédito, preciso abrir uma reclamação
+14;Reclamações;Tá tudo a fuder aqui, preciso te falar sobre um problema
+14;Reclamações;Preciso reclamar sobre um serviço ruim que recebi
+14;Reclamações;Tenho um problema com o meu cartão, preciso te falar
+14;Reclamações;Vou te registrar um problema com o meu cartão de crédito
+14;Reclamações;Queria reclamar do meu atendimento, não foi bom
+14;Reclamações;Preciso te dar um chute sobre um problema com o meu cartão
+14;Reclamações;Acho que preciso abrir uma reclamação com o meu cartão de crédito, não está tudo certo
+14;Reclamações;Tá tudo errado com o meu cartão, preciso te falar, mano!
+15;Atendimento humano;Quero falar com o atendente
+15;Atendimento humano;Preciso de um atendimento humano
+15;Atendimento humano;Tá difícil entender, me passa um humano
+15;Atendimento humano;Alguém aí pra me ajudar?
+15;Atendimento humano;Quero conversar com um atendente de verdade
+15;Atendimento humano;Não consigo resolver sozinho, me transfere pra um atendente
+15;Atendimento humano;Preciso de um ser humano pra resolver meu problema
+15;Atendimento humano;Tô com dificuldade, preciso de uma pessoa pra me ajudar
+15;Atendimento humano;Me passa pra alguém que entenda
+15;Atendimento humano;Não tô entendendo, me liga um atendente
+15;Atendimento humano;Quero falar com alguém real
+15;Atendimento humano;Preciso de alguém para falar
+15;Atendimento humano;Preciso de um atendimento
+15;Atendimento humano;Necessito de um assistente
+15;Atendimento humano;Quero falar com um operador
+15;Atendimento humano;Preciso falar com alguém
+15;Atendimento humano;Quero falar com uma pessoa do atendimento
+15;Atendimento humano;Preciso falar com um atendente real
+15;Atendimento humano;Preciso falar com uma pessoa do serviço
+15;Atendimento humano;Quero um atendimento agora, por favor
+15;Atendimento humano;Quero um atendente humano pra resolver meu problema
+15;Atendimento humano;Preciso de um suporte real, não de robô
+15;Atendimento humano;Ninguém aqui fala português?
+15;Atendimento humano;Alguém aí de verdade?
+15;Atendimento humano;Quero conversar com um ser humano, por favor
+15;Atendimento humano;Onde estão os atendentes?
+15;Atendimento humano;Quero um humano pra me ajudar
+15;Atendimento humano;Fala com um humano, pq tô cansado de maq
+15;Atendimento humano;Quero um humano, o atendimento automatizado tá horrível
+15;Atendimento humano;Ninguém tá online?
+16;Token de proposta;como solicitar o código do cartão?
+16;Token de proposta;me passa o código do cartão
+16;Token de proposta;quero o número do token de proposta
+16;Token de proposta;pode gerar o token da proposta?
+16;Token de proposta;gostaria de receber o código do cartão
+16;Token de proposta;como faço pra pegar o token?
+16;Token de proposta;me manda o código da proposta
+16;Token de proposta;qual o código do cartão?
+16;Token de proposta;solicito o token de proposta
+16;Token de proposta;preciso do token do cartão
+16;Token de proposta;me passa o código de proposta do meu cartão
+16;Token de proposta;quero o token do cartão
+16;Token de proposta;como faço pra pegar o código do cartão
+16;Token de proposta;qual o número do token da minha proposta
+16;Token de proposta;o código de proposta do meu cartão é esse?
+16;Token de proposta;onde eu acho o token do cartão?
+16;Token de proposta;como que eu pego o código do cartão?
+16;Token de proposta;quero saber o token da minha proposta
+16;Token de proposta;me manda o número do token do meu cartão
+16;Token de proposta;onde tá o código de proposta do meu cartão?
+16;Token de proposta;Como eu faço pra conseguir o token do meu cartão?
+16;Token de proposta;Preciso do código de proposta do cartão novo
+16;Token de proposta;Onde eu acho o token do meu cartão?
+16;Token de proposta;Fala, como faço pra pegar o token da minha proposta?
+16;Token de proposta;Quero gerar o token da proposta do cartão
+16;Token de proposta;Pq não consigo achar o token do meu cartão?
+16;Token de proposta;Tô com dificuldade pra encontrar o token do cartão
+16;Token de proposta;Como é que eu pego o código do cartão?
+16;Token de proposta;Onde tá o token do meu cartão novo?
+16;Token de proposta;Como faço pra emitir o token da proposta?

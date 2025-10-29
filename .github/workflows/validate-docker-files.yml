@@ -1,0 +1,229 @@
+name: Validate Docker Files
+
+on:
+  pull_request:
+    paths:
+      - 'participantes/**'
+
+jobs:
+  validate-docker-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v45
+        with:
+          files: |
+            participantes/**/Dockerfile
+            participantes/**/docker-compose.yaml
+            participantes/**/docker-compose.yml
+
+      - name: Validate Dockerfiles
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          #!/bin/bash
+          set -e
+
+          DOCKERFILES=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep -E 'Dockerfile$' || true)
+
+          if [ -z "$DOCKERFILES" ]; then
+            echo "No Dockerfiles changed in this PR"
+            exit 0
+          fi
+
+          VALIDATION_FAILED=0
+
+          for dockerfile in $DOCKERFILES; do
+            echo "Validating $dockerfile..."
+
+            # Check if file exists
+            if [ ! -f "$dockerfile" ]; then
+              echo "❌ File not found: $dockerfile"
+              VALIDATION_FAILED=1
+              continue
+            fi
+
+            # Check if Dockerfile uses scratch image
+            if ! grep -q '^FROM scratch' "$dockerfile"; then
+              echo "❌ $dockerfile must use 'FROM scratch' as base image"
+              VALIDATION_FAILED=1
+            else
+              echo "✅ $dockerfile uses scratch image"
+            fi
+          done
+
+          if [ $VALIDATION_FAILED -eq 1 ]; then
+            echo ""
+            echo "❌ Dockerfile validation failed!"
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ All Dockerfiles validated successfully!"
+
+      - name: Install yq for YAML parsing
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Validate docker-compose files
+        if: steps.changed-files.outputs.any_changed == 'true'
+        run: |
+          #!/bin/bash
+          set -e
+
+          COMPOSE_FILES=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep -E 'docker-compose\.ya?ml$' || true)
+
+          if [ -z "$COMPOSE_FILES" ]; then
+            echo "No docker-compose files changed in this PR"
+            exit 0
+          fi
+
+          VALIDATION_FAILED=0
+
+          for compose_file in $COMPOSE_FILES; do
+            echo "Validating $compose_file..."
+            echo "=========================================="
+
+            # Check if file exists
+            if [ ! -f "$compose_file" ]; then
+              echo "❌ File not found: $compose_file"
+              VALIDATION_FAILED=1
+              continue
+            fi
+
+            # Get all service names
+            SERVICE_NAMES=$(yq eval '.services | keys | .[]' "$compose_file")
+
+            if [ -z "$SERVICE_NAMES" ]; then
+              echo "❌ No services found in $compose_file"
+              VALIDATION_FAILED=1
+              continue
+            fi
+
+            # Initialize totals
+            TOTAL_CPU=0
+            TOTAL_MEMORY_MB=0
+
+            # Validate each service
+            for SERVICE_NAME in $SERVICE_NAMES; do
+              echo ""
+              echo "Checking service: $SERVICE_NAME"
+              echo "------------------------------------------"
+
+              # Check for OPENROUTER_API_KEY environment variable
+              HAS_OPENROUTER=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -i "OPENROUTER_API_KEY" || true)
+              if [ -z "$HAS_OPENROUTER" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have OPENROUTER_API_KEY environment variable"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ OPENROUTER_API_KEY found"
+              fi
+
+              # Check for PORT environment variable
+              HAS_PORT=$(yq eval ".services.$SERVICE_NAME.environment" "$compose_file" | grep -E "^PORT" || true)
+              if [ -z "$HAS_PORT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have PORT environment variable"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ PORT environment variable found"
+              fi
+
+              # Check for port 18020 exposed
+              PORTS=$(yq eval ".services.$SERVICE_NAME.ports[]" "$compose_file" 2>/dev/null || echo "")
+              HAS_PORT_18020=0
+
+              for port in $PORTS; do
+                # Handle both "18020:8080" and "18020" formats
+                if echo "$port" | grep -q "^18020:" || [ "$port" == "18020" ]; then
+                  HAS_PORT_18020=1
+                  break
+                fi
+              done
+
+              if [ $HAS_PORT_18020 -eq 0 ]; then
+                echo "❌ Service '$SERVICE_NAME' must expose port 18020"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ Port 18020 exposed"
+              fi
+
+              # Get CPU limit for this service
+              CPU_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.cpus" "$compose_file" 2>/dev/null || echo "null")
+              if [ "$CPU_LIMIT" == "null" ] || [ -z "$CPU_LIMIT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have CPU limit defined"
+                VALIDATION_FAILED=1
+              else
+                echo "  CPU limit: $CPU_LIMIT"
+                # Remove quotes if present
+                CPU_LIMIT=$(echo "$CPU_LIMIT" | tr -d "'\"")
+                # Add to total (using bc for floating point arithmetic)
+                TOTAL_CPU=$(echo "$TOTAL_CPU + $CPU_LIMIT" | bc)
+              fi
+
+              # Get memory limit for this service
+              MEMORY_LIMIT=$(yq eval ".services.$SERVICE_NAME.deploy.resources.limits.memory" "$compose_file" 2>/dev/null || echo "null")
+              if [ "$MEMORY_LIMIT" == "null" ] || [ -z "$MEMORY_LIMIT" ]; then
+                echo "❌ Service '$SERVICE_NAME' must have memory limit defined"
+                VALIDATION_FAILED=1
+              else
+                echo "  Memory limit: $MEMORY_LIMIT"
+                # Convert to MB
+                MEMORY_MB=0
+                if echo "$MEMORY_LIMIT" | grep -iq "MB"; then
+                  MEMORY_MB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                elif echo "$MEMORY_LIMIT" | grep -iq "M"; then
+                  MEMORY_MB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                elif echo "$MEMORY_LIMIT" | grep -iq "GB"; then
+                  MEMORY_GB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                  MEMORY_MB=$((MEMORY_GB * 1024))
+                elif echo "$MEMORY_LIMIT" | grep -iq "G"; then
+                  MEMORY_GB=$(echo "$MEMORY_LIMIT" | grep -oE '[0-9]+')
+                  MEMORY_MB=$((MEMORY_GB * 1024))
+                fi
+                TOTAL_MEMORY_MB=$((TOTAL_MEMORY_MB + MEMORY_MB))
+              fi
+            done
+
+            # Check total resource limits
+            echo ""
+            echo "=========================================="
+            echo "Total Resource Usage for $compose_file:"
+            echo "  Total CPU: $TOTAL_CPU"
+            echo "  Total Memory: ${TOTAL_MEMORY_MB}MB"
+            echo ""
+
+            # Validate total CPU (must be <= 0.5)
+            if [ "$TOTAL_CPU" != "0" ]; then
+              CPU_CHECK=$(echo "$TOTAL_CPU <= 0.5" | bc)
+              if [ "$CPU_CHECK" -eq 0 ]; then
+                echo "❌ Total CPU limit exceeds 0.5 (found: $TOTAL_CPU)"
+                VALIDATION_FAILED=1
+              else
+                echo "✅ Total CPU limit is within allowed range (≤ 0.5)"
+              fi
+            fi
+
+            # Validate total memory (must be <= 128MB)
+            if [ "$TOTAL_MEMORY_MB" -gt 128 ]; then
+              echo "❌ Total memory limit exceeds 128MB (found: ${TOTAL_MEMORY_MB}MB)"
+              VALIDATION_FAILED=1
+            else
+              echo "✅ Total memory limit is within allowed range (≤ 128MB)"
+            fi
+
+            echo ""
+          done
+
+          if [ $VALIDATION_FAILED -eq 1 ]; then
+            echo "❌ docker-compose validation failed!"
+            exit 1
+          fi
+
+          echo "✅ All docker-compose files validated successfully!"
